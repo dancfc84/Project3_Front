@@ -6,14 +6,10 @@ import splashImage from '../assets/malwareImage.jpg'
 
 function Home() {
   // function handleRegister() {
-
   // }
 
   // function hadnleLogin() {
-
   // }
-
-
 
   //cover image
   //cover text content 
@@ -22,24 +18,30 @@ function Home() {
   //login button ? 
 
 
-
   return (
     <section classNameName="hero is-warning">
-
-      <form className="container column box is-one-third">
+      <div className="container column box is-one-third">
         <div className="field">
-          <label className="label">Email</label>
+          {/* <label className="label">Email</label> */}
           <div className="control">
-            <input className="input" type="email" placeholder="e.g. alex@example.com" />
+            <input className="input" type="mail" placeholder="Email, e.g. 1@hackerone.com" />
           </div>
         </div>
-
-        <button className="button is-secondary">Sign in</button>
-        <button className="button is-primary">Register</button>
-      </form>
-      <div className="column is-half">
-        <img classNameName="image" src={splashImage} />
-
+        <div className="field is-grouped">
+          <div className="control">
+            <button className="button is-primary">Submit</button>
+          </div>
+          <div className="control">
+            <button className="button is-light">Register</button>
+          </div>
+        </div>
+      </div>
+      <div className="columns">
+        <div className="column is-one-thirds" />
+        <div className="column is-one-thirds">
+          <img classNameName="card image" src={splashImage} />
+        </div>
+        <div className="column is-one-thirds" />
       </div>
     </section>
   )

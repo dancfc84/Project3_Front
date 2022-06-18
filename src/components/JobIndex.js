@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-function PokemonIndex() {
+function JobIndex() {
   const [pokemon, setPokemon] = React.useState([])
 
   React.useEffect(() => {
@@ -23,5 +23,5 @@ function PokemonIndex() {
   )
 }
 
-export default PokemonIndex
+export default JobIndex
 

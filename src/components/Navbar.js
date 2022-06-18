@@ -2,7 +2,7 @@ import logoFile from '../assets/HT-logo.jpg'
 import { NavLink } from "react-router-dom"
 import React from "react"
 
-function Navbar() {
+export default function Navbar() {
   return (
     <>
       <header>
@@ -24,5 +24,5 @@ function Navbar() {
   )
 }
 
-export default Navbar
+
 

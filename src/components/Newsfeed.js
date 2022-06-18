@@ -1,7 +1,7 @@
 
 import React from 'react'
 
-function Newsfeed() {
+export default function Newsfeed() {
   const [pokemon, setPokemon] = React.useState([])
 
   React.useEffect(() => {
@@ -22,6 +22,4 @@ function Newsfeed() {
     </div>
   )
 }
-
-export default Newsfeed
 

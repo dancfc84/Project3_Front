@@ -4,7 +4,7 @@ import splashImage from '../assets/malwareImage.jpg'
 // import { Link } from "react-router-dom"
 
 
-function Home() {
+export default function Home() {
   // function handleRegister() {
   // }
 
@@ -46,5 +46,3 @@ function Home() {
     </section>
   )
 }
-
-export default Home

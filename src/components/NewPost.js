@@ -1,8 +1,8 @@
-// import axios from 'axios'
 import React, { useState } from 'react'
 import Select from 'react-select'
 // import { useNavigate } from 'react-router-dom'
 import tags from '../data/tags'
+import axios from 'axios'
 
 
 export default function CreateNewPost() {
@@ -16,33 +16,39 @@ export default function CreateNewPost() {
 
 
   function handleChangeEvent(e) {
-    const { name, value } = e.target
     setformDataInput({
       ...formDataInput,
-      [name]: value,
+      [e.target.name]: e.target.value,
     })
   }
 
-  // async function handleAuth(e) {
-  //   e.preventDefault()
-  //   try {
-  //     const token = localStorage.getItem("token")
-  //     const { data } = await axios.post('/api/hotels', formDataInput, {
-  //       headers: {
-  //         'Authorization': `Bearer ${token}`,
-  //       },
-  //     })
-  //     navigate('/')
-  //   } catch (err) {
-  //     console.log(err.response.data);
-  //   }
-  // }
+  async function handleAuth(e) {
+    e.preventDefault()
+    const newFormData = {
+      ...formDataInput,
+      tags: formDataInput.tags.map(type => type.value),
+    }
+    
+    try {
+      // const token = localStorage.getItem("token")
+      console.log(formDataInput);
+      const { data } = await axios.post('/api/posts/', newFormData)
+      // , {
+      //   // headers: {
+      //   //   'Authorization': `Bearer ${token}`,
+      //   // },
+      // })
+      // navigate('/')
+      console.log(data);
+    } catch (err) {
+      console.log(err.response.data);
+    }
+  }
 
 
   return <div className="section">
     <div className="container">
-      <form onSubmit={'Needs authentication'}>
-
+      <form onSubmit={handleAuth}>
         <div className="field ">
           <label className="label">Post</label>
           <div className="control">
@@ -66,7 +72,8 @@ export default function CreateNewPost() {
             options={tags}
             className="basic-multi-select"
             classNamePrefix="select"
-
+            onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
+            value={formDataInput.types}
           />
         </div>
         <button className="button is-warning is-light is-fullwidth is-outlined">

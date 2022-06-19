@@ -14,11 +14,11 @@ export default function Newsfeed() {
     const getData = async () => {
       const res = await fetch('/api/posts')
       const json = await res.json()
+    
       setUserPosts(json)
     }
     getData()
   }, [])
-  console.log(userPosts)
 
   return (
     <>
@@ -31,8 +31,8 @@ export default function Newsfeed() {
         </div>
         <div className="level-item">
           <div className="column is-one-third">
-            {userPosts.map(userPost =>
-              <div key={userPost._id}>
+            {userPosts.map((userPost, index) =>
+              <div key={index}>
                 <PostElement {...userPost} />
                 {/* {userPost.comments.map(comment =>
                 <div key={comment._id}>

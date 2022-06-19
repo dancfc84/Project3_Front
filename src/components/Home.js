@@ -19,7 +19,7 @@ export default function Home() {
 
 
   return (
-    <section classNameName="hero is-warning">
+    <section className="">
       <div className="container column box is-one-third">
 
         <div className="field">
@@ -40,7 +40,7 @@ export default function Home() {
       <div className="columns">
         <div className="column is-one-thirds" />
         <div className="column is-one-thirds">
-          <img classNameName="card image" src={splashImage} />
+          <img className="card image" src={splashImage} />
         </div>
         <div className="column is-one-thirds" />
       </div>

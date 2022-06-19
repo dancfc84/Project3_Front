@@ -31,16 +31,16 @@ export default function PostElement(postData) {
           <p className="content">
             {postData.postContent}
           </p></div>
-        <smaill>posted at {postData.createdAt}.</smaill><br />
-        <div className="tags level-right"><br />{postData.tags.map(tag => <span key={tag._id} className="tag is-link mx-1 is-light">{tag}</span>)}
-          <button className="button is-small is-info is-light mx-1" onClick={'UPDATE'}>Edit</button>
+        <p>posted at {postData.createdAt}.</p><br />
+        <div className="tags level-right"><br />{postData.tags.map((tag, index) => <span key={index} className="tag is-link mx-1 is-light">{tag}</span>)}
+          <button className="button is-small is-info is-light mx-1">Edit</button>
         </div>
 
 
 
         <span className="">{5}</span>
 
-        <button className="button is-small is-info is-light mx-5" onClick={'like'}>Upvote</button>
+        <button className="button is-small is-info is-light mx-5" >Upvote</button>
 
         <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
         <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}> Comments:

@@ -22,27 +22,26 @@ export default function Newsfeed() {
 
   return (
     <>
-
       <h1 className="title">
         Newsfeed
       </h1>
-      <div className="level column level-left">
+      <div className="level column">
         <div className="column level-item is-one-third ">
           <CreateNewPost />
         </div>
-      </div>
-      <div className="level-item">
-        <div className="column is-one-third">
-          {userPosts.map(userPost =>
-            <div key={userPost._id}>
-              <PostElement {...userPost} />
-              {/* {userPost.comments.map(comment =>
+        <div className="level-item">
+          <div className="column is-one-third">
+            {userPosts.map(userPost =>
+              <div key={userPost._id}>
+                <PostElement {...userPost} />
+                {/* {userPost.comments.map(comment =>
                 <div key={comment._id}>
                   <CommentElement {...comment} />
                 </div>
               )} */}
-            </div>
-          )}
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </>

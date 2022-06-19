@@ -21,6 +21,7 @@ export default function Home() {
   return (
     <section classNameName="hero is-warning">
       <div className="container column box is-one-third">
+
         <div className="field">
           {/* <label className="label">Email</label> */}
           <div className="control">
@@ -29,7 +30,7 @@ export default function Home() {
         </div>
         <div className="field is-grouped">
           <div className="control">
-            <button className="button is-primary">Submit</button>
+            <button className="button is-primary">Login</button>
           </div>
           <div className="control">
             <button className="button is-light">Register</button>

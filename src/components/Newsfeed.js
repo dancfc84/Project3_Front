@@ -1,9 +1,10 @@
 
 import React from 'react'
 import _ from 'lodash'
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 import CommentElement from './Comment'
 import PostElement from './Post'
+import CreateNewPost from './NewPost'
 
 export default function Newsfeed() {
   const [userPosts, setUserPosts] = React.useState([])
@@ -30,6 +31,7 @@ export default function Newsfeed() {
       <h1 className="title">
         Newsfeed
       </h1>
+      <CreateNewPost />
       <div className="container card">
         {userPosts.map(userPost =>
           <div key={userPost._id}>

@@ -7,7 +7,7 @@ export default function PostElement(postData) {
 
   return (
 
-    <div key={postData._id + 0} > {/* double keys due to mapping so adding 'salt' with 0 */}
+    <div key={postData._id + 0} > {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
       <img src={postData.owner.profilePic} />
       <h4>
         <Link to={`/users/${postData.owner._id}`}>

@@ -13,9 +13,13 @@ export default function Navbar() {
               <NavLink to="/" className="navbar-item is-size-3 has-text-weight-bold ml-3 is-right">
                 Home
               </NavLink>
+              <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+                Newsfeed
+              </NavLink>
               <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 About
               </NavLink>
+
             </div>
           </div>
         </nav>

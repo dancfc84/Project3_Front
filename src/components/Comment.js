@@ -6,7 +6,7 @@ export default function CommentElement(comment) {
 
 
   return (
-    <div key={comment._id + 0}> {/* double keys due to mapping so adding 'salt' with 0 */}
+    <div key={comment._id + 0}> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
       <Link to={`/users/${comment.owner._id}`}>
         <h6>{comment.owner.username} </h6>
       </Link>

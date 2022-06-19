@@ -2,7 +2,8 @@
 import React from 'react'
 import _ from 'lodash'
 import { Link } from "react-router-dom"
-
+import CommentElement from './Comment'
+import PostElement from './Post'
 
 export default function Newsfeed() {
   const [userPosts, setUserPosts] = React.useState([])
@@ -29,38 +30,21 @@ export default function Newsfeed() {
       <h1 className="title">
         Newsfeed
       </h1>
-      <div className="container">
+      <div className="container card">
         {userPosts.map(userPost =>
           <div key={userPost._id}>
-            <img src={userPost.owner.profilePic} />
-            <h4>
-              <Link to={`/users/${userPost.owner._id}`}>
-                {userPost.owner.username}
-              </Link>
-              at {userPost.timestamp}             {/* need to format timestamp */}
-            </h4>
-            <div>{userPost.tags.map(tag => <div key={tag._id}>{tag}</div>)}</div>
-            <p>
-              {userPost.content}
-            </p>
-            <h5>Upvotes: {userPost.likedBy.length}</h5>
-            <button className="button is-smal is-info is-light" onClick={() => handleShowCommentsButton(userPost._id)}>Show Comments</button>
-            <div className={hiddenCommentsNumber.includes(userPost._id) ? '' : `is-hidden`}>
+            <PostElement {...userPost} />
+            <button className="button is-medium is-info is-light" onClick={() => handleShowCommentsButton(userPost._id)}>Show Comments</button>
+            <div className={hiddenCommentsNumber.includes(userPost._id) ? '' : `is-hidden`}> {/* need to format timestamp */}
               {userPost.comments.map(comment =>
                 <div key={comment._id}>
-                  <Link to={`/users/${userPost.owner._id}`}>
-                    <h6>{comment.owner.username} </h6>
-                  </Link>
-                  <p>at {comment.timestamp}:</p>
-                  <p>{comment.content}</p>
-                  <p>{comment.likedBy.length} upvotes</p>
+                  <CommentElement {...comment} />
                 </div>
-              )
-              }
+              )}
             </div>
           </div>
         )}
       </div>
-    </div>
+    </div >
   )
 }

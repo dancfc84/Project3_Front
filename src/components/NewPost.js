@@ -43,7 +43,7 @@ export default function CreateNewPost() {
     <div className="container">
       <form onSubmit={'Needs authentication'}>
 
-        <div className="field">
+        <div className="field ">
           <label className="label">Post</label>
           <div className="control">
             <input
@@ -57,7 +57,7 @@ export default function CreateNewPost() {
           </div>
         </div>
 
-        <div className="field">
+        <div className="field ">
           <h2>Tag it</h2>
           <Select
             defaultValue={[]}

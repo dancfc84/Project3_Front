@@ -19,7 +19,7 @@ export default function PostElement(postData) {
 
     <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
       {/* <img src={postData.owner.profilePic} /> */}
-      <div className=" content">
+      <div className="content">
         <h4 className="header">
           {/* <Link to={`/users/${postData.owner._id}`}>
           {postData.owner.username}
@@ -27,19 +27,26 @@ export default function PostElement(postData) {
           {/* need to format timestamp */}
           Username
         </h4>
+        <div className="is-grouped">
+          <p className="content">
+            {postData.postContent}
+          </p></div>
+        <smaill>posted at {postData.createdAt}.</smaill><br />
+        <div className="tags level-right"><br />{postData.tags.map(tag => <span key={tag._id} className="tag is-link mx-1 is-light">{tag}</span>)}
+          <button className="button is-small is-info is-light mx-1" onClick={'UPDATE'}>Edit</button>
+        </div>
 
-        <p className="content">
-          {postData.postContent}
-        </p></div>
-      <smaill>posted at {postData.createdAt}.</smaill><br />
-      <div className="level-right"><br />{postData.tags.map(tag => <div key={tag._id} className="tag mr-2	">{tag}</div>)}</div><br />
-      {'e.g. 5'}<button className="button is-small is-info is-light mx-5" onClick={'like'}>Upvote</button>
 
-      <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
-      <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}> Comments:
-        {/* {postData.userComments} */}
+
+        <span className="">{5}</span>
+
+        <button className="button is-small is-info is-light mx-5" onClick={'like'}>Upvote</button>
+
+        <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
+        <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}> Comments:
+          {/* {postData.userComments} */}
+        </div>
       </div>
-
       {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}
     </div>
   )

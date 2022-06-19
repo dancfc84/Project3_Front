@@ -22,7 +22,7 @@ export default function Newsfeed() {
 
   return (
     <>
-      <h1 className="title">
+      <h1 className="title is-1">
         Newsfeed
       </h1>
       <div className="level column">

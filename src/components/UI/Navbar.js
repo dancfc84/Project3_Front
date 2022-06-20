@@ -1,4 +1,4 @@
-import logoFile from '../assets/HT-logo.jpg'
+import logoFile from '../../assets/HT-logo.jpg'
 import { NavLink } from "react-router-dom"
 import React from "react"
 
@@ -15,6 +15,9 @@ export default function Navbar() {
               </NavLink>
               <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Newsfeed
+              </NavLink>
+              <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+                Create Job
               </NavLink>
               <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 About

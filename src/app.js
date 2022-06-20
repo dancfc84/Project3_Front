@@ -1,10 +1,10 @@
 import React from 'react'
-// import PokemonIndex from './components/PokemonIndex'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import Home from "./components/Home"
 // import About from "./components/About"
-import Navbar from "./components/Navbar"
+import Navbar from "./components/UI/Navbar"
 import Newsfeed from "./components/Newsfeed"
+import CreateJob from './components/Jobs/CreateJob'
 
 function App() {
   return (
@@ -13,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/newsfeed" element={<Newsfeed />} />
+        <Route path="/jobs/create" element={<CreateJob />} />
       </Routes>
     </Router>
   )

@@ -14,36 +14,47 @@ export default function Newsfeed() {
     const getData = async () => {
       const res = await fetch('/api/posts')
       const json = await res.json()
-    
+
       setUserPosts(json)
     }
     getData()
   }, [])
 
   return (
-    <>
-      <h1 className="title is-1">
-        Newsfeed
-      </h1>
-      <div className="level column">
-        <div className="column level-item is-one-third ">
-          <CreateNewPost />
-        </div>
-        <div className="level-item">
-          <div className="column is-one-third">
-            {userPosts.map((userPost, index) =>
-              <div key={index}>
-                <PostElement {...userPost} />
-                {/* {userPost.comments.map(comment =>
+    <section className="section">
+      <div className="container">
+        <h1 className="title is-1">
+          Newsfeed
+        </h1>
+
+
+        {userPosts ? (
+          <div className="level column">
+            <div className="column level-item is-one-third ">
+              <CreateNewPost />
+            </div>
+            <div className="level-item">
+              <div className="column is-one-third">
+                {userPosts.map((userPost, index) =>
+                  <div key={index}>
+                    <PostElement {...userPost} />
+                    {/* {userPost.comments.map(comment =>
                 <div key={comment._id}>
                   <CommentElement {...comment} />
                 </div>
               )} */}
+                  </div>
+                )}
               </div>
-            )}
+            </div>
           </div>
-        </div>
+
+        ) : (
+
+          <p>Newsfeed is loading posts...</p>
+        )}
       </div>
-    </>
+    </section>
+
   )
 }

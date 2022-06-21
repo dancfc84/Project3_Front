@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { useParams } from "react-router-dom"
+import { Link, useParams } from "react-router-dom"
 //import axios from "axios"
 
 export default function ShowJob() {
@@ -11,8 +11,7 @@ export default function ShowJob() {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setJob(data))
-  }, [job, jobId, setJob])
-  console.log(job);
+  }, [])
 
   return (
     <section className="section">
@@ -33,6 +32,13 @@ export default function ShowJob() {
                 >
                   Delete job
                 </button>} */}
+            
+                <Link to={`/jobs/edit/${jobId}`}>
+                  <button className="button is-warning">
+                    Edit Job
+                  </button>
+                </Link>
+
               </div>
               <div className="column is-half">
                 <h4 className="title is-4">

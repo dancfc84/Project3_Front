@@ -1,25 +1,38 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from "axios"
+import { useParams } from "react-router-dom"
 
 export default function CreateJob () {
+
   const [formData, setFormData] = useState(
     {
-      "jobTitle": "Digital Analyst",
-      "jobShortSummary": "Are you keen to be at the forefront of digital workplace technologies while also being a trusted advisor to some of the world’s leading companies?",
+      "jobTitle": "",
+      "jobShortSummary": "",
       "jobDescription":
-        "You will be joining an experienced, widely recognised and expanding team that’s collaborative and supportive of your personal and professional development. As part of your role, you’ll be comfortable talking about digital workplace strategies and solutions either to your team or in client workshops to C-level stakeholders. We’re looking for people who are future leaders and natural initiative-takers who bring out the best in others, are brilliant listeners and can grow our business without compromising standards, integrity or culture.",
-      "jobSalary": 50000 ,
-      "jobLocation": "London",
-      "jobType": "Full-time",
-      "companyName": "Reuters",
-      "companyImage": "https://yt3.ggpht.com/ytc/AKedOLS2SZUR3w8r974zTHsQ9c-b8ob7n6X9cutfzr_wVmw=s900-c-k-c0x00ffffff-no-rj",
+        "",
+      "jobSalary": 0 ,
+      "jobLocation": "",
+      "jobType": "",
+      "companyName": "",
+      "companyImage": "",
     }
   )
+
+  const { jobId } = useParams()
+
+  useEffect(() => {
+    fetch(`/api/jobs/${jobId}`)
+      .then(resp => resp.json())
+      .then(data => setFormData(data))
+  }, [])
+
+
+  console.log(formData);
 
   async function handleSubmit(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.post("/api/jobs/create", formData)
+      const { data } = await axios.put(`/api/jobs/edit/${jobId}`, formData)
       console.log(data);
 
     } catch (error) {
@@ -134,7 +147,7 @@ export default function CreateJob () {
             />
           </div>
         </div>
-        <button className="button">Create Job</button>
+        <button className="button">Submit Changes</button>
       </form>
     </div>
   </div>

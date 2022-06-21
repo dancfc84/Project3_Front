@@ -16,6 +16,9 @@ export default function Navbar() {
               <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Newsfeed
               </NavLink>
+              <NavLink to="/jobs/index" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+                Job Listings
+              </NavLink>
               <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Create Job
               </NavLink>

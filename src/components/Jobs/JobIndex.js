@@ -9,6 +9,7 @@ export default function JobIndex() {
     const getData = async () => {
       try {
         const { data } = await axios.get("/api/jobs")
+        console.log(data);
         setJobs(data)
       } catch (error) {
         console.log(error);
@@ -20,12 +21,11 @@ export default function JobIndex() {
   return (
 
     <div className="section">
-      <h1 className="title">Pokemon Index</h1>
+      <h1 className="title">Available Jobs</h1>
       <div className="container">
-        {jobs.map(job => <h2 key={job._id}>{job.name}</h2>)}
+        {jobs.map(job => <h2 key={job._id}>{job.jobTitle}</h2>)}
       </div>
     </div>
-
   )
 }
 

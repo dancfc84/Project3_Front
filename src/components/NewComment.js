@@ -9,7 +9,7 @@ export default function NewComment(props) {
   // const navigate = useNavigate()
 
   const [formDataInput, setformDataInput] = useState({
-    commentContent: "",
+    content: "",
   })
 
 
@@ -44,7 +44,7 @@ export default function NewComment(props) {
   }
 
 
-  return <div className="section">
+  return <div className="">
     <div className="container">
       <form onSubmit={handleAuth}>
         <div className="field ">
@@ -53,8 +53,8 @@ export default function NewComment(props) {
             <input
               className="input text is-secondary"
               type="text"
-              name={'commentContent'}
-              value={formDataInput.commentContent}
+              name={'content'}
+              value={formDataInput.content}
               onChange={handleChangeEvent}
               placeholder="Fascinating, can you share more?"
             />

@@ -2,6 +2,7 @@ import React from "react"
 // import { Link } from "react-router-dom"
 import _ from 'lodash'
 import NewComment from "./NewComment"
+import CommentElement from "./Comment"
 
 
 export default function PostElement(postData) {
@@ -31,7 +32,7 @@ export default function PostElement(postData) {
             </h4>
             <div className="is-grouped">
               <p className="content">
-                {postData.postContent}
+                {postData.content}
               </p></div>
             <p>posted at {postData.createdAt}.</p><br />
             <div className="tags level-right"><br />{postData.tags.map((tag, index) => <span key={index} className="tag is-link mx-1 is-light">{tag}</span>)}
@@ -45,8 +46,10 @@ export default function PostElement(postData) {
             <button className="button is-small is-info is-light mx-5" >Upvote</button>
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
             <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
-              {postData.userComments}
-              <NewComment {...postData._id}/>
+              {postData.userComments.map((comment, index) =>
+                <CommentElement {...comment} key={index} />
+              )}
+              <NewComment {...postData} />
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}

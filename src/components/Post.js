@@ -1,6 +1,7 @@
 import React from "react"
 // import { Link } from "react-router-dom"
 import _ from 'lodash'
+import NewComment from "./NewComment"
 
 
 export default function PostElement(postData) {
@@ -42,10 +43,10 @@ export default function PostElement(postData) {
             <span className="">{5}</span>
 
             <button className="button is-small is-info is-light mx-5" >Upvote</button>
-
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
-            <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}> Comments:
-              {/* {postData.userComments} */}
+            <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
+              {postData.userComments}
+              <NewComment {...postData._id}/>
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}

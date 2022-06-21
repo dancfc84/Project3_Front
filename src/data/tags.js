@@ -1,6 +1,6 @@
 export default [
   { value: 'react', label: 'React' },
-  { value: 'backend', label: 'Normal' },
+  { value: 'backend', label: 'Backend' },
   { value: 'frontend', label: 'Frontend' },
   { value: 'openning', label: 'Openning' },
   { value: 'ui', label: 'UI' },

@@ -29,12 +29,12 @@ export default function Newsfeed() {
 
 
         {userPosts ? (
-          <div className="level column">
-            <div className="column level-item is-one-third ">
+          <div className="columns ">
+            <div className="column is-one-third ">
               <CreateNewPost />
             </div>
-            <div className="level-item">
-              <div className="column is-one-third">
+            <div className="column ">
+              <div className="">
                 {userPosts.map((userPost, index) =>
                   <div key={index}>
                     <PostElement {...userPost} />

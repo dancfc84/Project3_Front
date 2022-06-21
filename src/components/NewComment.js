@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
-import Select from 'react-select'
+// import Select from 'react-select'
 // import { useNavigate } from 'react-router-dom'
-import tags from '../data/tags'
+// import tags from '../data/tags'
 import axios from 'axios'
 
 
-export default function CreateNewPost() {
+export default function NewComment(props) {
   // const navigate = useNavigate()
 
   const [formDataInput, setformDataInput] = useState({
-    postContent: "",
-    tags: [],
+    commentContent: "",
   })
+
 
   function handleChangeEvent(e) {
     setformDataInput({
@@ -22,15 +22,15 @@ export default function CreateNewPost() {
 
   async function handleAuth(e) {
     e.preventDefault()
-    const newFormData = {
-      ...formDataInput,
-      tags: formDataInput.tags.map(type => type.value),
-    }
+    // const newFormData = {
+    //   ...formDataInput,
+    //   tags: formDataInput.tags.map(type => type.value),
+    // }
     
     try {
       // const token = localStorage.getItem("token")
       console.log(formDataInput);
-      const { data } = await axios.post('/api/posts/', newFormData)
+      const { data } = await axios.post(`/api/posts/${props.commentID}/comment`, formDataInput)
       // , {
       //   // headers: {
       //   //   'Authorization': `Bearer ${token}`,
@@ -48,34 +48,20 @@ export default function CreateNewPost() {
     <div className="container">
       <form onSubmit={handleAuth}>
         <div className="field ">
-          <label className="label">Post</label>
+          <label className="label">Comment</label>
           <div className="control">
             <input
-              className="input textarea is-primary"
+              className="input text is-secondary"
               type="text"
-              name={'postContent'}
-              value={formDataInput.postContent}
+              name={'commentContent'}
+              value={formDataInput.commentContent}
               onChange={handleChangeEvent}
-              placeholder="Make it count"
+              placeholder="Fascinating, can you share more?"
             />
           </div>
         </div>
-
-        <div className="field ">
-          <h2>Tag it</h2>
-          <Select
-            defaultValue={[]}
-            isMulti
-            name="colors"
-            options={tags}
-            className="basic-multi-select"
-            classNamePrefix="select"
-            onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
-            value={formDataInput.types}
-          />
-        </div>
-        <button className="button is-warning is-light is-fullwidth is-outlined">
-          SEND IT
+        <button className="button is-outlined">
+          Comment
         </button>
       </form>
     </div >

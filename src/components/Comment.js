@@ -5,14 +5,25 @@ export default function CommentElement(comment) {
   // const user = localStorage.getItem('user')
 
   return (
-    <section className="section">
+    <article className="media my-5 mx-5">
       <div key={comment._id + 0}> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
         {/* <Link to={`/users/${comment.owner._id}`}> */}
         {/* <h6>{comment.user.username} </h6> */}
         {/* </Link> */}
-        <p> Username at {comment.createdAt}: {comment.content}</p>
-        {/* <p>{comment.likedBy.length} upvotes</p> */}
+
+        {/* <figure className="media-left">
+          <p>
+            <img />
+          </p>
+        </figure> */}
+        <div className="media-content">
+          <div className="content">
+
+            <p> <strong> Username </strong>at <small> {comment.createdAt}:<br /></small> {comment.content}</p>
+            {/* <p>{comment.likedBy.length} upvotes</p> */}
+          </div>
+        </div>
       </div>
-    </section>
+    </article>
   )
 }

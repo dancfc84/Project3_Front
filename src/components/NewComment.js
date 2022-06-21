@@ -46,7 +46,7 @@ export default function NewComment(props) {
 
 
   return <div className=" box">
-    <div className="container">
+    <div className="">
       <form onSubmit={handleAuth}>
         <div className="field">
           <div className="control columns">

@@ -17,7 +17,7 @@ export default function NewComment(props) {
     setformDataInput({
       ...formDataInput,
       [e.target.name]: e.target.value,
-      
+
     })
   }
 
@@ -27,11 +27,11 @@ export default function NewComment(props) {
     //   ...formDataInput,
     //   tags: formDataInput.tags.map(type => type.value),
     // }
-    
+
     try {
       // const token = localStorage.getItem("token")
       console.log(formDataInput);
-      const { data } = await axios.post(`/api/posts/${props.commentID}/comment`, formDataInput)
+      const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
       // , {
       //   // headers: {
       //   //   'Authorization': `Bearer ${token}`,
@@ -45,14 +45,16 @@ export default function NewComment(props) {
   }
 
 
-  return <div className="">
+  return <div className=" box">
     <div className="container">
       <form onSubmit={handleAuth}>
-        <div className="field ">
-          <label className="label">Comment</label>
-          <div className="control">
+        <div className="field">
+          <div className="control columns">
+            <button className="button mx-4 is-outlined">
+              Post your comment
+            </button>
             <input
-              className="input text is-secondary"
+              className="input column text is-secondary"
               type="text"
               name={'content'}
               value={formDataInput.content}
@@ -61,9 +63,7 @@ export default function NewComment(props) {
             />
           </div>
         </div>
-        <button className="button is-outlined">
-          Comment
-        </button>
+
       </form>
     </div >
   </div >

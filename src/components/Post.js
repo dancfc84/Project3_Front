@@ -14,6 +14,7 @@ export default function PostElement(postData) {
     hiddenCommentsNumber.includes(postID)
       ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
+
   }
 
   return (
@@ -25,30 +26,40 @@ export default function PostElement(postData) {
           <div className="content">
             <h4 className="header">
               {/* <Link to={`/users/${postData.owner._id}`}>
-          {postData.owner.username}
-        </Link> */}
+              {postData.owner.username}
+              </Link> */}
               {/* need to format timestamp */}
-              Username
             </h4>
             <div className="is-grouped">
               <p className="content">
                 {postData.postContent}
               </p></div>
-            <p>posted at {postData.createdAt}.</p><br />
-            <div className="tags level-right"><br />{postData.tags.map((tag, index) => <span key={index} className="tag is-link mx-1 is-light">{tag}</span>)}
-              <button className="button is-small is-info is-light mx-1">Edit</button>
-            </div>
 
+            <p>posted at {postData.createdAt}.</p><br />
+            
+            <div className="tags level-right"><br />{postData.tags.map((tag, index) =>
+              <span key={index} className="tag is-link mx-1 is-light">
+                {tag}
+              </span>)}
+            <button className="button is-small is-info is-light mx-1">
+                Edit
+            </button>
+            </div>
 
 
             <span className="">{5}</span>
 
             <button className="button is-small is-info is-light mx-5" >Upvote</button>
-            <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>Show Comments</button>
+
+            <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
+              Show Comments
+            </button>
+
             <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
               {postData.userComments.map((comment, index) =>
                 <CommentElement {...comment} key={index} />
               )}
+              <br/>
               <NewComment {...postData} />
             </div>
           </div>

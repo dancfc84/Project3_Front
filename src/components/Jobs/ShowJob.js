@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from "react-router-dom"
 //import axios from "axios"
 
-export default function ShowJob () {
+export default function ShowJob() {
 
-  const [ job, setJob ] = useState(undefined)
+  const [job, setJob] = useState(undefined)
   const { jobId } = useParams()
 
   useEffect(() => {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setJob(data))
-  }, [ job, jobId, setJob ])
+  }, [job, jobId, setJob])
   console.log(job);
 
   return (
@@ -59,7 +59,7 @@ export default function ShowJob () {
                   Job Added By
                 </h4>
                 <hr />
-{/*                 <p>{job.user.username}</p> */}
+                {/*                 <p>{job.user.username}</p> */}
 
               </div>
             </div>

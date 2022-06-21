@@ -37,6 +37,7 @@ export default function CreateNewPost() {
       //   // },
       // })
       // navigate('/')
+      setformDataInput(formDataInput)
       console.log(data);
     } catch (err) {
       console.log(err.response.data);

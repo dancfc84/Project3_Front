@@ -17,6 +17,7 @@ export default function NewComment(props) {
     setformDataInput({
       ...formDataInput,
       [e.target.name]: e.target.value,
+      
     })
   }
 

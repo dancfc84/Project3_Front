@@ -32,7 +32,7 @@ export default function PostElement(postData) {
             </h4>
             <div className="is-grouped">
               <p className="content">
-                {postData.content}
+                {postData.postContent}
               </p></div>
             <p>posted at {postData.createdAt}.</p><br />
             <div className="tags level-right"><br />{postData.tags.map((tag, index) => <span key={index} className="tag is-link mx-1 is-light">{tag}</span>)}

@@ -7,6 +7,7 @@ import Newsfeed from "./components/Newsfeed"
 import CreateJob from './components/Jobs/CreateJob'
 import JobIndex from './components/Jobs/JobIndex'
 import ShowJob from './components/Jobs/ShowJob'
+import EditJob from './components/Jobs/EditJob'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/jobs/index" element={<JobIndex />} />
         <Route path="/jobs/create" element={<CreateJob />} />
         <Route path="/jobs/:jobId" element={<ShowJob />} />
+        <Route path="/jobs/edit/:jobId" element={<EditJob />} />
       </Routes>
     </Router>
   )

@@ -36,16 +36,18 @@ export default function PostElement(postData) {
               </p></div>
 
             <p>posted at {postData.createdAt}.</p><br />
-            
-            <div className="tags level-right"><br />{postData.tags.map((tag, index) =>
-              <span key={index} className="tag is-link mx-1 is-light">
-                {tag}
-              </span>)}
-            <button className="button is-small is-info is-light mx-1">
-                Edit
-            </button>
+            <h5 className="level-right" >Tags:</h5>
+
+            <div className="tags level-right">
+              {postData.tags.map((tag, index) =>
+                <span key={index} className="tag is-link mx-1 is-light">
+                  {tag}
+                </span>)} <br />
             </div>
 
+            <div className="level-right" ><button className="button is-small is-info is-light mx-1">
+              Edit
+            </button></div>
 
             <span className="">{5}</span>
 
@@ -57,9 +59,16 @@ export default function PostElement(postData) {
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
               {postData.userComments.map((comment, index) =>
-                <CommentElement {...comment} key={index} />
+                <div key={index}>
+                  <CommentElement {...comment} />
+                  <div className="level-right" ><button className="button is-small is-info is-light mx-1">
+                    Edit
+                  </button>
+                  </div>
+                </div>
+
               )}
-              <br/>
+              <br />
               <NewComment {...postData} />
             </div>
           </div>

@@ -9,7 +9,7 @@ export default function Navbar() {
         <nav>
           <div className="container-nav ">
             <div className="navbar-brand">
-              <NavLink to="/"><img className="logo image image is-64x64 p-1" src={logoFile} /></NavLink>
+              <NavLink to="/"><img className="logo image image is-128x128 p-1 mx-5" src={logoFile} /></NavLink>
               <NavLink to="/" className="navbar-item is-size-3 has-text-weight-bold ml-3 is-right">
                 Home
               </NavLink>

@@ -24,7 +24,7 @@ export default function PostElement(postData) {
         <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
           {/* <img src={postData.owner.profilePic} /> */}
           <div className="content">
-            <h4 className="header">
+            <h4 className="header">Username
               {/* <Link to={`/users/${postData.owner._id}`}>
               {postData.owner.username}
               </Link> */}

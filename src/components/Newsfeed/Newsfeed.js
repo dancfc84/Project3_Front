@@ -35,10 +35,6 @@ export default function Newsfeed() {
   }
 
 
-  function handleComments(data1) {
-    console.log(data1);
-  }
-
   async function handleAuth(e) {
 
     e.preventDefault()
@@ -50,6 +46,7 @@ export default function Newsfeed() {
     try {
       // const token = localStorage.getItem("token")
       const { data } = await axios.post('/api/posts/', newFormData)
+      console.log(data);
       setUserPosts([newFormData, ...userPosts])
       //query APi 2nd time
       // , {
@@ -118,7 +115,7 @@ export default function Newsfeed() {
                 <div >
                   {userPosts.map((userPost, index) =>
                     <div key={index}>
-                      <PostElement handleComments={handleComments} {...userPost}  />
+                      <PostElement {...userPost} />
                     </div>
                   )}
 

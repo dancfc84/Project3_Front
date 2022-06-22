@@ -27,12 +27,12 @@ export default function NewComment(props) {
 
     try {
       // console.log();
-      props.setComments(formDataInput)
+      props.setNewCommentState(formDataInput)
       // const token = localStorage.getItem("token")
-      const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
+      const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
       // props.setComments([props.userComments, data])
       // props.handleComments(data.userComments[0])
-      // console.log('test', data);
+      console.log('NewCommentPostData', data);
 
       // , {
       //   // headers: {
@@ -40,15 +40,15 @@ export default function NewComment(props) {
       //   // },
       // })
       // navigate('/')
+
     } catch (err) {
       console.log(err.response.data);
-      // props.handleComments("Was unable to post")
     }
   }
 
 
   return <div className=" box">
-    { }
+
     <div className="">
       <form onSubmit={handleAuth}>
         <div className="field">

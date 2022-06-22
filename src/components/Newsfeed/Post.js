@@ -3,14 +3,13 @@ import React from "react"
 import _ from 'lodash'
 import NewComment from "./NewComment"
 import CommentElement from "./Comment"
+import axios from "axios"
 
 
 export default function PostElement(postData) {
   // const user = localStorage.getItem('user')
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
-  const [comments, setComments] = React.useState()
-
-
+  const [newCommentState, setNewCommentState] = React.useState(postData.userComments)
 
   function handleShowCommentsButton(postID) { //handles button
     hiddenCommentsNumber.includes(postID)
@@ -18,32 +17,18 @@ export default function PostElement(postData) {
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
   }
 
-  async function handleDelete(postID, commentID) {
-    e.preventDefault()
-
-    setComments()
-
-    try {
-      // console.log();
-      props.setComments(formDataInput)
-      // const token = localStorage.getItem("token")
-      const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
-      // props.setComments([props.userComments, data])
-      // props.handleComments(data.userComments[0])
-      // console.log('test', data);
-
-      // , {
-      //   // headers: {
-      //   //   'Authorization': `Bearer ${token}`,
-      //   // },
-      // })
-      // navigate('/')
-    } catch (err) {
-      console.log(err.response.data);
-      // props.handleComments("Was unable to post")
-    }
+  function setNewState(newComment) {
+    setNewCommentState({
+      ...newCommentState,
+      newComment,
+    })
+    console.log(newCommentState);
   }
 
+
+  async function deletePostHandle() {
+    await axios.delete(`/api/posts/${postData._id}`)
+  }
 
 
   return (
@@ -74,41 +59,48 @@ export default function PostElement(postData) {
                 </span>)} <br />
             </div>
 
-            <div className="level-right" ><button className="button is-small is-info is-light mx-1">
-              Edit
-            </button></div>
+            <div className="level-right" >
+              <button className="button is-small is-info is-light mx-1">
+                Edit
+              </button>
+              <button className="button is-small is-warning is-light mx-1" onClick={deletePostHandle} >
+                Delete
+              </button>
+            </div>
 
             <span className="">{5}</span>
 
             <button className="button is-small is-info is-light mx-5" >Upvote</button>
 
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
-              Show Comments
+              Show {postData.userComments ? _.size(postData.userComments) : '0'} Comments
             </button>
 
-            <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
-              {postData.userComments ?
-                postData.userComments.map((comment, index) =>
+            <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>
+
+              {newCommentState
+                ? newCommentState.map((comment, index) =>
                   <div key={index}>
                     <CommentElement {...comment} />
                     <div className="level-right" >
                       <button className="button is-small is-info is-light mx-1">
                         Edit
                       </button>
-                      <button className="button is-small is-warning is-light mx-1" onClick={handleDelete(postData._id, comment._id)}>
+                      <button className="button is-small is-warning is-light mx-1" >
                         Delete
                       </button>
                     </div>
                   </div>
 
                 ) : null}
+              {/* {newCommentState !== null ? <CommentElement {...newCommentState} /> : null} */}
+
               <br />
-              <NewComment setComments={setComments} handleComments={postData.handleComments} {...postData} />
+              <NewComment setNewCommentState={setNewCommentState} newCommentState={newCommentState} postIDprop={postData._id} setNewState={setNewState} />
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}
         </div>
-
       </div>
     </section>
   )

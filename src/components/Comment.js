@@ -18,7 +18,7 @@ export default function CommentElement(comment) {
         <div className="media-content">
           <div className="content">
 
-            <p> <strong> Username </strong>at <small> {comment.createdAt}:<br /></small> {comment.postContent}</p>
+            <p> <strong> Username </strong>at <small> {comment.createdAt.toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}:<br /></small> {comment.content}</p>
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
         </div>

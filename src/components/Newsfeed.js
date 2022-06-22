@@ -58,7 +58,7 @@ export default function Newsfeed() {
       // },
       // })
       // navigate('/')
-      setformDataInput(formDataInput)
+      // setformDataInput(formDataInput)
     } catch (err) {
       console.log(err.response.data);
     }

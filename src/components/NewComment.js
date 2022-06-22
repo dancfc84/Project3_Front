@@ -27,7 +27,7 @@ export default function NewComment(props) {
 
     try {
       // console.log();
-      props.handleComments(formDataInput)
+      props.setComments(formDataInput)
       // const token = localStorage.getItem("token")
       const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
       // props.setComments([props.userComments, data])
@@ -42,6 +42,7 @@ export default function NewComment(props) {
       // navigate('/')
     } catch (err) {
       console.log(err.response.data);
+      // props.handleComments("Was unable to post")
     }
   }
 

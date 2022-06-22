@@ -16,8 +16,35 @@ export default function PostElement(postData) {
     hiddenCommentsNumber.includes(postID)
       ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
-
   }
+
+  async function handleDelete(postID, commentID) {
+    e.preventDefault()
+
+    setComments()
+
+    try {
+      // console.log();
+      props.setComments(formDataInput)
+      // const token = localStorage.getItem("token")
+      const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
+      // props.setComments([props.userComments, data])
+      // props.handleComments(data.userComments[0])
+      // console.log('test', data);
+
+      // , {
+      //   // headers: {
+      //   //   'Authorization': `Bearer ${token}`,
+      //   // },
+      // })
+      // navigate('/')
+    } catch (err) {
+      console.log(err.response.data);
+      // props.handleComments("Was unable to post")
+    }
+  }
+
+
 
   return (
     <section className="section">
@@ -37,7 +64,7 @@ export default function PostElement(postData) {
                 {postData.postContent}
               </p></div>
 
-            <p>posted at {postData.createdAt.toLocaleString("es-ES", {dateStyle: "short", timeStyle: "short"})}.</p><br />
+            <p>posted at {postData.createdAt.toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}</p><br />
             <h5 className="level-right" >Tags:</h5>
 
             <div className="tags level-right">
@@ -60,13 +87,17 @@ export default function PostElement(postData) {
             </button>
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
-              {comments ?
-                comments.map((comment, index) =>
+              {postData.userComments ?
+                postData.userComments.map((comment, index) =>
                   <div key={index}>
                     <CommentElement {...comment} />
-                    <div className="level-right" ><button className="button is-small is-info is-light mx-1">
-                      Edit
-                    </button>
+                    <div className="level-right" >
+                      <button className="button is-small is-info is-light mx-1">
+                        Edit
+                      </button>
+                      <button className="button is-small is-warning is-light mx-1" onClick={handleDelete(postData._id, comment._id)}>
+                        Delete
+                      </button>
                     </div>
                   </div>
 

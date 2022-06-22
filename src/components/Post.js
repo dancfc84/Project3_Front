@@ -8,6 +8,8 @@ import CommentElement from "./Comment"
 export default function PostElement(postData) {
   // const user = localStorage.getItem('user')
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
+  const [comments, setComments] = React.useState()
+
 
 
   function handleShowCommentsButton(postID) { //handles button
@@ -35,7 +37,7 @@ export default function PostElement(postData) {
                 {postData.postContent}
               </p></div>
 
-            <p>posted at {postData.createdAt}.</p><br />
+            <p>posted at {postData.createdAt.toLocaleString("es-ES", {dateStyle: "short", timeStyle: "short"})}.</p><br />
             <h5 className="level-right" >Tags:</h5>
 
             <div className="tags level-right">
@@ -58,18 +60,19 @@ export default function PostElement(postData) {
             </button>
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? '' : `is-hidden`}>
-              {postData.userComments.map((comment, index) =>
-                <div key={index}>
-                  <CommentElement {...comment} />
-                  <div className="level-right" ><button className="button is-small is-info is-light mx-1">
-                    Edit
-                  </button>
+              {comments ?
+                comments.map((comment, index) =>
+                  <div key={index}>
+                    <CommentElement {...comment} />
+                    <div className="level-right" ><button className="button is-small is-info is-light mx-1">
+                      Edit
+                    </button>
+                    </div>
                   </div>
-                </div>
 
-              )}
+                ) : null}
               <br />
-              <NewComment {...postData} />
+              <NewComment setComments={setComments} handleComments={postData.handleComments} {...postData} />
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}

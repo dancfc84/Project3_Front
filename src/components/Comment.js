@@ -3,7 +3,6 @@ import React from "react"
 
 export default function CommentElement(comment) {
   // const user = localStorage.getItem('user')
-
   return (
     <article className="media my-5 mx-5">
       <div key={comment._id + 0}> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
@@ -19,7 +18,7 @@ export default function CommentElement(comment) {
         <div className="media-content">
           <div className="content">
 
-            <p> <strong> Username </strong>at <small> {comment.createdAt}:<br /></small> {comment.content}</p>
+            <p> <strong> Username </strong>at <small> {comment.createdAt}:<br /></small> {comment.postContent}</p>
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
         </div>

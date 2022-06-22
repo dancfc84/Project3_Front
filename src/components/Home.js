@@ -10,13 +10,11 @@ export default function Home() {
 
   // function hadnleLogin() {
   // }
-
   //cover image
   //cover text content 
   // email input
   //register button 
   //login button ? 
-
 
   return (
     <section className="">

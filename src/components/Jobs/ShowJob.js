@@ -8,7 +8,7 @@ export default function ShowJob() {
 
   const [job, setJob] = useState(undefined)
   const { jobId } = useParams()
-
+  console.log(jobId);
   useEffect(() => {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
@@ -17,7 +17,7 @@ export default function ShowJob() {
 
   async function handleDelete () {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`)
-    console.log(deleteJob);
+    console.log(`deleteJob - ${deleteJob}`);
     navigate("/jobs")
   }
 

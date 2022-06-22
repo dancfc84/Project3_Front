@@ -1,44 +1,26 @@
-// import React, { useState, useEffect } from 'react'
-// import axios from "axios"
-// import { useParams } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import axios from "axios"
+import { useParams } from "react-router-dom"
 
-// export default function CreateJob () {
+export default function EditPost (propPostId) {
 
-//   const [formData, setFormData] = useState(
-//     {
-//       "jobTitle": "",
-//       "jobShortSummary": "",
-//       "jobDescription":
-//         "",
-//       "jobSalary": 0 ,
-//       "jobLocation": "",
-//       "jobType": "",
-//       "companyName": "",
-//       "companyImage": "",
-//     }
-//   )
+  const [formData, setFormData] = useState(
+    {
 
-//   const { jobId } = useParams()
-
-//   useEffect(() => {
-//     fetch(`/api/jobs/${jobId}`)
-//       .then(resp => resp.json())
-//       .then(data => setFormData(data))
-//   }, [])
+    }
+  )
 
 
-//   console.log(formData);
 
-//   async function handleSubmit(e) {
-//     try {
-//       e.preventDefault()
-//       const { data } = await axios.put(`/api/jobs/edit/${jobId}`, formData)
-//       console.log(data);
+  async function handlePostUpdate(e) {
+    try {
+      e.preventDefault()
+      const { data } = await axios.put(`/api/posts/${propPostId}`, formData)
 
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   }
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
 //   function handleChange (e) {
 //     const { name, value } = e.target

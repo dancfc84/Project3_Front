@@ -18,10 +18,8 @@ export default function PostElement(postData) {
   }
 
   function setNewState(newComment) {
-    setNewCommentState({
-      ...newCommentState,
-      newComment,
-    })
+    const newComArray = [...newCommentState, newComment]
+    setNewCommentState(newComArray)
     console.log(newCommentState);
   }
 
@@ -29,6 +27,19 @@ export default function PostElement(postData) {
   async function deletePostHandle() {
     await axios.delete(`/api/posts/${postData._id}`)
   }
+
+  
+
+  // async function handlePostUpdateFromModal(posID) {
+  //   try {
+  //     e.preventDefault()
+  //     const { data } = await axios.put(`/api/posts/${propPostId}`, formData)
+
+  //   } catch (e) {
+  //     console.log(e);
+  //   }
+  // }
+
 
 
   return (
@@ -47,10 +58,14 @@ export default function PostElement(postData) {
             <div className="is-grouped">
               <p className="content">
                 {postData.postContent}
-              </p></div>
+              </p>
+            </div>
 
-            <p>posted at {postData.createdAt.toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}</p><br />
-            <h5 className="level-right" >Tags:</h5>
+            <p>posted at {postData.createdAt.toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}</p>
+            <br />
+            <h5 className="level-right">
+              Tags:
+            </h5>
 
             <div className="tags level-right">
               {postData.tags.map((tag, index) =>
@@ -60,7 +75,7 @@ export default function PostElement(postData) {
             </div>
 
             <div className="level-right" >
-              <button className="button is-small is-info is-light mx-1">
+              <button className="button is-small is-info is-light mx-1" >
                 Edit
               </button>
               <button className="button is-small is-warning is-light mx-1" onClick={deletePostHandle} >

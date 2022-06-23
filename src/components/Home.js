@@ -11,10 +11,10 @@ export default function Home() {
 
   // ! Put our form fields in state.
   const [formData, setFormData] = useState({
-    username: "Cody2",
-    password: "Cody2hello%8",
-    passwordConfirmation: "Cody2hello%8",
-    email: "cody2@frontend.com",
+    username: "",
+    password: "",
+    passwordConfirmation: "",
+    email: "",
   })
 
   function handleChange(e) {
@@ -32,6 +32,7 @@ export default function Home() {
 
     try {
       const { data } = await axios.post('/api/register', formData)
+      console.log(data);
       // ! Navigate to the /login page. 
       navigate('/')
 

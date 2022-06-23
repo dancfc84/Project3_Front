@@ -11,10 +11,10 @@ export default function Home() {
 
   // ! Put our form fields in state.
   const [formData, setFormData] = useState({
-    username: "Cody2",
-    password: "Cody2hello%8",
-    passwordConfirmation: "Cody2hello%8",
-    email: "cody2@frontend.com",
+    username: "",
+    password: "",
+    passwordConfirmation: "",
+    email: "",
   })
 
   function handleChange(e) {
@@ -32,8 +32,13 @@ export default function Home() {
 
     try {
       const { data } = await axios.post('/api/register', formData)
+<<<<<<< HEAD
       // ! Navigate to the /login page.
       console.log(data);
+=======
+      console.log(data);
+      // ! Navigate to the /login page. 
+>>>>>>> 07eed8b6de465076e00ccb8f0413ee0f9e49489f
       navigate('/')
 
     } catch (err) {
@@ -46,8 +51,18 @@ export default function Home() {
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
-      localStorage.setItem('token', data.token)
-      console.log(data.token)
+      const token = data.token
+      const userID = data.user._id
+      const userName = data.user.username
+
+      if (token !== null && userID !== null) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userID", userID);
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("loggedIn", true)
+      }
+      
+      
       navigate('/')
       // ! Navigate to the /login page. 
     } catch (err) {

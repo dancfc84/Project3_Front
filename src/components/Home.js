@@ -32,8 +32,13 @@ export default function Home() {
 
     try {
       const { data } = await axios.post('/api/register', formData)
+<<<<<<< HEAD
+      // ! Navigate to the /login page.
+      console.log(data);
+=======
       console.log(data);
       // ! Navigate to the /login page. 
+>>>>>>> 07eed8b6de465076e00ccb8f0413ee0f9e49489f
       navigate('/')
 
     } catch (err) {

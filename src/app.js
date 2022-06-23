@@ -10,6 +10,7 @@ import JobIndex from './components/Jobs/JobIndex'
 import ShowJob from './components/Jobs/ShowJob'
 import EditJob from './components/Jobs/EditJob'
 
+
 function App() {
   return (
     <>
@@ -23,7 +24,7 @@ function App() {
           <Route path="/jobs/:jobId" element={<ShowJob />} />
           <Route path="/jobs/edit/:jobId" element={<EditJob />} />
         </Routes>
-        <footer className="footer my-2 py-2">
+        <footer className="footer column is-narrow my-2 py-2">
           <div className="box content has-text-centered">
 
             Companies looking to hire:

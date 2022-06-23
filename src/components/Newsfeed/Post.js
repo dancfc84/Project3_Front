@@ -20,7 +20,6 @@ export default function PostElement(postData) {
   function setNewState(newComment) {
     const newComArray = [...newCommentState, newComment]
     setNewCommentState(newComArray)
-
   }
 
 

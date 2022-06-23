@@ -1,17 +1,25 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useParams } from "react-router-dom"
-//import axios from "axios"
+import { Link, useParams, useNavigate } from "react-router-dom"
+import axios from "axios"
 
 export default function ShowJob() {
 
+  const navigate = useNavigate()
+
   const [job, setJob] = useState(undefined)
   const { jobId } = useParams()
-
+  console.log(jobId);
   useEffect(() => {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setJob(data))
   }, [])
+
+  async function handleDelete () {
+    const deleteJob = await axios.delete(`/api/jobs/${jobId}`)
+    console.log(`deleteJob - ${deleteJob}`);
+    navigate("/jobs")
+  }
 
   return (
     <section className="section">
@@ -25,13 +33,13 @@ export default function ShowJob() {
                 <figure className="image">
                   <img src={job.companyImage} alt={job.companyName} />
                 </figure>
-                {/* // ! Only show the button if the pokemon was made by the user. */}
-                {/*                 {isCreator(job.user._id) && <button
+                {/* {isCreator(job.user._id) && */} 
+                <button
                   className="button is-danger"
                   onClick={handleDelete}
                 >
                   Delete job
-                </button>} */}
+                </button>
             
                 <Link to={`/jobs/edit/${jobId}`}>
                   <button className="button is-warning">

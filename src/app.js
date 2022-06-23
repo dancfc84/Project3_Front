@@ -1,9 +1,9 @@
 import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Home from "./components/Home"
+import Home from "./components//Home"
 // import About from "./components/About"
 import Navbar from "./components/UI/Navbar"
-import Newsfeed from "./components/Newsfeed"
+import Newsfeed from "./components/Newsfeed/Newsfeed"
 import CreateJob from './components/Jobs/CreateJob'
 import JobIndex from './components/Jobs/JobIndex'
 import ShowJob from './components/Jobs/ShowJob'

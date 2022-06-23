@@ -12,12 +12,9 @@ export default function NewComment(props) {
     content: "",
   })
 
-
   function handleChangeEvent(e) {
     setformDataInput({
-      ...formDataInput,
       [e.target.name]: e.target.value,
-
     })
   }
 
@@ -29,16 +26,21 @@ export default function NewComment(props) {
     // }
 
     try {
+      // console.log();
+      props.setNewState(formDataInput)
       // const token = localStorage.getItem("token")
-      console.log(formDataInput);
-      const { data } = await axios.post(`/api/posts/${props._id}/comment`, formDataInput)
+      const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
+      // props.setComments([props.userComments, data])
+      // props.handleComments(data.userComments[0])
+      console.log('NewCommentPostData', data);
+
       // , {
       //   // headers: {
       //   //   'Authorization': `Bearer ${token}`,
       //   // },
       // })
       // navigate('/')
-      console.log(data);
+
     } catch (err) {
       console.log(err.response.data);
     }
@@ -46,6 +48,7 @@ export default function NewComment(props) {
 
 
   return <div className=" box">
+
     <div className="">
       <form onSubmit={handleAuth}>
         <div className="field">

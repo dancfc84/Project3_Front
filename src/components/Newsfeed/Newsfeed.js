@@ -7,7 +7,6 @@ import axios from 'axios'
 import Select from 'react-select'
 // import { useNavigate } from 'react-router-dom'
 import tags from '../../data/tags'
-
 export default function Newsfeed() {
   const [userPosts, setUserPosts] = React.useState([])
   // const [newPost, setNewpost] = React.useState()
@@ -34,6 +33,13 @@ export default function Newsfeed() {
     })
   }
 
+  function updatePostsOnDelete(deletedPostID) {
+    // let const posts = [...userPosts] - deletedPost
+    setUserPosts(userPosts.filter((post) =>
+      post._id !== deletedPostID
+    )
+    )
+  }
 
   async function handleAuth(e) {
 
@@ -115,7 +121,7 @@ export default function Newsfeed() {
                 <div >
                   {userPosts.map((userPost, index) =>
                     <div key={index}>
-                      <PostElement {...userPost} />
+                      <PostElement updatePostsOnDelete={updatePostsOnDelete} {...userPost} />
                     </div>
                   )}
 

@@ -11,7 +11,7 @@ export default function PostElement(postData) {
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
   const [newCommentState, setNewCommentState] = React.useState(postData.userComments)
 
-  function handleShowCommentsButton(postID) { //handles button
+  function handleShowCommentsButton(postID) { //handles SHow button
     hiddenCommentsNumber.includes(postID)
       ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
@@ -20,15 +20,28 @@ export default function PostElement(postData) {
   function setNewState(newComment) {
     const newComArray = [...newCommentState, newComment]
     setNewCommentState(newComArray)
-    console.log(newCommentState);
   }
 
 
   async function deletePostHandle() {
-    await axios.delete(`/api/posts/${postData._id}`)
+    try {
+      const deletePost = await axios.delete(`/api/posts/${postData._id}`)
+      if (deletePost.status === 204) {
+        postData.updatePostsOnDelete(postData._id)
+      }
+
+      // {
+      //   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      // }
+
+
+      // await axios.delete(`/api/posts/${postData._id}`)
+    } catch (e) {
+      console.log(e)
+    }
   }
 
-  
+
 
   // async function handlePostUpdateFromModal(posID) {
   //   try {
@@ -111,7 +124,7 @@ export default function PostElement(postData) {
               {/* {newCommentState !== null ? <CommentElement {...newCommentState} /> : null} */}
 
               <br />
-              <NewComment setNewCommentState={setNewCommentState} newCommentState={newCommentState} postIDprop={postData._id} setNewState={setNewState} />
+              <NewComment postIDprop={postData._id} setNewState={setNewState} />
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}

@@ -27,7 +27,7 @@ export default function NewComment(props) {
 
     try {
       // console.log();
-      props.setNewCommentState(formDataInput)
+      props.setNewState(formDataInput)
       // const token = localStorage.getItem("token")
       const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
       // props.setComments([props.userComments, data])

@@ -1,26 +1,48 @@
 import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
+import JobComment from "../Jobs/JobComment"
 import axios from "axios"
 
 export default function ShowJob() {
 
   const navigate = useNavigate()
 
+
+
+  const [formDataInput, setformDataInput] = useState({
+    content: "",
+  })
+
+
   const [job, setJob] = useState(undefined)
   const { jobId } = useParams()
-  console.log(jobId);
+
+
   useEffect(() => {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setJob(data))
   }, [])
 
+
   async function handleDelete () {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`)
-    console.log(`deleteJob - ${deleteJob}`);
-    navigate("/jobs")
+    navigate("/jobs/index")
+    console.log(deleteJob);
   }
 
+  async function handleCommentPost (e) {
+    e.preventDefault()
+    const addComment =  await axios.post(`/api/jobs/${jobId}/comment`, formDataInput)
+    console.log(addComment);
+  } 
+
+  function handleChangeEvent(e) {
+    console.log(e);
+    setformDataInput({
+      [e.target.name]: e.target.value,
+    })
+  }
   return (
     <section className="section">
       <div className="container">
@@ -68,17 +90,45 @@ export default function ShowJob() {
                 <h4 className="title is-4">
                   Job Type
                 </h4>
+                <hr />
                 <p>{job.jobType}</p>
+                <hr />
                 <h4 className="title is-4">
                   Job Added By
                 </h4>
                 <hr />
-                {/*                 <p>{job.user.username}</p> */}
 
+                {/*<p>{job.user.username}</p> */}
+
+                <div className=" box">
+                  <div className="">
+                    <form  onSubmit={handleCommentPost} >
+                      <div className="field">
+                        <div className="control columns">
+                          <button className="button mx-4 is-outlined">
+                            Post your comment
+                          </button>
+                          <input
+                            className="input column text is-secondary"
+                            type="text"
+                            name={'content'}
+                            value={formDataInput.content}
+                            onChange={handleChangeEvent}
+                            placeholder="Type Comment Here"
+                          />
+                        </div>
+                      </div>
+                    </form>
+                  </div >
+                </div >
+                { job.comments.map((comment) => {
+                  {console.log(comment)}
+                  return job.comments.length > 0 && <JobComment comments={comment}/> 
+                })
+                }
               </div>
             </div>
           </div>
-
         ) : (
           <p>...loading</p>
         )}

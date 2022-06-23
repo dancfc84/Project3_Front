@@ -9,7 +9,6 @@ import axios from 'axios'
 export default function Home() {
   const navigate = useNavigate()
 
-<<<<<<< HEAD
   // ! Put our form fields in state.
   const [formData, setFormData] = useState({
     username: "Cody2",
@@ -33,7 +32,8 @@ export default function Home() {
 
     try {
       const { data } = await axios.post('/api/register', formData)
-      // ! Navigate to the /login page. 
+      // ! Navigate to the /login page.
+      console.log(data);
       navigate('/')
 
     } catch (err) {
@@ -56,15 +56,6 @@ export default function Home() {
     }
   }
 
-=======
-  // function hadnleLogin() {
-  // }
-  //cover image
-  //cover text content 
-  // email input
-  //register button 
-  //login button ? 
->>>>>>> 21b63c934cabedc44d5304d8aac511d49cec2d95
 
   return (
     <section className="">

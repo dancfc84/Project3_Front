@@ -29,10 +29,7 @@ export default function CreateNewPost() {
     
     try {
       // const token = localStorage.getItem("token")
-      console.log(formDataInput);
       const { data } = await axios.post('/api/posts/', newFormData)
-      localStorage.setItem("newPost", data)
-
       // , {
       //   // headers: {
       //   //   'Authorization': `Bearer ${token}`,

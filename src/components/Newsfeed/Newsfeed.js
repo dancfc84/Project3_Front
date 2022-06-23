@@ -16,13 +16,14 @@ export default function Newsfeed() {
   })
 
 
+  async function getData() {
+    const res = await fetch('/api/posts')
+    const json = await res.json()
+    setUserPosts(json)
+    // setNewpost()
+  }
+
   React.useEffect(() => {                   //gets all current posts in DB
-    async function getData() {
-      const res = await fetch('/api/posts')
-      const json = await res.json()
-      setUserPosts(json)
-      // setNewpost()
-    }
     getData()
   }, [])
 
@@ -33,27 +34,26 @@ export default function Newsfeed() {
     })
   }
 
-  function updatePostsOnDelete(deletedPostID) {
-    // let const posts = [...userPosts] - deletedPost
+  function updatePostsOnDelete(deletedPostID) { //only shows posts that are not the deleted one without quering the api
     setUserPosts(userPosts.filter((post) =>
       post._id !== deletedPostID
-    )
-    )
+    ))
   }
 
   async function handleAuth(e) {
-
     e.preventDefault()
     const newFormData = {
       ...formDataInput,
       tags: formDataInput.tags.map(type => type.value),
     }
-
+    const newPost = {
+      ...newFormData,
+      createdAt: "just now",
+    }
+    setUserPosts([newPost, ...userPosts])
     try {
-      // const token = localStorage.getItem("token")
       const { data } = await axios.post('/api/posts/', newFormData)
-      console.log(data);
-      setUserPosts([newFormData, ...userPosts])
+      setTimeout(() => setUserPosts([data, ...userPosts]), 2000)
       //query APi 2nd time
       // , {
       // headers: {
@@ -66,6 +66,7 @@ export default function Newsfeed() {
       console.log(err.response.data);
     }
   }
+  // const token = localStorage.getItem("token")
 
   return (
     <>

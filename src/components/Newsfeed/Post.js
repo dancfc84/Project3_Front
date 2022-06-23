@@ -20,6 +20,7 @@ export default function PostElement(postData) {
   function setNewState(newComment) {
     const newComArray = [...newCommentState, newComment]
     setNewCommentState(newComArray)
+
   }
 
 
@@ -29,18 +30,13 @@ export default function PostElement(postData) {
       if (deletePost.status === 204) {
         postData.updatePostsOnDelete(postData._id)
       }
-
       // {
       //   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       // }
-
-
-      // await axios.delete(`/api/posts/${postData._id}`)
     } catch (e) {
       console.log(e)
     }
   }
-
 
 
   // async function handlePostUpdateFromModal(posID) {
@@ -52,7 +48,6 @@ export default function PostElement(postData) {
   //     console.log(e);
   //   }
   // }
-
 
 
   return (
@@ -69,16 +64,17 @@ export default function PostElement(postData) {
               {/* need to format timestamp */}
             </h4>
             <div className="is-grouped">
-              <p className="content">
+              <p className="content ">
                 {postData.postContent}
               </p>
             </div>
 
-            <p>posted at {postData.createdAt.toLocaleString("es-ES", { dateStyle: "short", timeStyle: "short" })}</p>
-            <br />
-            <h5 className="level-right">
+            <p className="level-right">
+              posted at <br />
+              {postData.createdAt}</p>
+            {postData.tags.length > 0 && <h5 className="level-right">
               Tags:
-            </h5>
+            </h5>}
 
             <div className="tags level-right">
               {postData.tags.map((tag, index) =>
@@ -86,6 +82,7 @@ export default function PostElement(postData) {
                   {tag}
                 </span>)} <br />
             </div>
+
 
             <div className="level-right" >
               <button className="button is-small is-info is-light mx-1" >
@@ -98,10 +95,15 @@ export default function PostElement(postData) {
 
             <span className="">{5}</span>
 
-            <button className="button is-small is-info is-light mx-5" >Upvote</button>
-
+            <button className="button is-small is-info is-light mx-5" >
+              Upvote
+            </button>
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
-              Show {postData.userComments ? _.size(postData.userComments) : '0'} Comments
+
+              {newCommentState.length > 0 ?
+                `Show ${_.size(postData.userComments)} Comments`
+                : 'Comment first'
+              }
             </button>
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>

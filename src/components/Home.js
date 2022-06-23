@@ -46,8 +46,18 @@ export default function Home() {
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
-      localStorage.setItem('token', data.token)
-      console.log(data.token)
+      const token = data.token
+      const userID = data.user._id
+      const userName = data.user.username
+
+      if (token !== null && userID !== null) {
+        localStorage.setItem("token", token);
+        localStorage.setItem("userID", userID);
+        localStorage.setItem("userName", userName);
+        localStorage.setItem("loggedIn", true)
+      }
+      
+      
       navigate('/')
       // ! Navigate to the /login page. 
     } catch (err) {

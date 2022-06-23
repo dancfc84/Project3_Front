@@ -101,7 +101,7 @@ export default function PostElement(postData) {
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
 
               {newCommentState.length > 0 ?
-                `Show ${_.size(postData.userComments)} Comments`
+                `Show ${_.size(newCommentState)} Comments`
                 : 'Comment first'
               }
             </button>

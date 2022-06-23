@@ -38,7 +38,7 @@ export default function Navbar() {
               <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 About
               </NavLink>
-              {userLogged && <li><NavLink to="/" onClick={NavbarChange} className="navbar-item">Logout</NavLink></li>}
+              {userLogged && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
 
             </div>
           </div>

@@ -100,7 +100,7 @@ export default function Home() {
                 name={'password'}
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="44bitsOfEntropyIsOk"
+                placeholder="40 bits of entropy and above is fine"
               /> <small>Hints: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
             </div>
           </div>
@@ -115,12 +115,11 @@ export default function Home() {
 
               <button type="button" className="button is-primary mx-5" onClick={handleForm}>{registering === true ? "Confirm your registration" : "Register"}</button>
             </div>
-            <br />
           </div>
 
           <div className={registering === false ? "field is-hidden" : "is-field"}>
             <input className="mx-3" type="checkbox" name={'userType'} value="business" />
-            <label className="checkbox my-2" >
+            <label className="checkbox my-1" >
               Would you like to post and promote official jobs as a company?
             </label>
             <div className="control column is-half">

@@ -29,21 +29,17 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
         </Routes>
-        <footer className="footer column is-narrow my-2 py-2">
+        <footer className="footer column is-narrow">
           <div className="box content has-text-centered">
-
             Companies looking to hire:
-            <Link to={`/jobs/create`}> Post a new Job</Link> <br /><br />
+            <Link to={`/jobs/create`}> Post a new Job</Link><br />
             ⎔ Devs can
-            <Link to={`/jobs/index`}> see current listings.</Link> <br /><br />
-
-            <Link to={`/about`} className=" ">About us</Link>
+            <Link to={`/jobs/index`}> see current listings.</Link><br />
             <br />
             <div className="content has-text-centered ">
               <p>
                 <strong>HackerTrees.com</strong> proudly developed by
                 <Link to="https://github.com/dancfc84" className=""> Dimitar Vidolov</Link>,
-
                 <Link to="https://github.com/dancfc84" className=""> Daniel Whittock</Link> and
                 <Link to="https://github.com/Qshan888" className=""> Cody Shan </Link>
                 as part of Software Engineering Immersive 23 at

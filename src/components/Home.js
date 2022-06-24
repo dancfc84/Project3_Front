@@ -1,20 +1,22 @@
 import splashImage from '../assets/malwareImage.jpg'
-import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React from 'react'
+// import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 // import { Link } from "react-router-dom"
 
 
 export default function Home() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
+  const [registering, setRegistering] = React.useState(false)
 
   // ! Put our form fields in state.
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = React.useState({
     username: "",
     password: "",
     passwordConfirmation: "",
     email: "",
+    userType: "",
   })
 
   function handleChange(e) {
@@ -23,18 +25,22 @@ export default function Home() {
     const { name, value } = e.target
     setFormData({
       ...formData, // ! This is whatever the form data was before, all it's fields.
-      [name]: value, 
+      [name]: value,
     })
   }
 
-  async function handleRegister(e) {
-    e.preventDefault()
+  function handleForm(e) {
+    registering === false ? setRegistering(true) : handleRegistrationConfirm(e)
+  }
 
+  async function handleRegistrationConfirm(e) {
+    e.preventDefault()
     try {
       const { data } = await axios.post('/api/register', formData)
       console.log(data);
       // ! Navigate to the /login page. 
-      navigate('/')
+      // data ? navigate('/') : null //should be newsfeed
+      //but we also need to log them automatically
 
     } catch (err) {
       // ! Print out the response from the backend if there's an error
@@ -55,10 +61,11 @@ export default function Home() {
         localStorage.setItem("userID", userID);
         localStorage.setItem("userName", userName);
         localStorage.setItem("loggedIn", true)
+        // navigate('/newsfeed') //navigates you to newsfeed once logged in
       }
-      
 
-      navigate('/')
+
+      // navigate('/')
       // ! Navigate to the /login page. 
     } catch (err) {
       // ! Print out the response from the backend if there's an error
@@ -70,7 +77,7 @@ export default function Home() {
   return (
     <section className="">
       <div className="container column box is-one-third">
-        <form>
+        <form onSubmit={handleLogin}>
           <div className="field">
             <label className="label">Email</label>
             <div className="control">
@@ -95,8 +102,23 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="field">
-            <label className="label">Confirm password</label>
+
+          <input className="mx-3" type="checkbox" name={'userType'} value="business" />
+          <label className="checkbox my-3" >
+            Would you like to post and promote official jobs as a company?
+          </label>
+
+          <div className="field is-grouped">
+            <div className="control">
+              <button type='submit' className="button is-primary">Login</button>
+            </div>
+            <div className="control">
+              <button type="button" className="button is-light" onClick={handleForm}>{registering === true ? "Confirm Registration once password entered" : "Register"}</button>
+            </div>
+            <br />
+          </div>
+
+          <div className={registering === false ? "field is-hidden" : "is-field"}>
             <div className="control">
               <input
                 className="input"
@@ -104,15 +126,8 @@ export default function Home() {
                 name={'passwordConfirmation'}
                 value={formData.passwordConfirmation}
                 onChange={handleChange}
+                placeholder="Please confirm password"
               />
-            </div>
-          </div>
-          <div className="field is-grouped">
-            <div className="control">
-              <button className="button is-primary" onClick={handleLogin}>Login</button>
-            </div>
-            <div className="control">
-              <button className="button is-light" onClick={handleRegister}>Register</button>
             </div>
           </div>
         </form>

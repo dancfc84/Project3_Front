@@ -8,6 +8,8 @@ import axios from 'axios'
 export default function CreateNewPost() {
   // const navigate = useNavigate()
 
+
+
   const [formDataInput, setformDataInput] = useState({
     postContent: "",
     tags: [],

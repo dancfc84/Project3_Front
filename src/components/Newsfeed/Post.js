@@ -37,7 +37,6 @@ export default function PostElement(postData) {
     }
   }
 
-
   // async function handlePostUpdateFromModal(posID) {
   //   try {
   //     e.preventDefault()
@@ -48,7 +47,6 @@ export default function PostElement(postData) {
   //   }
   // }
 
-
   return (
     <section className="section">
       <div className="container">
@@ -56,7 +54,7 @@ export default function PostElement(postData) {
         <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
           {/* <img src={postData.owner.profilePic} /> */}
           <div className="content">
-            <h4 className="header">Username
+            <h4 className="header"> User {localStorage.getItem("userID")}:
               {/* <Link to={`/users/${postData.owner._id}`}>
               {postData.owner.username}
               </Link> */}
@@ -69,7 +67,7 @@ export default function PostElement(postData) {
             </div>
 
             <p className="level-right">
-              posted at <br />
+              posted <br />
               {postData.createdAt}</p>
             {postData.tags.length > 0 && <h5 className="level-right">
               Tags:

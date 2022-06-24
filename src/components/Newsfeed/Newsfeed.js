@@ -54,8 +54,7 @@ export default function Newsfeed() {
     setUserPosts([newPost, ...userPosts])
     try {
       const { data } = await axios.post('/api/posts/', newFormData)
-      setTimeout(() => setUserPosts([data, ...userPosts]), 2000)
-      //query APi 2nd time
+      setTimeout(() => setUserPosts([data, ...userPosts]), 2000) //query APi 2nd time
       // , {
       // headers: {
       //   'Authorization': `Bearer ${token}`,

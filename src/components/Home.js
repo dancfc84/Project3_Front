@@ -109,11 +109,11 @@ export default function Home() {
 
           <div className="field is-grouped">
             <div className="control">
-              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>Login</button>
+              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>Log In</button>
             </div>
             <div className="control">
 
-              <button type="button" className="button is-primary mx-5" onClick={handleForm}>{registering === true ? "Confirm your registration" : "Register"}</button>
+              <button type="button" className="button is-primary mx-5" onClick={handleForm}>{registering === true ? "Confirm Your registration" : "Create New Account"}</button>
             </div>
           </div>
 

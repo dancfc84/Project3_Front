@@ -1,13 +1,13 @@
 import splashImage from '../assets/malwareImage.jpg'
 import React from 'react'
-// import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
 // import { Link } from "react-router-dom"
 
 
 export default function Home() {
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
   const [registering, setRegistering] = React.useState(false)
 
   // ! Put our form fields in state.
@@ -39,7 +39,8 @@ export default function Home() {
       const { data } = await axios.post('/api/register', formData)
       console.log(data);
       // ! Navigate to the /login page. 
-      // data ? navigate('/') : null //should be newsfeed
+      navigate('/newsfeed')  //navigates to newsfeed if successfully registered
+
       //but we also need to log them automatically
 
     } catch (err) {
@@ -78,6 +79,7 @@ export default function Home() {
     <section className="">
       <div className="container column box is-one-third">
         <form onSubmit={handleLogin}>
+
           <div className="field column is-two-thirds">
             <label className="label">Email</label>
             <div className="control">
@@ -91,6 +93,7 @@ export default function Home() {
               />
             </div>
           </div>
+
           <div className="field column is-two-thirds">
             <label className="label">Password</label>
             <div className="control">
@@ -109,11 +112,15 @@ export default function Home() {
 
           <div className="field is-grouped">
             <div className="control">
-              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>Log In</button>
+              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>
+                Log In
+              </button>
             </div>
             <div className="control">
 
-              <button type="button" className="button is-primary mx-5" onClick={handleForm}>{registering === true ? "Confirm Your registration" : "Create New Account"}</button>
+              <button type="button" className="button is-primary mx-5" onClick={handleForm}>
+                {registering === true ? "Confirm Your registration" : "Create New Account"}
+              </button>
             </div>
           </div>
 
@@ -122,6 +129,7 @@ export default function Home() {
             <label className="checkbox my-1" >
               Would you like to post and promote official jobs as a company?
             </label>
+
             <div className="control column is-half">
               <input
                 className="input"
@@ -135,6 +143,7 @@ export default function Home() {
           </div>
         </form>
       </div >
+
       <div className="columns">
         <div className="column is-one-thirds" />
         <div className="column is-one-thirds">
@@ -142,6 +151,7 @@ export default function Home() {
         </div>
         <div className="column is-one-thirds" />
       </div>
+
     </section >
   )
 }

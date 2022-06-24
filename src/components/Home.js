@@ -78,7 +78,7 @@ export default function Home() {
     <section className="">
       <div className="container column box is-one-third">
         <form onSubmit={handleLogin}>
-          <div className="field column is-half ">
+          <div className="field column is-two-thirds">
             <label className="label">Email</label>
             <div className="control">
               <input
@@ -91,7 +91,7 @@ export default function Home() {
               />
             </div>
           </div>
-          <div className="field column is-half">
+          <div className="field column is-two-thirds">
             <label className="label">Password</label>
             <div className="control">
               <input
@@ -100,7 +100,7 @@ export default function Home() {
                 name={'password'}
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="40 bits of entropy and above is fine"
+                placeholder="Make it long, not complex. 40 bits of entropy and above."
               /> <small>Hints: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
             </div>
           </div>

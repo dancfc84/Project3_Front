@@ -11,6 +11,7 @@ import ShowJob from './components/Jobs/ShowJob'
 import EditJob from './components/Jobs/EditJob'
 import About from "./components/About"
 import Contact from './components/Contact'
+import EditPost from './components/Newsfeed/EditPost'
 
 
 
@@ -22,6 +23,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/newsfeed" element={<Newsfeed />} />
+          <Route path="/postedit/:postID" element={<EditPost />} />
           <Route path="/jobs/index" element={<JobIndex />} />
           <Route path="/jobs/create" element={<CreateJob />} />
           <Route path="/jobs/:jobId" element={<ShowJob />} />

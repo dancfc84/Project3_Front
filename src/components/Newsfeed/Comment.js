@@ -21,7 +21,7 @@ export default function CommentElement(comment) {
         <div className="media-content">
           <div className="content">
             <p><strong>Username </strong>at
-              <small> {comment.createdAt}:<br /></small>
+              <small> {comment.user}:<br /></small>
               {comment.content}</p>
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>

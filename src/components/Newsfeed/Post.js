@@ -1,12 +1,16 @@
 import React from "react"
-// import { Link } from "react-router-dom"
+import { Link } from "react-router-dom"
 import _ from 'lodash'
 import NewComment from "./NewComment"
 import CommentElement from "./Comment"
 import axios from "axios"
 
 
+
 export default function PostElement(postData) {
+  // const [modalShow, setModalShow] = React.useState(false)
+
+
   // const user = localStorage.getItem('user')
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
   const [newCommentState, setNewCommentState] = React.useState(postData.userComments)
@@ -21,7 +25,6 @@ export default function PostElement(postData) {
     const newComArray = [...newCommentState, newComment]
     setNewCommentState(newComArray)
   }
-
 
   async function deletePostHandle() {
     try {
@@ -47,8 +50,18 @@ export default function PostElement(postData) {
   //   }
   // }
 
+  // function modalPopUp() {
+  //   setModalShow(true)
+  // }
+
+
+
+
+
+
   return (
     <section className="section">
+
       <div className="container">
 
         <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
@@ -57,9 +70,9 @@ export default function PostElement(postData) {
             <h4 className="header"> User {localStorage.getItem("userID")}:
               {/* <Link to={`/users/${postData.owner._id}`}>
               {postData.owner.username}
-              </Link> */}
-              {/* need to format timestamp */}
-            </h4>
+              </Link> */}</h4>
+            {/* {modalShow === true && <editModal {...postData} />} */}
+
             <div className="is-grouped">
               <p className="content ">
                 {postData.postContent}
@@ -69,9 +82,10 @@ export default function PostElement(postData) {
             <p className="level-right">
               posted <br />
               {postData.createdAt}</p>
-            {postData.tags.length > 0 && <h5 className="level-right">
-              Tags:
-            </h5>}
+            {postData.tags.length > 0 &&
+              <h5 className="level-right">
+                Tags:
+              </h5>}
 
             <div className="tags level-right">
               {postData.tags.map((tag, index) =>
@@ -82,12 +96,13 @@ export default function PostElement(postData) {
 
 
             <div className="level-right" >
-              <button className="button is-small is-info is-light mx-1" >
-                Edit
-              </button>
+              <Link to={`/postedit/${postData._id}`}>
+                <button className="button is-small is-info is-light mx-1" >
+                  Edit </button>
+              </Link>
+
               <button className="button is-small is-warning is-light mx-1" onClick={deletePostHandle} >
-                Delete
-              </button>
+                Delete </button>
             </div>
 
             <span className="">{5}</span>
@@ -110,7 +125,7 @@ export default function PostElement(postData) {
                   <div key={index}>
                     <CommentElement {...comment} />
                     <div className="level-right" >
-                      <button className="button is-small is-info is-light mx-1">
+                      <button className="button is-small is-info is-light mx-1" >
                         Edit
                       </button>
                       <button className="button is-small is-warning is-light mx-1" >

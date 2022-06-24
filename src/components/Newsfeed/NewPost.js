@@ -1,14 +1,9 @@
 import React, { useState } from 'react'
 import Select from 'react-select'
-// import { useNavigate } from 'react-router-dom'
 import tags from '../../data/tags'
 import axios from 'axios'
 
-
 export default function CreateNewPost() {
-  // const navigate = useNavigate()
-
-
 
   const [formDataInput, setformDataInput] = useState({
     postContent: "",
@@ -28,7 +23,6 @@ export default function CreateNewPost() {
       ...formDataInput,
       tags: formDataInput.tags.map(type => type.value),
     }
-    
     try {
       // const token = localStorage.getItem("token")
       const { data } = await axios.post('/api/posts/', newFormData)
@@ -37,7 +31,6 @@ export default function CreateNewPost() {
       //   //   'Authorization': `Bearer ${token}`,
       //   // },
       // })
-      // navigate('/')
       setformDataInput(formDataInput)
       console.log(data);
     } catch (err) {

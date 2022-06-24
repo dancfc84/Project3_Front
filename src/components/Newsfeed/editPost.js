@@ -1,137 +1,80 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useParams } from "react-router-dom"
-
-export default function EditPost (propPostId) {
-
-  const [formData, setFormData] = useState(
-    {
-
-    }
-  )
+import Select from 'react-select'
+import tags from '../../data/tags'
+import { useNavigate } from 'react-router-dom'
 
 
+
+export default function EditPost() {
+  const navigate = useNavigate()
+  const { postID } = useParams()
+
+  const [formDataInput, setformDataInput] = useState({
+    postContent: "",
+    tags: [],
+  })
+
+  useEffect(() => {
+    fetch(`/api/posts/${postID}`)
+      .then(resp => resp.json())
+      .then(data => setformDataInput(data))
+  }, [])
 
   async function handlePostUpdate(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.put(`/api/posts/${propPostId}`, formData)
-
+      const { data } = await axios.put(`/api/posts/${postID}`, formDataInput)
+      console.log(data);
+      navigate('/newsfeed')
     } catch (e) {
       console.log(e);
     }
   }
 
-//   function handleChange (e) {
-//     const { name, value } = e.target
-//     setFormData( {
-//       ...formData, 
-//       [name]: value,
-//     })
-//   }
+  function handleChange(e) {
+    const { name, value } = e.target
+    setformDataInput({
+      ...formDataInput,
+      [name]: value,
+    })
+  }
 
-//   return <div className="section">
-//     <div className="container">
-//       <form onSubmit={handleSubmit}>
-//         <div className="field">
-//           <label className="label">Job Title</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'jobTitle'} 
-//               value={formData.jobTitle}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Job Summary</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'jobShortSummary'}
-//               value={formData.jobShortSummary}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Job Description</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="textarea"
-//               name={'jobDescription'}
-//               value={formData.jobDescription}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Job Salary</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'jobSalary'}
-//               value={formData.jobSalary}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Job Location</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'jobLocation'}
-//               value={formData.jobLocation}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Job Type</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'jobType'}
-//               value={formData.jobType}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Company Name</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'companyName'}
-//               value={formData.companyName}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <div className="field">
-//           <label className="label">Company Image</label>
-//           <div className="control">
-//             <input
-//               className="input"
-//               type="text"
-//               name={'companyImage'}
-//               value={formData.companyImage}
-//               onChange={handleChange}
-//             />
-//           </div>
-//         </div>
-//         <button className="button">Submit Changes</button>
-//       </form>
-//     </div>
-//   </div>
+  return <div className="section">
+    <div className="container">
+      <form onSubmit={handlePostUpdate}>
+        <div className="field ">
+          <label className="label">Post</label>
+          <div className="control">
+            <input
+              className="input textarea is-primary"
+              type="text"
+              name={'postContent'}
+              value={formDataInput.postContent}
+              onChange={handleChange}
+              placeholder="Make it count"
+            />
+          </div>
+        </div>
 
-// }
+        <div className="field ">
+          <h2>Tag it</h2>
+          <Select
+            defaultValue={[]}
+            isMulti
+            name="colors"
+            options={tags}
+            className="basic-multi-select"
+            classNamePrefix="select"
+            onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
+            value={formDataInput.types}
+          />
+        </div>
+        <button className="button is-warning is-light is-fullwidth is-outlined">
+          SEND IT
+        </button>
+      </form>
+    </div >
+  </div >
+}

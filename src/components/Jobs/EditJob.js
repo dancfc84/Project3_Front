@@ -53,6 +53,7 @@ export default function CreateJob () {
   function handleDiscard () {
     navigate(`/jobs/${jobId}`)
   }
+  
 
   return <div className="section">
     <div className="container">

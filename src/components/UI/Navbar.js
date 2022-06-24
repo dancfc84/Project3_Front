@@ -39,7 +39,6 @@ export default function Navbar() {
                 About
               </NavLink>
               {userLogged && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
-
             </div>
           </div>
         </nav>

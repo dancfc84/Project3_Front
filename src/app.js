@@ -10,6 +10,7 @@ import JobIndex from './components/Jobs/JobIndex'
 import ShowJob from './components/Jobs/ShowJob'
 import EditJob from './components/Jobs/EditJob'
 import About from "./components/About"
+import Contact from './components/Contact'
 
 
 
@@ -26,6 +27,7 @@ function App() {
           <Route path="/jobs/:jobId" element={<ShowJob />} />
           <Route path="/jobs/edit/:jobId" element={<EditJob />} />
           <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
         </Routes>
         <footer className="footer column is-narrow my-2 py-2">
           <div className="box content has-text-centered">

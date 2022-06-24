@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import axios from "axios"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 export default function CreateJob () {
+
+  const navigate = useNavigate()
 
   const [formData, setFormData] = useState(
     {
@@ -46,6 +48,10 @@ export default function CreateJob () {
       ...formData, 
       [name]: value,
     })
+  }
+
+  function handleDiscard () {
+    navigate(`/jobs/${jobId}`)
   }
 
   return <div className="section">
@@ -148,6 +154,7 @@ export default function CreateJob () {
           </div>
         </div>
         <button className="button">Submit Changes</button>
+        <button onClick={handleDiscard} className="button">Discard Changes</button>
       </form>
     </div>
   </div>

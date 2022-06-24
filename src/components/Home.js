@@ -78,7 +78,7 @@ export default function Home() {
     <section className="">
       <div className="container column box is-one-third">
         <form onSubmit={handleLogin}>
-          <div className="field">
+          <div className="field column is-half ">
             <label className="label">Email</label>
             <div className="control">
               <input
@@ -87,51 +87,55 @@ export default function Home() {
                 name={'email'}
                 value={formData.email}
                 onChange={handleChange}
+                placeholder="e.g. higgs-boson@cern.ch"
               />
             </div>
           </div>
-          <div className="field">
+          <div className="field column is-half">
             <label className="label">Password</label>
             <div className="control">
               <input
-                className="input"
+                className="input "
                 type="password"
                 name={'password'}
                 value={formData.password}
                 onChange={handleChange}
-              />
+                placeholder="44bitsOfEntropyIsOk"
+              /> <small>Hints: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
             </div>
           </div>
 
-          <input className="mx-3" type="checkbox" name={'userType'} value="business" />
-          <label className="checkbox my-3" >
-            Would you like to post and promote official jobs as a company?
-          </label>
+
 
           <div className="field is-grouped">
             <div className="control">
-              <button type='submit' className="button is-primary">Login</button>
+              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>Login</button>
             </div>
             <div className="control">
-              <button type="button" className="button is-light" onClick={handleForm}>{registering === true ? "Confirm Registration once password entered" : "Register"}</button>
+
+              <button type="button" className="button is-primary mx-5" onClick={handleForm}>{registering === true ? "Confirm your registration" : "Register"}</button>
             </div>
             <br />
           </div>
 
           <div className={registering === false ? "field is-hidden" : "is-field"}>
-            <div className="control">
+            <input className="mx-3" type="checkbox" name={'userType'} value="business" />
+            <label className="checkbox my-2" >
+              Would you like to post and promote official jobs as a company?
+            </label>
+            <div className="control column is-half">
               <input
                 className="input"
                 type="password"
                 name={'passwordConfirmation'}
                 value={formData.passwordConfirmation}
                 onChange={handleChange}
-                placeholder="Please confirm password"
+                placeholder="Enter your password confirmation here..."
               />
             </div>
           </div>
         </form>
-      </div>
+      </div >
       <div className="columns">
         <div className="column is-one-thirds" />
         <div className="column is-one-thirds">
@@ -139,6 +143,6 @@ export default function Home() {
         </div>
         <div className="column is-one-thirds" />
       </div>
-    </section>
+    </section >
   )
 }

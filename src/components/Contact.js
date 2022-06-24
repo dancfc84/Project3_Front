@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import emailjs from '@emailjs/browser';
 import { useNavigate } from "react-router-dom"
 
-export default function Contact () {
+export default function Contact() {
 
   const navigate = useNavigate()
   const form = useRef();
@@ -20,7 +20,7 @@ export default function Contact () {
     navigate("/")
   };
 
-  
+
   return (
     <div className="section">
       <div className="container">

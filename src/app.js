@@ -11,8 +11,7 @@ import ShowJob from './components/Jobs/ShowJob'
 import EditJob from './components/Jobs/EditJob'
 import About from "./components/About"
 import Contact from './components/Contact'
-import EditPost from './components/Newsfeed/editPost'
-
+import EditPost from './components/Newsfeed/EditPost'
 
 
 function App() {

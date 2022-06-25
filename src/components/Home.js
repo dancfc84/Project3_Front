@@ -90,7 +90,7 @@ export default function Home() {
                 value={formData.password}
                 onChange={handleChange}
                 placeholder="Make it long, not complex. 40 bits of entropy and above."
-              /> <small>Hints: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
+              />
             </div>
           </div>
 

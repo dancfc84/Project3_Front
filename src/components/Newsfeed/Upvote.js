@@ -8,9 +8,10 @@ export default function NewUpvote(props) {
   })
 
   function handleChangeEvent(e) {
+    const user = localStorage.getItem("loggedIn")
     setUpvotedBy({
       ...upvotedBy,
-      upvotedBy: props.userUpvotedBy,
+      upvotedBy: user,
     })
   }
 
@@ -38,8 +39,8 @@ export default function NewUpvote(props) {
             <input
               className="input column text is-secondary"
               type="text"
-              name={'content'}
-              value={formDataInput.content}
+              name={'upvotedBy'}
+              value={upvotedBy.upvotedBy}
               onChange={handleChangeEvent}
               placeholder="Fascinating, can you share more?"
             />

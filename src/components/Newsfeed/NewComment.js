@@ -46,7 +46,7 @@ export default function NewComment(props) {
       <form onSubmit={handleAuth}>
         <div className="field">
           <div className="control columns">
-            <button className="button mx-4 is-outlined">
+            <button className="button is-rounded mx-4 is-outlined">
               Post your comment
             </button>
             <input

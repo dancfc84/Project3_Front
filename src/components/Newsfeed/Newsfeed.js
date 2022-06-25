@@ -16,7 +16,6 @@ export default function Newsfeed() {
     tags: [],
   })
 
-
   async function getData() {
     const res = await fetch('/api/posts')
     const json = await res.json()
@@ -110,7 +109,7 @@ export default function Newsfeed() {
                           value={formDataInput.types}
                         />
                       </div>
-                      <button className="button is-warning is-light is-fullwidth is-outlined">
+                      <button className="button is-rounded is-warning is-light is-fullwidth is-outlined">
                         SEND IT
                       </button>
                     </form>

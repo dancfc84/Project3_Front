@@ -64,23 +64,6 @@ export default function PostElement(postData) {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   return (
     <section className="section">
       <div className="container">
@@ -88,7 +71,7 @@ export default function PostElement(postData) {
         <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
           {/* <img src={postData.owner.profilePic} /> */}
           <div className="content">
-            <h4 className="header"> User {postData.user}:
+            <h4 className="header">  {postData.username ? postData.username : "User posted"}:
               {/* <Link to={`/users/${postData.owner._id}`}>
               {postData.owner.username}
               </Link> */}</h4>
@@ -134,23 +117,23 @@ export default function PostElement(postData) {
               {/* {isCreator(postData.user._id)} 
               // check if user created the post and only then show edit */}
               <Link to={`/postedit/${postData._id}`}>
-                <button className="button is-small is-info is-light mx-1" >
+                <button className="button is-rounded is-small is-info is-light mx-1" >
                   Edit </button>
               </Link>
 
               {/* {isCreator(postData.user._id)} 
               // check if user created the post and only then show edit */}
-              <button className="button is-small is-warning is-light mx-1" onClick={deletePostHandle} >
+              <button className="button is-rounded is-small is-warning is-light mx-1" onClick={deletePostHandle} >
                 Delete </button>
             </div>
 
             <span className="">{postData.upvotedBy}</span>
 
-            <button className="button is-small is-info is-light mx-5"  >
+            <button className="button is-rounded is-small is-info is-light mx-3"  >
               {/* onClick={upVoteChangeHandle} */}
               Upvote
             </button>
-            <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
+            <button className="button is-rounded is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
 
               {newCommentState.length > 0 ?
                 `Show ${_.size(newCommentState)} Comments`
@@ -166,14 +149,6 @@ export default function PostElement(postData) {
                 ? newCommentState.map((comment, index) =>
                   <div key={index}>
                     <CommentElement {...comment} />
-                    <div className="level-right" >
-                      <button className="button is-small is-info is-light mx-1" >
-                        Edit
-                      </button>
-                      <button className="button is-small is-warning is-light mx-1" >
-                        Delete
-                      </button>
-                    </div>
                   </div>
 
                 ) : null}

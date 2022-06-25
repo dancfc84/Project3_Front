@@ -22,20 +22,20 @@ export default function ShowJob() {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setJob(data))
-  }, [])
+  })
 
 
-  async function handleDelete () {
+  async function handleDelete() {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`)
     navigate("/jobs/index")
     console.log(deleteJob);
   }
 
-  async function handleCommentPost (e) {
+  async function handleCommentPost(e) {
     e.preventDefault()
-    const addComment =  await axios.post(`/api/jobs/${jobId}/comment`, formDataInput)
+    const addComment = await axios.post(`/api/jobs/${jobId}/comment`, formDataInput)
     console.log(addComment);
-  } 
+  }
 
   function handleChangeEvent(e) {
     console.log(e);
@@ -55,14 +55,14 @@ export default function ShowJob() {
                 <figure className="image">
                   <img src={job.companyImage} alt={job.companyName} />
                 </figure>
-                {/* {isCreator(job.user._id) && */} 
+                {/* {isCreator(job.user._id) && */}
                 <button
                   className="button is-danger"
                   onClick={handleDelete}
                 >
                   Delete job
                 </button>
-            
+
                 <Link to={`/jobs/edit/${jobId}`}>
                   <button className="button is-warning">
                     Edit Job
@@ -102,7 +102,7 @@ export default function ShowJob() {
 
                 <div className=" box">
                   <div className="">
-                    <form  onSubmit={handleCommentPost} >
+                    <form onSubmit={handleCommentPost} >
                       <div className="field">
                         <div className="control columns">
                           <button className="button mx-4 is-outlined">
@@ -121,9 +121,9 @@ export default function ShowJob() {
                     </form>
                   </div >
                 </div >
-                { job.comments.map((comment) => {
-                  {console.log(comment)}
-                  return job.comments.length > 0 && <JobComment comments={comment}/> 
+                {job.comments.map((comment) => {
+                  { console.log(comment) }
+                  return job.comments.length > 0 && <JobComment comments={comment} />
                 })
                 }
               </div>

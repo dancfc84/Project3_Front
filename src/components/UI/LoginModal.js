@@ -75,8 +75,8 @@ const LoginModal = (props) => {
                 name={'password'}
                 value={modalForm.password}
                 onChange={handleModalChange}
-                placeholder="Make it long, not complex. 40 bits of entropy and above."
-              /> <small>Hints: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
+                placeholder="Mamorable, not complex. 40 bits of entropy."
+              /> <small>Hint: <a href="https://xkcd.com/936/">info on passwords and entropy</a></small>
             </div>
           </div>
 
@@ -90,7 +90,7 @@ const LoginModal = (props) => {
                 name={'username'}
                 value={modalForm.username}
                 onChange={handleModalChange}
-                placeholder="Enter a Display Name / Username you'd like to use. "
+                placeholder="Enter a Display Name / Username you like. "
               />
             </div>
           </div>

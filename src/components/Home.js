@@ -8,8 +8,6 @@ export default function Home() {
   const navigate = useNavigate()
   // const [registering, setRegistering] = React.useState(false)
 
-
-
   // ! Put our form fields in state.
   const [formData, setFormData] = React.useState({
     username: "",
@@ -25,8 +23,6 @@ export default function Home() {
       [name]: value,
     })
   }
-
-
 
   async function handleRegistrationConfirm(e) {
     e.preventDefault()
@@ -44,7 +40,6 @@ export default function Home() {
   }
 
   async function handleLogin(e) {
-
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
@@ -60,14 +55,12 @@ export default function Home() {
         // navigate('/newsfeed') //navigates you to newsfeed once logged in
       }
 
-
       navigate('/newsfeed')
     } catch (err) {
       // ! Print out the response from the backend if there's an error
       console.log(err.response.data)
     }
   }
-
 
   return (
     <section className="">
@@ -101,18 +94,14 @@ export default function Home() {
             </div>
           </div>
 
-
-
           <div className="field container">
             <div className="control">
               <button type='submit' className={"button"}>
                 Log In
               </button>
             </div>
-   
           </div>
 
-        
         </form>
       </div >
 

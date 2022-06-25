@@ -20,6 +20,8 @@ export default function CreateJob () {
     }
   )
 
+  const [isUserLoggedIn, setIsUserLoggedIn ] = useState(false)  
+
   const { jobId } = useParams()
 
   useEffect(() => {
@@ -28,8 +30,6 @@ export default function CreateJob () {
       .then(data => setFormData(data))
   }, [])
 
-
-  console.log(formData);
 
   async function handleSubmit(e) {
     try {

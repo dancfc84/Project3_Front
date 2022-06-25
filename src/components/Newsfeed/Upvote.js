@@ -2,41 +2,23 @@ import React, { useState } from 'react'
 import axios from 'axios'
 
 
-export default function NewComment(props) {
-  // const navigate = useNavigate()
-
-  const [formDataInput, setformDataInput] = useState({
-    content: "",
+export default function NewUpvote(props) {
+  const [upvotedBy, setUpvotedBy] = useState({
+    upvotedBy: [],
   })
 
   function handleChangeEvent(e) {
-    setformDataInput({
-      [e.target.name]: e.target.value,
+    setUpvotedBy({
+      ...upvotedBy,
+      upvotedBy: props.userUpvotedBy,
     })
   }
 
   async function handleAuth(e) {
     e.preventDefault()
-    // const newFormData = {
-    //   ...formDataInput,
-    //   tags: formDataInput.tags.map(type => type.value),
-    // }
 
     try {
-      // console.log();
-      props.setNewState(formDataInput)
-      // const token = localStorage.getItem("token")
-      const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
-      // props.setComments([props.userComments, data])
-      // props.handleComments(data.userComments[0])
-      console.log('NewCommentPostData', data);
-
-      // , {
-      //   // headers: {
-      //   //   'Authorization': `Bearer ${token}`,
-      //   // },
-      // })
-      // navigate('/')
+      const { data } = await axios.put(`/api/posts/${props.postIDprop}`, upvotedBy)
 
     } catch (err) {
       console.log(err.response.data);

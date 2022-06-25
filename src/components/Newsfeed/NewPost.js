@@ -3,6 +3,7 @@ import Select from 'react-select'
 import tags from '../../data/tags'
 import axios from 'axios'
 
+
 export default function CreateNewPost() {
 
   const [formDataInput, setformDataInput] = useState({
@@ -24,13 +25,7 @@ export default function CreateNewPost() {
       tags: formDataInput.tags.map(type => type.value),
     }
     try {
-      // const token = localStorage.getItem("token")
       const { data } = await axios.post('/api/posts/', newFormData)
-      // , {
-      //   // headers: {
-      //   //   'Authorization': `Bearer ${token}`,
-      //   // },
-      // })
       setformDataInput(formDataInput)
       console.log(data);
     } catch (err) {

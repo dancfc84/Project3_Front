@@ -3,13 +3,12 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 
-// import { Link } from "react-router-dom"
-
-
 export default function Home() {
   const navigate = useNavigate()
   const [registering, setRegistering] = React.useState(false)
 
+
+  
   // ! Put our form fields in state.
   const [formData, setFormData] = React.useState({
     username: "",

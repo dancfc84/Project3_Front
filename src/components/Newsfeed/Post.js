@@ -6,53 +6,75 @@ import CommentElement from "./Comment"
 import axios from "axios"
 
 
-
 export default function PostElement(postData) {
-  // const [modalShow, setModalShow] = React.useState(false)
-
-
-  // const user = localStorage.getItem('user')
+  // const [upvotedBy, setUpvotedBy] = React.useState(postData.upvotedBy)
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
   const [newCommentState, setNewCommentState] = React.useState(postData.userComments)
 
-  function handleShowCommentsButton(postID) { //handles SHow button
+  //handles Show Comments button
+  function handleShowCommentsButton(postID) {
     hiddenCommentsNumber.includes(postID)
       ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
   }
 
+  //keeps comments up to date
   function setNewState(newComment) {
     const newComArray = [...newCommentState, newComment]
     setNewCommentState(newComArray)
   }
 
+  //handles post deleting
   async function deletePostHandle() {
     try {
       const deletePost = await axios.delete(`/api/posts/${postData._id}`)
       if (deletePost.status === 204) {
         postData.updatePostsOnDelete(postData._id)
       }
-      // {
-      //   headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      // }
     } catch (e) {
       console.log(e)
     }
   }
 
-  // async function handlePostUpdateFromModal(posID) {
-  //   try {
-  //     e.preventDefault()
-  //     const { data } = await axios.put(`/api/posts/${propPostId}`, formData)
 
-  //   } catch (e) {
-  //     console.log(e);
+
+
+
+
+  // function upVoteChangeHandle(e) {
+
+  //   setUpvotedBy({
+  //     ...upvotedBy,
+  //     upvotedBy: [e.target.value],
+  //   })
+  //   console.log(upvotedBy);
+  //   handleVoteUpdateToDB(e)
+  // }
+
+  // async function handleVoteUpdateToDB(e) {
+  //   e.preventDefault()
+  //   try {
+  //     const { data } = await axios.put(`/api/posts/${postData._id}`, upvotedBy)
+  //     console.log(data);
+  //   } catch (err) {
+  //     console.log(err.response.data);
   //   }
   // }
 
-  // function modalPopUp() {
-  //   setModalShow(true)
-  // }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -61,23 +83,27 @@ export default function PostElement(postData) {
 
   return (
     <section className="section">
-
       <div className="container">
 
         <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
           {/* <img src={postData.owner.profilePic} /> */}
           <div className="content">
-            <h4 className="header"> User {localStorage.getItem("userID")}:
+            <h4 className="header"> User {postData.user}:
               {/* <Link to={`/users/${postData.owner._id}`}>
               {postData.owner.username}
               </Link> */}</h4>
-            {/* {modalShow === true && <editModal {...postData} />} */}
+            {/* {modalShow ==
+              = true && <editModal {...postData} />} */}
 
             <div className="is-grouped">
               <p className="content ">
                 {postData.postContent}
               </p>
             </div>
+
+
+
+
 
             <p className="level-right">
               posted <br />
@@ -87,6 +113,11 @@ export default function PostElement(postData) {
                 Tags:
               </h5>}
 
+
+
+
+
+
             <div className="tags level-right">
               {postData.tags.map((tag, index) =>
                 <span key={index} className="tag is-link mx-1 is-light">
@@ -95,19 +126,28 @@ export default function PostElement(postData) {
             </div>
 
 
+
+
+
+
             <div className="level-right" >
+              {/* {isCreator(postData.user._id)} 
+              // check if user created the post and only then show edit */}
               <Link to={`/postedit/${postData._id}`}>
                 <button className="button is-small is-info is-light mx-1" >
                   Edit </button>
               </Link>
 
+              {/* {isCreator(postData.user._id)} 
+              // check if user created the post and only then show edit */}
               <button className="button is-small is-warning is-light mx-1" onClick={deletePostHandle} >
                 Delete </button>
             </div>
 
-            <span className="">{5}</span>
+            <span className="">{postData.upvotedBy}</span>
 
-            <button className="button is-small is-info is-light mx-5" >
+            <button className="button is-small is-info is-light mx-5"  >
+              {/* onClick={upVoteChangeHandle} */}
               Upvote
             </button>
             <button className="button is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
@@ -117,6 +157,10 @@ export default function PostElement(postData) {
                 : 'Comment first'
               }
             </button>
+
+
+
+
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>
 

@@ -32,12 +32,14 @@ function About() {
               <div className="media">
                 <div className="media-content">
                   <p className="title is-4">Cody Shan</p>
-                  <p className="subtitle is-6">Co-Founder</p>
+                  <p className="subtitle is-6">Developer</p>
+                  <p>Developed user for the site, both frontend and backend.
+                  </p>
                 </div>
               </div>
             </div>
             <div className="card-image">
-              <figure className="image is-4by3">
+              <figure className="image">
                 <img src="https://ca.slack-edge.com/T0351JZQ0-U02SXV937DG-a8cbe049b288-512" alt={"profiles"} />
               </figure>
             </div>

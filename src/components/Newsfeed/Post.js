@@ -20,8 +20,8 @@ export default function PostElement(postData) {
 
   //keeps comments up to date
   function setNewState(newComment) {
-    const newComArray = [...newCommentState, newComment]
-    setNewCommentState(newComArray)
+    setNewCommentState([...newCommentState, newComment])
+    console.log(newCommentState);
   }
 
   //handles post deleting
@@ -155,7 +155,7 @@ export default function PostElement(postData) {
               {/* {newCommentState !== null ? <CommentElement {...newCommentState} /> : null} */}
 
               <br />
-              <NewComment postIDprop={postData._id} setNewState={setNewState} />
+              <NewComment postIDprop={postData._id} postComments={postData.userComments} setNewState={setNewState} />
             </div>
           </div>
           {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}

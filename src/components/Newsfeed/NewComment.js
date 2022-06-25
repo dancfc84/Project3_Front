@@ -3,7 +3,6 @@ import axios from 'axios'
 
 
 export default function NewComment(props) {
-  // const navigate = useNavigate()
 
   const [formDataInput, setformDataInput] = useState({
     content: "",
@@ -15,14 +14,23 @@ export default function NewComment(props) {
     })
   }
 
+
   async function handleAuth(e) {
     e.preventDefault()
-
-
+    const newComment = {
+      ...formDataInput,
+      createdAt: "just now",
+    }
     try {
-      props.setNewState(formDataInput)
+      props.setNewState(newComment)
       // const token = localStorage.getItem("token")
       const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
+      setTimeout(() => {
+        props.setNewState(data) //query APi 2nd time
+        console.log(data);
+      }, 1000)
+
+
       // props.setComments([props.userComments, data])
       // props.handleComments(data.userComments[0])
       console.log('NewCommentPostData', data);

@@ -10,7 +10,6 @@ import tags from '../../data/tags'
 
 export default function Newsfeed() {
   const [userPosts, setUserPosts] = React.useState([])
-  // const [newPost, setNewpost] = React.useState()
   const [formDataInput, setformDataInput] = React.useState({
     postContent: "",
     tags: [],
@@ -20,7 +19,6 @@ export default function Newsfeed() {
     const res = await fetch('/api/posts')
     const json = await res.json()
     setUserPosts(json)
-    // setNewpost()
   }
 
   React.useEffect(() => {                   //gets all current posts in DB
@@ -42,16 +40,21 @@ export default function Newsfeed() {
 
   async function handleAuth(e) {
     e.preventDefault()
+
     const newFormData = {
       ...formDataInput,
       tags: formDataInput.tags.map(type => type.value),
     }
+
     const newPost = {
       ...newFormData,
       createdAt: "just now",
     }
+
     setUserPosts([newPost, ...userPosts])
+
     try {
+      // const token = localStorage.getItem("token")
       const { data } = await axios.post('/api/posts/', newFormData)
       setTimeout(() => setUserPosts([data, ...userPosts]), 2000) //query APi 2nd time
       // , {
@@ -59,13 +62,10 @@ export default function Newsfeed() {
       //   'Authorization': `Bearer ${token}`,
       // },
       // })
-      // navigate('/')
-      // setformDataInput(formDataInput)
     } catch (err) {
       console.log(err.response.data);
     }
   }
-  // const token = localStorage.getItem("token")
 
   return (
     <>

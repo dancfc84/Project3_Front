@@ -12,15 +12,15 @@ export default function EditPost() {
   const { postID } = useParams()
 
   const [formDataInput, setformDataInput] = useState({
-    postContent: "",
-    tags: [],
+    "postContent": "",
+    "tags": [],
   })
 
   useEffect(() => {
     fetch(`/api/posts/${postID}`)
       .then(resp => resp.json())
       .then(data => setformDataInput(data))
-  })
+  }, [postID])
 
   async function handlePostUpdate(e) {
     try {
@@ -40,6 +40,11 @@ export default function EditPost() {
       [name]: value,
     })
   }
+
+  function handleCancel() {
+    navigate(`/newsfeed/`)
+  }
+
 
   return <div className="section">
     <div className="container">
@@ -68,13 +73,17 @@ export default function EditPost() {
             className="basic-multi-select"
             classNamePrefix="select"
             onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
-            value={formDataInput.types}
+            value={formDataInput.tags}
           />
         </div>
-        <button className="button is-warning is-light is-fullwidth is-outlined">
-          SEND IT
-        </button>
+        <br />
+        <br />
+        <button className="button is-light is-outlined is-rounded is-primary mx-1">
+          Save Post </button>
+        <button onClick={handleCancel} className="button is-rounded is-warning is-light is-outlined  mx-1">
+          Cancel Edit </button>
       </form>
+
     </div >
   </div >
 }

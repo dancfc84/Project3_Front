@@ -28,7 +28,7 @@ export default function CreateJob () {
     fetch(`/api/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setFormData(data))
-  }, [])
+  }, [jobId])
 
 
   async function handleSubmit(e) {

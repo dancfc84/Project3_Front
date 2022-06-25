@@ -19,7 +19,11 @@ export default function CreateJob () {
   async function handleSubmit(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.post("/api/jobs/create", formData)
+      const { data } = await axios.post("/api/jobs/create", formData, {
+        headers: {
+          "authorization": localStorage.getItem("token"),
+        },
+      })
       console.log(data);
 
     } catch (error) {

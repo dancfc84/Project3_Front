@@ -6,8 +6,9 @@ import axios from 'axios'
 
 
 const LoginModal = (props) => {
-
   const navigate = useNavigate()
+
+  const [showModal, setShowModal] = React.useState(true)
 
   const [modalForm, setModalForm] = useState({
     username: "",
@@ -98,16 +99,15 @@ const LoginModal = (props) => {
 
       <div className="field container">
         <div className="control">
-          <button type="button" className="button is-primary mx-5" onClick={handleModalChange}>
+          <button type="button" className="button is-primary mx-5 my-5" >
             Confirm New Account
           </button>
-          <button type="button" className="button is-warning is-light mx-5">
+          <button type="button" className="button is-warning is-light my-5 mx-5 is-outlined" onClick={() => setShowModal(!showModal)}>
             Cancel
           </button>
         </div>
       </div>
-    
-    </Modal>
+    </Modal >
   );
 };
 

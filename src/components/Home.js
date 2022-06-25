@@ -2,46 +2,41 @@ import splashImage from '../assets/malwareImage.jpg'
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import LoginModal from './UI/LoginModal'
 
 export default function Home() {
   const navigate = useNavigate()
-  const [registering, setRegistering] = React.useState(false)
+  // const [registering, setRegistering] = React.useState(false)
 
 
-  
+
   // ! Put our form fields in state.
   const [formData, setFormData] = React.useState({
     username: "",
     password: "",
-    passwordConfirmation: "",
     email: "",
     userType: "",
   })
 
   function handleChange(e) {
-    // ! name: field you've typed in, e.g. the email input
-    // ! value: the text that's in that field
     const { name, value } = e.target
     setFormData({
-      ...formData, // ! This is whatever the form data was before, all it's fields.
+      ...formData,
       [name]: value,
     })
   }
 
-  function handleForm(e) {
-    registering === false ? setRegistering(true) : handleRegistrationConfirm(e)
-  }
+
 
   async function handleRegistrationConfirm(e) {
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/register', formData)
       console.log(data);
+      handleLogin(e) //login the user once user has registered
+
       // ! Navigate to the /login page. 
       navigate('/newsfeed')  //navigates to newsfeed if successfully registered
-
-      //but we also need to log them automatically
-
     } catch (err) {
       // ! Print out the response from the backend if there's an error
       console.log(err.response.data)
@@ -49,6 +44,7 @@ export default function Home() {
   }
 
   async function handleLogin(e) {
+
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
@@ -65,8 +61,7 @@ export default function Home() {
       }
 
 
-      // navigate('/')
-      // ! Navigate to the /login page. 
+      navigate('/newsfeed')
     } catch (err) {
       // ! Print out the response from the backend if there's an error
       console.log(err.response.data)
@@ -76,10 +71,9 @@ export default function Home() {
 
   return (
     <section className="">
-      <div className="container column box is-one-third">
+      <div className="container column box is-half">
         <form onSubmit={handleLogin}>
-
-          <div className="field column is-two-thirds">
+          <div className="field column">
             <label className="label">Email</label>
             <div className="control">
               <input
@@ -93,7 +87,7 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="field column is-two-thirds">
+          <div className="field column">
             <label className="label">Password</label>
             <div className="control">
               <input
@@ -109,37 +103,16 @@ export default function Home() {
 
 
 
-          <div className="field is-grouped">
+          <div className="field container">
             <div className="control">
-              <button type='submit' className={registering === true ? " button is-hidden" : "button"}>
+              <button type='submit' className={"button"}>
                 Log In
               </button>
             </div>
-            <div className="control">
-
-              <button type="button" className="button is-primary mx-5" onClick={handleForm}>
-                {registering === true ? "Confirm Your registration" : "Create New Account"}
-              </button>
-            </div>
+   
           </div>
 
-          <div className={registering === false ? "field is-hidden" : "is-field"}>
-            <input className="mx-3" type="checkbox" name={'userType'} value="business" />
-            <label className="checkbox my-1" >
-              Would you like to post and promote official jobs as a company?
-            </label>
-
-            <div className="control column is-half">
-              <input
-                className="input"
-                type="password"
-                name={'passwordConfirmation'}
-                value={formData.passwordConfirmation}
-                onChange={handleChange}
-                placeholder="Enter your password confirmation here..."
-              />
-            </div>
-          </div>
+        
         </form>
       </div >
 
@@ -150,7 +123,11 @@ export default function Home() {
         </div>
         <div className="column is-one-thirds" />
       </div>
-
+      <LoginModal
+        handleChange={handleChange}
+        handleRegistrationConfirm={handleRegistrationConfirm}
+        setFormData={setFormData}
+        formData={formData} />
     </section >
   )
 }

@@ -160,8 +160,6 @@ export default function PostElement(postData) {
 
 
 
-
-
             <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>
 
               {newCommentState

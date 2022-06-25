@@ -17,13 +17,9 @@ export default function NewComment(props) {
 
   async function handleAuth(e) {
     e.preventDefault()
-    // const newFormData = {
-    //   ...formDataInput,
-    //   tags: formDataInput.tags.map(type => type.value),
-    // }
+
 
     try {
-      // console.log();
       props.setNewState(formDataInput)
       // const token = localStorage.getItem("token")
       const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)

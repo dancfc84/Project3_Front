@@ -45,7 +45,9 @@ const LoginModal = (props) => {
 
   return (
     <Modal>
-      <div className="container column box is-half">
+      <div className="container column box">
+        <div className="title is-2">Create New Account</div>
+        <hr />
         <form onSubmit={handleRegistrationConfirm}>
           <div className="field column">
             <label className="label">
@@ -77,18 +79,20 @@ const LoginModal = (props) => {
             </div>
           </div>
 
-
-          <div className="control column is-half">
-            <input
-              className="input"
-              type="password"
-              name={'username'}
-              value={modalForm.username}
-              onChange={handleModalChange}
-              placeholder="Enter a Display Name / Username you'd like to use. "
-            />
+          <div className="field column">
+            <label className="label">
+              Usename / Display-name</label>
+            <div className="control">
+              <input
+                className="input"
+                type="text"
+                name={'username'}
+                value={modalForm.username}
+                onChange={handleModalChange}
+                placeholder="Enter a Display Name / Username you'd like to use. "
+              />
+            </div>
           </div>
-
         </form>
       </div >
 
@@ -97,8 +101,12 @@ const LoginModal = (props) => {
           <button type="button" className="button is-primary mx-5" onClick={handleModalChange}>
             Confirm New Account
           </button>
+          <button type="button" className="button is-warning is-light mx-5">
+            Cancel
+          </button>
         </div>
       </div>
+    
     </Modal>
   );
 };

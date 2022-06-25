@@ -20,7 +20,7 @@ export default function CreateJob () {
     }
   )
 
-  const [isUserLoggedIn, setIsUserLoggedIn ] = useState(false)  
+  // const [isUserLoggedIn, setIsUserLoggedIn ] = useState(false)  
 
   const { jobId } = useParams()
 

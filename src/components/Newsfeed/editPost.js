@@ -83,7 +83,7 @@ export default function EditPost() {
         <button onClick={handleCancel} className="button is-rounded is-warning is-light is-outlined  mx-1">
           Cancel Edit </button>
       </form>
-
+{/* tags update still not working */}
     </div >
   </div >
 }

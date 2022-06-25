@@ -1,12 +1,15 @@
 
 import axios from 'axios'
-import React, { useState } from 'react'
-import { Link } from "react-router-dom"
+import React, { useState, useEffect } from 'react'
+import Job from "./Job"
 
 export default function JobIndex() {
   const [jobs, setJobs] = useState([])
 
-  React.useEffect(() => {
+  const [search, setSearch] = useState("")
+
+
+  useEffect(() => {
     const getData = async () => {
       try {
         const { data } = await axios.get("/api/jobs")
@@ -19,13 +22,32 @@ export default function JobIndex() {
     getData()
   }, [])
 
+  function filterJobs() {
+    return jobs.filter((job) => {
+      return (job["jobTitle"].toLowerCase().includes(search.toLowerCase())
+      )
+    })
+  }
+
   return (
-    <div className="section">
-      <h1 className="title">Available Jobs</h1>
-      <div className="container">
-        {jobs.map(job => <Link to={`/jobs/${job._id}`} key={job._id}><h2>{job.jobTitle}</h2></Link>)}
+    <section className="section">
+      <input className="container"
+        value={search} 
+        placeholder={"SEARCH JOBS"}
+        onChange={(e) => setSearch(e.target.value)} 
+      />
+
+      <div>
+        {jobs ? filterJobs().map((job, i) => {
+          return <Job
+            key={i}
+            jobInfo={job}
+          />
+        })
+          : <p>Loading Jobs</p>
+        }
       </div>
-    </div>
+    </section>  
   )
 }
 

@@ -20,7 +20,7 @@ export default function EditPost() {
     fetch(`/api/posts/${postID}`)
       .then(resp => resp.json())
       .then(data => setformDataInput(data))
-  }, [])
+  })
 
   async function handlePostUpdate(e) {
     try {

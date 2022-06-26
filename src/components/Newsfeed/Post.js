@@ -9,7 +9,7 @@ import axios from "axios"
 export default function PostElement(postData) {
   // const [upvotedBy, setUpvotedBy] = React.useState(postData.upvotedBy)
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
-  const [newCommentState, setNewCommentState] = React.useState(postData.userComments)
+  const [post, setPost] = React.useState(postData)
 
   //handles Show Comments button
   function handleShowCommentsButton(postID) {
@@ -18,16 +18,23 @@ export default function PostElement(postData) {
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
   }
 
-  //keeps comments up to date
-  function setNewState(newComment) {
-    setNewCommentState([...newCommentState, newComment])
-    console.log(newCommentState);
-  }
+
+  React.useEffect(() => {
+    fetch(`/api/posts/${post._id}`)
+      .then(resp => resp.json())
+      .then(data => setPost(data))
+  }, [post._id])
+
+
 
   //handles post deleting
   async function deletePostHandle() {
     try {
-      const deletePost = await axios.delete(`/api/posts/${postData._id}`)
+      const deletePost = await axios.delete(`/api/posts/${postData._id}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
       if (deletePost.status === 204) {
         postData.updatePostsOnDelete(postData._id)
       }
@@ -38,11 +45,7 @@ export default function PostElement(postData) {
 
 
 
-
-
-
   // function upVoteChangeHandle(e) {
-
   //   setUpvotedBy({
   //     ...upvotedBy,
   //     upvotedBy: [e.target.value],
@@ -60,8 +63,6 @@ export default function PostElement(postData) {
   //     console.log(err.response.data);
   //   }
   // }
-
-
 
 
   return (
@@ -127,7 +128,7 @@ export default function PostElement(postData) {
                 Delete </button>
             </div>
 
-            <span className="">{postData.upvotedBy}</span>
+            {/* <span className="">{postData.upvotedBy && postData.upvotedBy.length()}</span> */}
 
             <button className="button is-rounded is-small is-info is-light mx-3"  >
               {/* onClick={upVoteChangeHandle} */}
@@ -135,30 +136,24 @@ export default function PostElement(postData) {
             </button>
             <button className="button is-rounded is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
 
-              {newCommentState.length > 0 ?
-                `Show ${_.size(newCommentState)} Comments`
-                : 'Comment first'
+              {post.userComments.length > 0 ?
+                `Show ${_.size(post.userComments)} Comments`
+                : 'Comment'
               }
             </button>
 
 
 
             <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>
-
-              {newCommentState
-                ? newCommentState.map((comment, index) =>
-                  <div key={index}>
-                    <CommentElement {...comment} />
-                  </div>
-
-                ) : null}
-              {/* {newCommentState !== null ? <CommentElement {...newCommentState} /> : null} */}
-
+              {post.userComments && post.userComments.map((comment) => {
+                return <div key={comment._id}>
+                  <CommentElement {...comment} PostIDProp={postData._id} />
+                </div>
+              })}
               <br />
-              <NewComment postIDprop={postData._id} postComments={postData.userComments} setNewState={setNewState} />
+              <NewComment postIDprop={postData._id} setPost={setPost} />
             </div>
           </div>
-          {/* <h5>Upvotes: {postData.likedBy.length}</h5> */}
         </div>
       </div>
     </section>

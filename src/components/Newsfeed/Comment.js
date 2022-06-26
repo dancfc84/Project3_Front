@@ -1,5 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
+import axios from "axios"
 
 export default function CommentElement(comment) {
 
@@ -34,7 +35,7 @@ export default function CommentElement(comment) {
                 Edit </button>
             </Link>
 
-            <button className="button is-rounded is-small is-warning is-light mx-1 my-1" >
+            <button className="button is-rounded is-small is-warning is-light mx-1 my-1" onClick={() => console.log(comment.PostIDProp)} >
               Delete</button>
           </div>
           <button className="button is-rounded is-small is-info is-light mx-3">
@@ -43,6 +44,6 @@ export default function CommentElement(comment) {
         </div>
 
       </div>
-    </article>
+    </article >
   )
 }

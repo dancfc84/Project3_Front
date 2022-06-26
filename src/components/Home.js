@@ -1,20 +1,21 @@
 import splashImage from '../assets/malwareImage.jpg'
-import React from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import LoginModal from './UI/LoginModal'
 
 export default function Home() {
   const navigate = useNavigate()
-  // const [registering, setRegistering] = React.useState(false)
 
   // ! Put our form fields in state.
-  const [formData, setFormData] = React.useState({
+  const [formData, setFormData] = useState({
     username: "",
     password: "",
     email: "",
     userType: "",
   })
+
+  const [ showRegisterModal, setShowRegisterModal ] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -23,6 +24,20 @@ export default function Home() {
       [name]: value,
     })
   }
+
+  console.log(showRegisterModal);
+
+  const showModalHandler = (state) => {
+    console.log(state);
+    setShowRegisterModal(true)
+  }
+
+  const hideModalHandler = (state) => {
+    console.log(state)
+    setShowRegisterModal(false)
+  }
+
+
 
   async function handleRegistrationConfirm(e) {
     e.preventDefault()
@@ -101,6 +116,13 @@ export default function Home() {
               </button>
             </div>
           </div>
+          <div className="field container">
+            <div className="control">
+              <button type='submit' className={"button"} onClick={showModalHandler}>
+                Create User
+              </button>
+            </div>
+          </div>
 
         </form>
       </div >
@@ -112,11 +134,14 @@ export default function Home() {
         </div>
         <div className="column is-one-thirds" />
       </div>
-      <LoginModal
+
+      {showRegisterModal && <LoginModal
         handleChange={handleChange}
         handleRegistrationConfirm={handleRegistrationConfirm}
         setFormData={setFormData}
-        formData={formData} />
+        hideModalHandler={hideModalHandler}
+        formData={formData} />}
+
     </section >
   )
 }

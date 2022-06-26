@@ -38,19 +38,6 @@ export default function Home() {
   }
 
 
-
-  async function handleRegistrationConfirm(e) {
-    e.preventDefault()
-    try {
-      const { data } = await axios.post('/api/register', formData)
-      console.log(data);
-      handleLogin(e) //login the user once user has registered
-      navigate('/newsfeed')  //navigates to newsfeed if successfully registered
-    } catch (err) {
-      console.log(err.response.data)
-    }
-  }
-
   async function handleLogin(e) {
     e.preventDefault()
     try {
@@ -133,7 +120,6 @@ export default function Home() {
 
       {showRegisterModal && <LoginModal
         handleChange={handleChange}
-        handleRegistrationConfirm={handleRegistrationConfirm}
         setFormData={setFormData}
         hideModalHandler={hideModalHandler}
         formData={formData} />}

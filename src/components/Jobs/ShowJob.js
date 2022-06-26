@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import { Link, useParams, useNavigate } from "react-router-dom"
 import JobComment from "../Jobs/JobComment"
 import axios from "axios"
+import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 
 export default function ShowJob() {
 
   const navigate = useNavigate()
-
-
 
   const [formDataInput, setformDataInput] = useState({
     content: "",
@@ -16,7 +15,6 @@ export default function ShowJob() {
 
   const [job, setJob] = useState(undefined)
   const { jobId } = useParams()
-
 
   useEffect(() => {
     fetch(`/api/jobs/${jobId}`)
@@ -55,19 +53,19 @@ export default function ShowJob() {
                 <figure className="image">
                   <img src={job.companyImage} alt={job.companyName} />
                 </figure>
-                {/* {isCreator(job.user._id) && */}
+                {isCreator(job.user._id) && 
                 <button
                   className="button is-danger"
                   onClick={handleDelete}
                 >
                   Delete job
-                </button>
+                </button>}
 
-                <Link to={`/jobs/edit/${jobId}`}>
+                {isCreator(job.user._id) && <Link to={`/jobs/edit/${jobId}`}>
                   <button className="button is-warning">
                     Edit Job
                   </button>
-                </Link>
+                </Link> }
 
               </div>
               <div className="column is-half">
@@ -96,9 +94,8 @@ export default function ShowJob() {
                 <h4 className="title is-4">
                   Job Added By
                 </h4>
+                <p>{job.user.username}</p>
                 <hr />
-
-                {/*<p>{job.user.username}</p> */}
 
                 <div className=" box">
                   <div className="">
@@ -122,8 +119,7 @@ export default function ShowJob() {
                   </div >
                 </div >
                 {job.comments.map((comment) => {
-                  { console.log(comment) }
-                  return job.comments.length > 0 && <JobComment comments={comment} />
+                  return getLoggedInUserId && <JobComment comments={comment} />
                 })
                 }
               </div>

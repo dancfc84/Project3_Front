@@ -5,6 +5,7 @@ import Select from 'react-select'
 import tags from '../../data/tags'
 // import { set } from 'lodash'
 
+
 export default function Newsfeed() {
   const [userPosts, setUserPosts] = React.useState([])
   const [formDataInput, setformDataInput] = React.useState({
@@ -94,7 +95,7 @@ export default function Newsfeed() {
                         className="basic-multi-select"
                         classNamePrefix="select"
                         onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
-                        value={formDataInput.types}
+                        value={formDataInput.tags}
                       />
                     </div>
                     <button className="button is-rounded is-warning is-light is-fullwidth is-outlined">

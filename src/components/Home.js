@@ -15,7 +15,7 @@ export default function Home() {
     userType: "",
   })
 
-  const [ showRegisterModal, setShowRegisterModal ] = useState(false)
+  const [showRegisterModal, setShowRegisterModal] = useState(false)
 
   function handleChange(e) {
     const { name, value } = e.target
@@ -91,7 +91,6 @@ export default function Home() {
               />
             </div>
           </div>
-
           <div className="field container">
             <div className="control">
               <button type='submit' className={"button"}>
@@ -102,11 +101,10 @@ export default function Home() {
           <div className="field container">
             <div className="control">
               <button type='submit' className={"button"} onClick={showModalHandler}>
-                Create User
+                Create New Account
               </button>
             </div>
           </div>
-
         </form>
       </div >
 
@@ -118,11 +116,13 @@ export default function Home() {
         <div className="column is-one-thirds" />
       </div>
 
-      {showRegisterModal && <LoginModal
-        handleChange={handleChange}
-        setFormData={setFormData}
-        hideModalHandler={hideModalHandler}
-        formData={formData} />}
+      {
+        showRegisterModal && <LoginModal
+          handleChange={handleChange}
+          setFormData={setFormData}
+          hideModalHandler={hideModalHandler}
+          formData={formData} />
+      }
 
     </section >
   )

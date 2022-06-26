@@ -4,6 +4,7 @@ import _ from 'lodash'
 import NewComment from "./NewComment"
 import CommentElement from "./Comment"
 import axios from "axios"
+import { isCreator } from '../../lib/auth'
 
 
 export default function PostElement(postData) {
@@ -65,37 +66,37 @@ export default function PostElement(postData) {
   return (
     <section className="section">
       <div className="container">
-        <div key={postData._id + 0} className=" box mb-5">
+        <div key={post._id + 0} className=" box mb-5">
           <div className="content">
-            <h4 className="header">  {postData.username ? postData.username : "User posted"}:
+            <h4 className="header">  {post.username ? post.username : "User posted"}:
             </h4>
 
 
             <div className="is-grouped">
               <p className="content ">
-                {postData.postContent}
+                {post.postContent}
               </p>
             </div>
 
             <p className="level-right">
               posted <br />
-              {postData.createdAt}</p>
-            {postData.tags.length > 0 &&
+              {post.createdAt}</p>
+            {post.tags.length > 0 &&
               <h5 className="level-right">
                 Tags:
               </h5>}
 
 
             <div className="tags level-right">
-              {postData.tags.map((tag, index) =>
+              {post.tags.map((tag, index) =>
                 <span key={index} className="tag is-link mx-1 is-light">
                   {tag}
                 </span>)} <br />
             </div>
 
 
-            <div className="level-right" >
-              <Link to={`/postedit/${postData._id}`}>
+            {isCreator(post.username) && <div className="level-right" >
+              <Link to={`/postedit/${post._id}`}>
                 <button className="button is-rounded is-small is-info is-light mx-1" >
                   Edit </button>
               </Link>
@@ -103,7 +104,7 @@ export default function PostElement(postData) {
               <button className="button is-rounded is-small is-warning is-light mx-1" onClick={deletePostHandle} >
                 Delete </button>
             </div>
-
+            }
 
             <button className="button is-rounded is-small is-info is-light mx-3"  >
               Upvote

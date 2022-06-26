@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useParams } from "react-router-dom"
 import Select from 'react-select'
-import tags from '../../data/tags'
+import postTags from '../../data/tags'
 import { useNavigate } from 'react-router-dom'
 
 
@@ -12,8 +12,8 @@ export default function EditPost() {
   const { postID } = useParams()
 
   const [formDataInput, setformDataInput] = useState({
-    "postContent": "",
-    "tags": [],
+    postContent: "",
+    tags: [],
   })
 
 
@@ -28,7 +28,8 @@ export default function EditPost() {
   async function handlePostUpdate(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.put(`/api/posts/${postID}`, formDataInput)
+      const { data } = await axios.put(`/api/posts/${postID}`,
+        formDataInput)
       console.log(data);
       navigate('/newsfeed')
     } catch (e) {
@@ -73,7 +74,7 @@ export default function EditPost() {
             defaultValue={[]}
             isMulti
             name="colors"
-            options={tags}
+            options={postTags}
             className="basic-multi-select"
             classNamePrefix="select"
             onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
@@ -82,7 +83,7 @@ export default function EditPost() {
         </div>
         <br />
         <br />
-        <button className="button is-light is-outlined is-rounded is-primary mx-1">
+        <button type="submit" className="button is-light is-outlined is-rounded is-primary mx-1">
           Save Post </button>
         <button onClick={handleCancel} className="button is-rounded is-warning is-light is-outlined  mx-1">
           Cancel Edit </button>

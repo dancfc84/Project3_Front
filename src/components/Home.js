@@ -45,11 +45,8 @@ export default function Home() {
       const { data } = await axios.post('/api/register', formData)
       console.log(data);
       handleLogin(e) //login the user once user has registered
-
-      // ! Navigate to the /login page. 
       navigate('/newsfeed')  //navigates to newsfeed if successfully registered
     } catch (err) {
-      // ! Print out the response from the backend if there's an error
       console.log(err.response.data)
     }
   }
@@ -72,7 +69,6 @@ export default function Home() {
 
       navigate('/newsfeed')
     } catch (err) {
-      // ! Print out the response from the backend if there's an error
       console.log(err.response.data)
     }
   }

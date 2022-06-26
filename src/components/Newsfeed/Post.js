@@ -11,20 +11,19 @@ export default function PostElement(postData) {
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
   const [post, setPost] = React.useState(postData)
 
-  //handles Show Comments button
-  function handleShowCommentsButton(postID) {
-    hiddenCommentsNumber.includes(postID)
-      ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
-      : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
-  }
-
-
   React.useEffect(() => {
     fetch(`/api/posts/${post._id}`)
       .then(resp => resp.json())
       .then(data => setPost(data))
   }, [post._id])
 
+
+  //handles Show Comments button
+  function handleShowCommentsButton(postID) {
+    hiddenCommentsNumber.includes(postID)
+      ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
+      : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
+  }
 
 
   //handles post deleting
@@ -42,8 +41,6 @@ export default function PostElement(postData) {
       console.log(e)
     }
   }
-
-
 
   // function upVoteChangeHandle(e) {
   //   setUpvotedBy({
@@ -68,26 +65,17 @@ export default function PostElement(postData) {
   return (
     <section className="section">
       <div className="container">
-
-        <div key={postData._id + 0} className=" box mb-5"> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
-          {/* <img src={postData.owner.profilePic} /> */}
+        <div key={postData._id + 0} className=" box mb-5">
           <div className="content">
             <h4 className="header">  {postData.username ? postData.username : "User posted"}:
-              {/* <Link to={`/users/${postData.owner._id}`}>
-              {postData.owner.username}
-              </Link> */}</h4>
-            {/* {modalShow ==
-              = true && <editModal {...postData} />} */}
+            </h4>
+
 
             <div className="is-grouped">
               <p className="content ">
                 {postData.postContent}
               </p>
             </div>
-
-
-
-
 
             <p className="level-right">
               posted <br />
@@ -98,10 +86,6 @@ export default function PostElement(postData) {
               </h5>}
 
 
-
-
-
-
             <div className="tags level-right">
               {postData.tags.map((tag, index) =>
                 <span key={index} className="tag is-link mx-1 is-light">
@@ -110,31 +94,22 @@ export default function PostElement(postData) {
             </div>
 
 
-
-
-
-
             <div className="level-right" >
-              {/* {isCreator(postData.user._id)} 
-              // check if user created the post and only then show edit */}
               <Link to={`/postedit/${postData._id}`}>
                 <button className="button is-rounded is-small is-info is-light mx-1" >
                   Edit </button>
               </Link>
 
-              {/* {isCreator(postData.user._id)} 
-              // check if user created the post and only then show edit */}
               <button className="button is-rounded is-small is-warning is-light mx-1" onClick={deletePostHandle} >
                 Delete </button>
             </div>
 
-            {/* <span className="">{postData.upvotedBy && postData.upvotedBy.length()}</span> */}
 
             <button className="button is-rounded is-small is-info is-light mx-3"  >
-              {/* onClick={upVoteChangeHandle} */}
               Upvote
             </button>
-            <button className="button is-rounded is-small is-info is-light" onClick={() => handleShowCommentsButton(postData._id)}>
+            <button className="button is-rounded is-small is-info is-light" onClick={
+              () => handleShowCommentsButton(post._id)}>
 
               {post.userComments.length > 0 ?
                 `Show ${_.size(post.userComments)} Comments`
@@ -142,16 +117,14 @@ export default function PostElement(postData) {
               }
             </button>
 
-
-
-            <div className={hiddenCommentsNumber.includes(postData._id) ? null : `is-hidden`}>
+            <div className={hiddenCommentsNumber.includes(post._id) ? null : `is-hidden`}>
               {post.userComments && post.userComments.map((comment) => {
                 return <div key={comment._id}>
-                  <CommentElement {...comment} PostIDProp={postData._id} />
+                  <CommentElement {...comment} PostIDProp={post._id} />
                 </div>
               })}
               <br />
-              <NewComment postIDprop={postData._id} setPost={setPost} />
+              <NewComment postIDprop={post._id} setPost={setPost} />
             </div>
           </div>
         </div>

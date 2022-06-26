@@ -62,10 +62,22 @@ export default function Newsfeed() {
       //   'Authorization': `Bearer ${token}`,
       // },
       // })
-    } catch (err) {
-      console.log(err.response.data);
+    } catch (e) {
+      console.log(e.response.data);
     }
   }
+
+
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>

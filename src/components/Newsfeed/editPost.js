@@ -16,12 +16,15 @@ export default function EditPost() {
     "tags": [],
   })
 
+
+  //prepopulates the state of the form - faster would be via props without API
   useEffect(() => {
     fetch(`/api/posts/${postID}`)
       .then(resp => resp.json())
       .then(data => setformDataInput(data))
   }, [postID])
 
+  //updates the post on button click via API
   async function handlePostUpdate(e) {
     try {
       e.preventDefault()
@@ -33,6 +36,7 @@ export default function EditPost() {
     }
   }
 
+  //handles input changes in the fields
   function handleChange(e) {
     const { name, value } = e.target
     setformDataInput({
@@ -83,7 +87,7 @@ export default function EditPost() {
         <button onClick={handleCancel} className="button is-rounded is-warning is-light is-outlined  mx-1">
           Cancel Edit </button>
       </form>
-{/* tags update still not working */}
+      {/* tags update still not working */}
     </div >
   </div >
 }

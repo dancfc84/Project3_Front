@@ -1,47 +1,25 @@
-import React, { useState } from 'react'
+import React from 'react'
 import axios from 'axios'
+// import { useNavigate } from "react-router-dom"
+// import { isCreator, getLoggedInUserId } from '../../lib/auth'
+
 
 
 export default function NewComment(props) {
 
-  const [formDataInput, setformDataInput] = useState({
-    content: "",
-  })
-
-  function handleChangeEvent(e) {
-    setformDataInput({
-      [e.target.name]: e.target.value,
-    })
-  }
+  const [commentContent, setCommentContent] = React.useState('')
 
 
-  async function handleAuth(e) {
-    e.preventDefault()
-    const newComment = {
-      ...formDataInput,
-      createdAt: "just now",
-    }
+  async function handleComment() {
     try {
-      props.setNewState(newComment)
-      // const token = localStorage.getItem("token")
-      const { data } = await axios.post(`/api/posts/${props.postIDprop}/comment`, formDataInput)
-      setTimeout(() => {
-        props.setNewState(data) //query APi 2nd time
-        console.log(data);
-      }, 1000)
-
-
-      // props.setComments([props.userComments, data])
-      // props.handleComments(data.userComments[0])
-      console.log('NewCommentPostData', data);
-
-      // , {
-      //   // headers: {
-      //   //   'Authorization': `Bearer ${token}`,
-      //   // },
-      // })
-      // navigate('/')
-
+      const { data } = await axios.post(
+        `/api/posts/${props.postIDprop}/comment`,
+        { content: commentContent },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
+      props.setPost(data)
     } catch (err) {
       console.log(err.response.data);
     }
@@ -51,24 +29,19 @@ export default function NewComment(props) {
   return <div className=" box">
 
     <div className="">
-      <form onSubmit={handleAuth}>
-        <div className="field">
-          <div className="control columns">
-            <button className="button is-rounded mx-4 is-outlined">
-              Post your comment
-            </button>
-            <input
-              className="input column text is-secondary"
-              type="text"
-              name={'content'}
-              value={formDataInput.content}
-              onChange={handleChangeEvent}
-              placeholder="Fascinating, can you share more?"
-            />
-          </div>
+      <div className="field">
+        <div className="control columns">
+          <button className="button is-rounded mx-4 is-outlined" onClick={handleComment}>
+            Post your comment
+          </button>
+          <input
+            className="text column  is-secondary"
+            type="text"
+            onChange={(event) => setCommentContent(event.target.value)}
+            placeholder="Fascinating, can you share more?"
+          ></input>
         </div>
-
-      </form>
+      </div>
     </div >
   </div >
 }

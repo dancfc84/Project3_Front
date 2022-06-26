@@ -6,8 +6,6 @@ import styles from "./Job.module.css"
 
 const Job = (props) => {
 
-  console.log(props.jobInfo);
-
   return <div className={styles.card_margin}>
     <Link style={{ textDecoration: "none" }} to={`/jobs/${props.jobInfo._id}`}>
       <div className={`card ${styles.card_dimensions}` }>

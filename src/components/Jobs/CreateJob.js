@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 export default function CreateJob () {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState(
     {
       "jobTitle": "Digital Analyst",
@@ -25,6 +29,7 @@ export default function CreateJob () {
         },
       })
       console.log(data);
+      navigate('/jobs/index')
 
     } catch (error) {
       console.log(error);

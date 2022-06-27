@@ -22,7 +22,7 @@ export default function ShowJob() {
     fetch(`/api/jobs/${jobId}`)
       .then((resp) => resp.json())
       .then((data) => setJob(data));
-  }, [jobId]);
+  }, []);
 
   async function handleDelete() {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`);
@@ -42,6 +42,7 @@ export default function ShowJob() {
       }
     );
     console.log(addComment);
+    window.location.reload(false)
   }
 
   function handleChangeEvent(e) {
@@ -74,10 +75,6 @@ export default function ShowJob() {
                     <button className="button is-warning">Edit Job</button>
                   </Link>
                 )}
-
-                <Link to={`/jobs/edit/${jobId}`}>
-                  <button className="button is-warning">Compare Jobs</button>
-                </Link>
               </div>
               <div className="column is-half">
                 <h4 className="title is-4">Job Description</h4>
@@ -97,8 +94,9 @@ export default function ShowJob() {
                 <h4 className="title is-4">Job Added By</h4>
                 <p>{job.user.username}</p>
                 <hr />
-                <h4 className="title is-4">Post Comments</h4>
-                <div className=" box">
+                
+                {currUser && <div className=" box">
+                  <h4 className="title is-4">Post Comments</h4>
                   <div className="">
                     <form onSubmit={handleCommentPost}>
                       <div className="field">
@@ -113,13 +111,13 @@ export default function ShowJob() {
                             value={formDataInput.content}
                             onChange={handleChangeEvent}
                             placeholder="Type Comment Here"
-                          />
+                          /> 
                         </div>
                       </div>
                     </form>
                   </div>
-                </div>
-                {job.comments.map((comment) => {
+                </div> }
+                {currUser && job.comments.map((comment) => {
                   return (
                     <JobComment
                       key={comment._id}

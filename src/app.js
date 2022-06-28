@@ -30,7 +30,7 @@ function App() {
           <Route path="/jobs/edit/:jobId" element={<EditJob />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/profile/:userID" element={<Profile />} />
+          <Route path="/profile" element={<Profile />} />
         </Routes>
         <footer className="footer column is-narrow">
           <div className="box content has-text-centered">

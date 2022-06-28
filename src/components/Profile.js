@@ -1,6 +1,7 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { getLoggedInUserId } from '../lib/auth.js'
 
 // import { Link } from "react-router-dom"
 
@@ -34,18 +35,13 @@ export default function Profile() {
     event.preventDefault()
     const token = localStorage.getItem('token')
 
-    const newFormData = {
-      ...formData,
-      type: formData.type.map(type => type.value),
-    }
-
+    console.log(formData)
     try {
-      const { userID } = useParams()
-      const { data } = await axios.post(`/api/profile/${userID}`, newFormData, {
+      const { data } = await axios.put(`/api/profile/${getLoggedInUserId()}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       console.log(data._id)
-      navigate(`/api/profile/${data._id}`)
+      // navigate(`/api/profile}`)
     } catch (err) {
       console.log(err.response.data)
     }

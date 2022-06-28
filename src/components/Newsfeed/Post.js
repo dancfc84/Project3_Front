@@ -48,8 +48,8 @@ export default function PostElement(singlePostDataProp) {
               {tag}
             </div>
           })}
-          {<p className="">{singlePostDataProp.createdAt}</p>}
-          {<p className="">{singlePostDataProp.updatedAt}</p>}
+          {<p className="">{singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</p>}
+          {<p className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</p>}
           {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
             <Link to={`/postedit/${singlePostDataProp._id}`}>
               <button className="button is-rounded is-small is-info is-light mx-1" >

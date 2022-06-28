@@ -16,6 +16,8 @@ export default function Newsfeed() {
     postContent: "",
     tags: [],
   })
+  
+
 
   //handles search
   //handle posts filter
@@ -49,7 +51,7 @@ export default function Newsfeed() {
       const { data } = await axios.post('/api/posts/', newFormData, {
         headers: { Authorization: `Bearer ${token}` },
       })
-
+      getPostData()
       console.log(data._id)
     } catch (e) {
       console.log(e.response.data)
@@ -57,12 +59,12 @@ export default function Newsfeed() {
   }
 
   //gets data about posts from API db
+  const getPostData = async () => {
+    const apiResponse = await fetch('api/posts')
+    const json = await apiResponse.json()
+    setAllUserPosts(json)
+  }
   useEffect(() => {
-    const getPostData = async () => {
-      const apiResponse = await fetch('api/posts')
-      const json = await apiResponse.json()
-      setAllUserPosts(json)
-    }
     getPostData()
   }, [])
 
@@ -130,7 +132,7 @@ export default function Newsfeed() {
                 options={tags}
                 className="basic-multi-select my-5 level-right"
                 classNamePrefix="select"
-                onChange={(tag) => setSelectedTag([ ...selectedTag, tag ])}
+                onChange={(tag) => setSelectedTag([...selectedTag, tag])}
                 value={selectedTag}
                 placeholder={"Filter by tag"}
               />
@@ -139,7 +141,7 @@ export default function Newsfeed() {
             {postsFilter().map((post, index) => {
               return <div key={index} className="">
                 <PostElement
-                  {...post} />
+                  {...post} getPostData={getPostData}/>
               </div>
             }
             )}

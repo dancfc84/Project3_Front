@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "react-router-dom"
-// import _ from 'lodash'
+import _ from 'lodash'
 // import NewComment from "./NewComment"
 // import CommentElement from "./Comment"
 import axios from "axios"
@@ -10,6 +10,15 @@ import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 export default function PostElement(singlePostDataProp) {
   const [commentContent, setCommentContent] = React.useState('')
   // const [post, setPost] = React.useState(singlePostDataProp)
+  const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
+
+
+  //handles Show Comments button
+  function handleShowCommentsButton(postID) {
+    hiddenCommentsNumber.includes(postID)
+      ? setHiddenCommentsNumber(_.remove(hiddenCommentsNumber, (postCheck) => postCheck._id !== postID._id))
+      : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
+  }
 
   //handles post deleting
   async function deletePostHandle() {
@@ -20,8 +29,10 @@ export default function PostElement(singlePostDataProp) {
         }
       )
       if (deletePost.status === 204) {
-        singlePostDataProp.updatePostsOnDelete(singlePostDataProp._id)
+        singlePostDataProp.getPostData()
       }
+
+
     } catch (e) {
       console.log(e)
     }
@@ -37,7 +48,10 @@ export default function PostElement(singlePostDataProp) {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         }
       )
+      singlePostDataProp.getPostData()
+
       console.log(data);
+      setCommentContent('')
     } catch (e) {
       console.log(e)
     }
@@ -81,50 +95,57 @@ export default function PostElement(singlePostDataProp) {
           </div>
           }
 
-          {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
-            return <article key={comment._id} className="media">
+          <button className="button is-rounded is-small is-info is-light" onClick={
+            () => handleShowCommentsButton(singlePostDataProp._id)}>
+
+            {singlePostDataProp.userComments.length > 0 ?
+              `Show ${_.size(singlePostDataProp.userComments)} Comments`
+              : 'Comment'
+            }
+          </button>
+
+          <div className={hiddenCommentsNumber.includes(singlePostDataProp._id) ? null : `is-hidden`}>
+            {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
+              return <article key={comment._id} className="media">
+                <div className="media-content">
+                  <div className="content">
+                    <p className="subtitle">
+                      {comment.createdAt.replace('T', ' - ').slice(0, - 8)}
+                    </p>
+                    <p className="subtitle">
+                      {comment.user}
+                    </p>
+                    <p>{comment.content}</p>
+                  </div>
+                </div>
+              </article>
+            }) : <p>Loading comments </p>}
+
+            {getLoggedInUserId() && <article className="media">
               <div className="media-content">
-                <div className="content">
-                  <p className="subtitle">
-                    {comment.createdAt.replace('T', ' - ').slice(0, - 8)}
+                <div className="field">
+                  <p className="control">
+                    <textarea
+                      className="textarea"
+                      placeholder="Make a comment.."
+                      onChange={(event) => setCommentContent(event.target.value)}
+                    >
+                    </textarea>
                   </p>
-                  <p className="subtitle">
-                    {comment.user}
+                </div>
+                <div className="field">
+                  <p className="control">
+                    <button
+                      className="button is-info"
+                      onClick={handleComment}
+                    >
+                      Submit
+                    </button>
                   </p>
-                  <p>{comment.content}</p>
                 </div>
               </div>
-            </article>
-          }) : <p>Loading comments </p>}
-
-          {
-            // ! Little form to POST a comment (again lots of bulma)
-          }
-          {getLoggedInUserId() && <article className="media">
-            <div className="media-content">
-              <div className="field">
-                <p className="control">
-                  <textarea
-                    className="textarea"
-                    placeholder="Make a comment.."
-                    // ! Set the comment's content to be what's in the input textarea.
-                    onChange={(event) => setCommentContent(event.target.value)}
-                  >
-                  </textarea>
-                </p>
-              </div>
-              <div className="field">
-                <p className="control">
-                  <button
-                    className="button is-info"
-                    onClick={handleComment}
-                  >
-                    Submit
-                  </button>
-                </p>
-              </div>
-            </div>
-          </article>}
+            </article>}
+          </div>
         </div>
       </div>
     </div>

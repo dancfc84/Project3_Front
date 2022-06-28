@@ -12,6 +12,7 @@ import EditJob from './components/Jobs/EditJob'
 import About from "./components/About"
 import Contact from './components/Contact'
 import EditPost from './components/Newsfeed/EditPost'
+import Profile from './components/Profile'
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
           <Route path="/jobs/edit/:jobId" element={<EditJob />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
+          <Route path="/profile/:userID" element={<Profile />} />
         </Routes>
         <footer className="footer column is-narrow">
           <div className="box content has-text-centered">

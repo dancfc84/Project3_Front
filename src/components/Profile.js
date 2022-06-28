@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLoggedInUserId } from '../lib/auth.js'
 
@@ -7,7 +7,7 @@ import { getLoggedInUserId } from '../lib/auth.js'
 
 
 export default function Profile() {
-  const navigate = useNavigate()
+  // const navigate = useNavigate()
 
   // ! Put our form fields in state.
   const [formData, setFormData] = React.useState({

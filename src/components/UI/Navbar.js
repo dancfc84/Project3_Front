@@ -46,14 +46,10 @@ export default function Navbar() {
               <NavLink to="/contact" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Contact
               </NavLink>
-<<<<<<< HEAD
               <NavLink to="/profile/:userID" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Profile
               </NavLink>
-              {userLogged && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
-=======
               {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
->>>>>>> a22399fd75c1891240c3498b8dca2875c6dcd760
             </div>
           </div>
         </nav>

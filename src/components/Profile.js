@@ -57,7 +57,7 @@ export default function Profile() {
       <div className="container">
         <form onSubmit={handleSubmit}>
           {/* // ! Me Being Extremely Fancy 🤪: */}
-          {['Profile Picture', 'Bio User', 'First Name', 'Last Name', 'Position', 'Company Represented', 'Years of Expierence' ].map(field => {
+          {['profilePicture', 'bioUser', 'firstName', 'lastName', 'position', 'companyRepresented', 'yearsExp' ].map(field => {
             return <div key={field} className="field">
               <label className="label">
                 {field[0].toUpperCase() + field.slice(1)}

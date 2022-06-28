@@ -9,7 +9,7 @@ import tags from '../../data/tags'
 
 export default function Newsfeed() {
   const [allUserPosts, setAllUserPosts] = useState([])
-  const [selectedTags, setSelectedTags] = React.useState([])
+  const [selectedTag, setSelectedTag] = React.useState([])
 
   const [search, setSearch] = React.useState("")
   const [formData, setFormData] = useState({
@@ -21,9 +21,8 @@ export default function Newsfeed() {
   //handle posts filter
 
   function postsFilter() {
-    console.log(selectedTags);
     return allUserPosts.filter((post) => {
-      return (post.tags.includes(selectedTags) || post.postContent.toLowerCase().includes(search.toLowerCase())
+      return (post.tags.includes(selectedTag) || post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }
@@ -131,7 +130,8 @@ export default function Newsfeed() {
                 options={tags}
                 className="basic-multi-select my-5 level-right"
                 classNamePrefix="select"
-                onChange={(e) => setSelectedTags(e.target.value)}
+                onChange={(tag) => setSelectedTag([ ...selectedTag, tag ])}
+                value={selectedTag}
                 placeholder={"Filter by tag"}
               />
 

@@ -21,8 +21,19 @@ export default function EditPost() {
   useEffect(() => {
     fetch(`/api/posts/${postID}`)
       .then(resp => resp.json())
-      .then(data => setformDataInput(data))
+      .then(data => {
+        setformDataInput({
+          postContent: `${data.postContent}`,
+          tags: [...data.tags],
+        }
+        )
+        console.log(data)
+      })
+
   }, [postID])
+
+
+
 
   //updates the post on button click via API
   async function handlePostUpdate(e) {
@@ -33,7 +44,6 @@ export default function EditPost() {
       console.log(data);
       navigate('/newsfeed')
 
-      setformDataInput(data)
 
     } catch (e) {
       console.log(e);
@@ -78,9 +88,7 @@ export default function EditPost() {
             options={postTags}
             className="basic-multi-select"
             classNamePrefix="select"
-            onChange={(tags) => setformDataInput((prevState) => {
-              return { ...prevState, tags }
-            })
+            onChange={(tags) => setformDataInput(() => [...tags])
             }
             value={formDataInput.tags}
           />
@@ -92,7 +100,6 @@ export default function EditPost() {
         <button onClick={handleCancel} className="button is-rounded is-warning is-light is-outlined  mx-1">
           Cancel Edit </button>
       </form>
-      {/* tags update still not working */}
     </div >
   </div >
 }

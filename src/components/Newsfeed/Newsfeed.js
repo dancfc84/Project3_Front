@@ -16,17 +16,19 @@ export default function Newsfeed() {
     postContent: "",
     tags: [],
   })
-  
 
+  console.log(selectedTag);
 
   //handles search
   //handle posts filter
   function postsFilter() {
     return allUserPosts.filter((post) => {
-      return (post.tags.includes(selectedTag) || post.postContent.toLowerCase().includes(search.toLowerCase())
+      return ( post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }
+
+  // post.tags.includes(selectedTag) ||
 
   //handles input changes for a new post
   function handleChange(e) {
@@ -124,6 +126,7 @@ export default function Newsfeed() {
                 placeholder={"Search Newsfeed"}
                 onChange={(e) => setSearch(e.target.value)} />
             </div>
+
             <div>
               <Select
                 defaultValue={[]}
@@ -132,7 +135,9 @@ export default function Newsfeed() {
                 options={tags}
                 className="basic-multi-select my-5 level-right"
                 classNamePrefix="select"
-                onChange={(tag) => setSelectedTag([...selectedTag, tag])}
+                onChange={(tags) => {
+                  setSelectedTag([...tags])
+                }}
                 value={selectedTag}
                 placeholder={"Filter by tag"}
               />
@@ -141,7 +146,7 @@ export default function Newsfeed() {
             {postsFilter().map((post, index) => {
               return <div key={index} className="">
                 <PostElement
-                  {...post} getPostData={getPostData}/>
+                  {...post} getPostData={getPostData} />
               </div>
             }
             )}

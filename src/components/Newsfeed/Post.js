@@ -31,8 +31,6 @@ export default function PostElement(singlePostDataProp) {
       if (deletePost.status === 204) {
         singlePostDataProp.getPostData()
       }
-
-
     } catch (e) {
       console.log(e)
     }

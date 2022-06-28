@@ -8,6 +8,8 @@ import { isCreator } from '../../lib/auth.js'
 
 
 export default function PostElement(singlePostDataProp) {
+  // const [commentContent, setCommentContent] = React.useState('')
+  // const [post, setPost] = React.useState(singlePostDataProp)
 
   //handles post deleting
   async function deletePostHandle() {
@@ -24,7 +26,23 @@ export default function PostElement(singlePostDataProp) {
       console.log(e)
     }
   }
-  return <div className="card">
+
+  // async function handleComment() {
+  //   try {
+  //     const { data } = await axios.post(
+  //       `/api/posts/${post._id}/comment`,
+  //       { content: commentContent },
+  //       {
+  //         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+  //       }
+  //     )
+  //     setPost(data)
+  //   } catch (e) {
+  //     console.log(e)
+  //   }
+  // }
+
+  return <div className="card my-3">
 
     <div className="card-content">
       <div className="media">
@@ -50,6 +68,8 @@ export default function PostElement(singlePostDataProp) {
           })}
           {<p className="">{singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</p>}
           {<p className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</p>}
+
+          {/* {edit and delte buttons if creator} */}
           {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
             <Link to={`/postedit/${singlePostDataProp._id}`}>
               <button className="button is-rounded is-small is-info is-light mx-1" >
@@ -60,6 +80,32 @@ export default function PostElement(singlePostDataProp) {
               Delete </button>
           </div>
           }
+
+          {/* {getLoggedInUserId() && <article className="media">
+            <div className="media-content">
+              <div className="field">
+                <p className="control">
+                  <textarea
+                    className="textarea"
+                    placeholder="Make a comment.."
+                    // ! Set the comment's content to be what's in the input textarea.
+                    onChange={(event) => setCommentContent(event.target.value)}
+                  >
+                  </textarea>
+                </p>
+              </div>
+              <div className="field">
+                <p className="control">
+                  <button
+                    className="button is-info"
+                    onClick={handleComment}
+                  >
+                    Submit
+                  </button>
+                </p>
+              </div>
+            </div>
+          </article>} */}
         </div>
       </div>
     </div>

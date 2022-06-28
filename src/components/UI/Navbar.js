@@ -1,19 +1,16 @@
 import logoFile from '../../assets/HT-logo.jpg'
 import { NavLink } from "react-router-dom"
 import React from "react"
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+import { getLoggedInUserId } from '../../lib/auth.js'
+
 
 export default function Navbar() {
-  const location = useLocation()
-  const [userLogged, setUserLogged] = React.useState(false)
 
-  React.useEffect(() => {
-    setUserLogged(Boolean(localStorage.getItem("loggedIn")))
-  }, [location])
+
 
   function NavbarChange() {
     window.localStorage.clear()
-    setUserLogged(false)
   }
 
   return (
@@ -26,13 +23,13 @@ export default function Navbar() {
               {/* <NavLink to="/" className="navbar-item is-size-3 has-text-weight-bold ml-3 is-right">
                 Home
               </NavLink> */}
-              {userLogged && <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+              {getLoggedInUserId() && <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Newsfeed
               </NavLink>}
               <NavLink to="/jobs/index" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Job Listings
               </NavLink>
-              {userLogged && <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+              {getLoggedInUserId() && <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Create Job
               </NavLink>}
               <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
@@ -41,7 +38,7 @@ export default function Navbar() {
               <NavLink to="/contact" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Contact
               </NavLink>
-              {userLogged && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
+              {getLoggedInUserId() && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
             </div>
           </div>
         </nav>

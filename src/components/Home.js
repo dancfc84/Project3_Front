@@ -42,18 +42,9 @@ export default function Home() {
     e.preventDefault()
     try {
       const { data } = await axios.post('/api/login', formData)
-      const token = data.token
-      const userID = data.user._id
-      const userName = data.user.username
-
-      if (token !== null && userID !== null) {
-        localStorage.setItem("token", token);
-        localStorage.setItem("userID", userID);
-        localStorage.setItem("userName", userName);
-        localStorage.setItem("loggedIn", true)
-        // navigate('/newsfeed') //navigates you to newsfeed once logged in
-      }
-
+      localStorage.setItem('token', data.token)
+      localStorage.setItem("loggedIn", true)
+      console.log(data.token)
       navigate('/newsfeed')
     } catch (err) {
       console.log(err.response.data)

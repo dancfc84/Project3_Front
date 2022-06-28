@@ -20,6 +20,7 @@ export default function NewComment(props) {
         }
       )
       props.setPost(data)
+
     } catch (err) {
       console.log(err.response.data);
     }
@@ -37,9 +38,12 @@ export default function NewComment(props) {
           <input
             className="text column  is-secondary"
             type="text"
-            onChange={(event) => setCommentContent(event.target.value)}
+            onChange={(event) => {
+              setCommentContent(event.target.value);
+              event.target.value.clear()
+            }}
             placeholder="Fascinating, can you share more?"
-          ></input>
+          />
         </div>
       </div>
     </div >

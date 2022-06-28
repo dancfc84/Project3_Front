@@ -9,11 +9,24 @@ import tags from '../../data/tags'
 
 export default function Newsfeed() {
   const [allUserPosts, setAllUserPosts] = useState([])
+  const [selectedTags, setSelectedTags] = React.useState([])
+
+  const [search, setSearch] = React.useState("")
   const [formData, setFormData] = useState({
     postContent: "",
     tags: [],
   })
 
+  //handles search
+  //handle posts filter
+
+  function postsFilter() {
+    console.log(selectedTags);
+    return allUserPosts.filter((post) => {
+      return (post.tags.includes(selectedTags) || post.postContent.toLowerCase().includes(search.toLowerCase())
+      )
+    })
+  }
   //handles input changes
   function handleChange(e) {
     setFormData((prevState) => {
@@ -34,10 +47,10 @@ export default function Newsfeed() {
       tags: formData.tags.map(tag => tag.value),
     }
     try {
-      
       const { data } = await axios.post('/api/posts/', newFormData, {
         headers: { Authorization: `Bearer ${token}` },
       })
+
       console.log(data._id)
     } catch (e) {
       console.log(e.response.data)
@@ -66,7 +79,7 @@ export default function Newsfeed() {
         <div className="columns ">
           <div className="column is-one-third ">
             <div className="section">
-              <div className="container">
+              <div className="container box">
                 <form onSubmit={handleSubmit}>
                   <div className="field ">
                     <label className="label">Post</label>
@@ -98,22 +111,43 @@ export default function Newsfeed() {
                     SEND IT
                   </button>
                 </form>
+
               </div >
             </div >
           </div>
 
           <div>
-            {allUserPosts.map((post, index) => {
-              return <div key={index} className="">
-                <PostElement {...post} />
-              </div>
+            <div className="my-5 level-right">
+              <input
+                value={search}
+                placeholder={"Search Newsfeed"}
+                onChange={(e) => setSearch(e.target.value)} />
+            </div>
+            <div>
+              <Select
+                defaultValue={[]}
+                isMulti
+                name="tags"
+                options={tags}
+                className="basic-multi-select my-5 level-right"
+                classNamePrefix="select"
+                onChange={(e) => setSelectedTags(e.target.value)}
+                placeholder={"Filter by tag"}
+              />
 
-            })}
+            </div>
+            {postsFilter().map((post, index) => {
+              return <div key={index} className="">
+                <PostElement
+                  {...post} />
+              </div>
+            }
+            )}
           </div>
-          
+
         </div>
       </div>
-    </section>
+    </section >
 
 
 

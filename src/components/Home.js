@@ -43,6 +43,7 @@ export default function Home() {
     try {
       const { data } = await axios.post('/api/login', formData)
       localStorage.setItem('token', data.token)
+      localStorage.setItem("loggedIn", true)
       console.log(data.token)
       navigate('/newsfeed')
     } catch (err) {

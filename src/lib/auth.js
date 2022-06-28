@@ -7,6 +7,7 @@ export function getLoggedInUserId() {
   const middlePart = token.split('.')[1]
   const decodedString = window.atob(middlePart)
   const decodedObj = JSON.parse(decodedString)
+  console.log(decodedObj);
   return decodedObj.userId
 }
 

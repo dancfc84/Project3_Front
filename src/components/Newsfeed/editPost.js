@@ -32,6 +32,10 @@ export default function EditPost() {
         formDataInput)
       console.log(data);
       navigate('/newsfeed')
+      setformDataInput({
+        postContent: "",
+        tags: [],
+      })
     } catch (e) {
       console.log(e);
     }
@@ -39,10 +43,8 @@ export default function EditPost() {
 
   //handles input changes in the fields
   function handleChange(e) {
-    const { name, value } = e.target
-    setformDataInput({
-      ...formDataInput,
-      [name]: value,
+    setformDataInput((prevState) => {
+      return { ...prevState, postContent: e.target.value }
     })
   }
 
@@ -77,7 +79,10 @@ export default function EditPost() {
             options={postTags}
             className="basic-multi-select"
             classNamePrefix="select"
-            onChange={(tags) => setformDataInput({ ...formDataInput, tags })}
+            onChange={(tags) => setformDataInput((prevState) => {
+              return { ...prevState, tags }
+            })
+            }
             value={formDataInput.tags}
           />
         </div>

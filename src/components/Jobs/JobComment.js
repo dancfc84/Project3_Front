@@ -4,8 +4,6 @@ import { getLoggedInUserId } from "../../lib/auth.js";
 // import { Link } from "react-router-dom"
 
 export default function CommentElement(props) {
-  // const user = localStorage.getItem('user')
-
   const currUser = getLoggedInUserId();
 
   const commentId = props.comments._id
@@ -44,7 +42,7 @@ export default function CommentElement(props) {
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
           <div>
-            { currUser && <button onClick={handleCommentDelete}>Delete</button> }
+            {currUser && <button onClick={handleCommentDelete}>Delete</button>}
           </div>
           <button
             onClick={handleLike}

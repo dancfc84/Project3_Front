@@ -47,6 +47,11 @@ export default function Profile() {
     }
   }
 
+  function stringWords(field) {
+    const stringResult = field[0].toUpperCase() + field.slice(1)
+    return stringResult.match(/[A-Z][a-z]+|[0-9]+/g).join(" ")
+  }
+
 
   return (
     <section className="section">
@@ -56,7 +61,7 @@ export default function Profile() {
           {['profilePicture', 'bioUser', 'firstName', 'lastName', 'position', 'companyRepresented', 'yearsExp' ].map(field => {
             return <div key={field} className="field">
               <label className="label">
-                {field[0].toUpperCase() + field.slice(1)}
+                {stringWords(field)}
               </label>
               <div className="control">
                 <input

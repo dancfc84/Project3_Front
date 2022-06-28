@@ -23,7 +23,7 @@ export default function Newsfeed() {
   //handle posts filter
   function postsFilter() {
     return allUserPosts.filter((post) => {
-      return ( post.postContent.toLowerCase().includes(search.toLowerCase())
+      return (post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }

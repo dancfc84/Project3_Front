@@ -7,10 +7,6 @@ import { getLoggedInUserId } from '../lib/auth.js'
 
 
 export default function Profile() {
-<<<<<<< HEAD
-  // const navigate = useNavigate()
-=======
->>>>>>> d24ae6cd69fb28fb85bed7ff68feefc4f3328565
 
   const [formData, setFormData] = React.useState({
     profilePicture: "",

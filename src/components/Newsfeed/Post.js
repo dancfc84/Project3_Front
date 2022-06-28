@@ -10,9 +10,10 @@ import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 export default function PostElement(singlePostDataProp) {
   const [commentContent, setCommentContent] = React.useState('')
   // const [post, setPost] = React.useState(singlePostDataProp)
+
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
 
-
+  console.log(singlePostDataProp);
   //handles Show Comments button
   function handleShowCommentsButton(postID) {
     hiddenCommentsNumber.includes(postID)
@@ -111,7 +112,7 @@ export default function PostElement(singlePostDataProp) {
                       {comment.createdAt.replace('T', ' - ').slice(0, - 8)}
                     </p>
                     <p className="subtitle">
-                      {comment.user}
+                      {comment.user && comment.user.username}
                     </p>
                     <p>{comment.content}</p>
                   </div>

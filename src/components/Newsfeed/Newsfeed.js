@@ -19,14 +19,14 @@ export default function Newsfeed() {
 
   //handles search
   //handle posts filter
-
   function postsFilter() {
     return allUserPosts.filter((post) => {
       return (post.tags.includes(selectedTag) || post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }
-  //handles input changes
+
+  //handles input changes for a new post
   function handleChange(e) {
     setFormData((prevState) => {
       return {

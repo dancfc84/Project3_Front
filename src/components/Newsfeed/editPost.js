@@ -32,10 +32,9 @@ export default function EditPost() {
         formDataInput)
       console.log(data);
       navigate('/newsfeed')
-      setformDataInput({
-        postContent: "",
-        tags: [],
-      })
+
+      setformDataInput(data)
+
     } catch (e) {
       console.log(e);
     }

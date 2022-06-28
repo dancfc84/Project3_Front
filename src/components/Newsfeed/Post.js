@@ -4,11 +4,11 @@ import { Link } from "react-router-dom"
 // import NewComment from "./NewComment"
 // import CommentElement from "./Comment"
 import axios from "axios"
-import { isCreator } from '../../lib/auth.js'
+import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 
 
 export default function PostElement(singlePostDataProp) {
-  // const [commentContent, setCommentContent] = React.useState('')
+  const [commentContent, setCommentContent] = React.useState('')
   // const [post, setPost] = React.useState(singlePostDataProp)
 
   //handles post deleting
@@ -28,20 +28,20 @@ export default function PostElement(singlePostDataProp) {
   }
 
 
-  // async function handleComment() {
-  //   try {
-  //     const { data } = await axios.post(
-  //       `/api/posts/${post._id}/comment`,
-  //       { content: commentContent },
-  //       {
-  //         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-  //       }
-  //     )
-  //     setPost(data)
-  //   } catch (e) {
-  //     console.log(e)
-  //   }
-  // }
+  async function handleComment() {
+    try {
+      const { data } = await axios.post(
+        `/api/posts/${singlePostDataProp._id}/comment`,
+        { content: commentContent },
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
+      console.log(data);
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   return <div className="card my-3">
 
@@ -76,13 +76,31 @@ export default function PostElement(singlePostDataProp) {
               <button className="button is-rounded is-small is-info is-light mx-1" >
                 Edit </button>
             </Link>
-
             <button className="button is-rounded is-small is-warning is-light mx-1" onClick={deletePostHandle} >
               Delete </button>
           </div>
           }
 
-          {/* {getLoggedInUserId() && <article className="media">
+          {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
+            return <article key={comment._id} className="media">
+              <div className="media-content">
+                <div className="content">
+                  <p className="subtitle">
+                    {comment.createdAt.replace('T', ' - ').slice(0, - 8)}
+                  </p>
+                  <p className="subtitle">
+                    {comment.user}
+                  </p>
+                  <p>{comment.content}</p>
+                </div>
+              </div>
+            </article>
+          }) : <p>Loading comments </p>}
+
+          {
+            // ! Little form to POST a comment (again lots of bulma)
+          }
+          {getLoggedInUserId() && <article className="media">
             <div className="media-content">
               <div className="field">
                 <p className="control">
@@ -106,7 +124,7 @@ export default function PostElement(singlePostDataProp) {
                 </p>
               </div>
             </div>
-          </article>} */}
+          </article>}
         </div>
       </div>
     </div>

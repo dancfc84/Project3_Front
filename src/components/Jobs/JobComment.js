@@ -5,6 +5,7 @@ import { getLoggedInUserId } from "../../lib/auth.js";
 
 export default function CommentElement(props) {
   const currUser = getLoggedInUserId();
+  console.log(`this is my props ${props.comments.user}`);
 
   const commentId = props.comments._id
 
@@ -18,6 +19,7 @@ export default function CommentElement(props) {
   
   async function handleLike () {
     const like = await axios.put(`/api/jobs/${props.jobId}/${commentId}/likes`, { currentUser: currUser, likes: likes + 1 })
+    console.log(like);
     setLikes(like.data[0].likes);
   }
   
@@ -35,7 +37,7 @@ export default function CommentElement(props) {
         </figure> */}
         <div className="media-content">
           <div className="content">
-            <p><strong>{props.username}</strong> posted on
+            <p><strong></strong> posted on
               <small> {props.comments.createdAt.replace('T', ' - ').slice(0, - 8)}<br /></small>
               {props.comments.content}</p>
             <p>{likes}</p>

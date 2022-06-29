@@ -13,10 +13,8 @@ export default function CommentElement(props) {
 
   const [likes, setLikes ] = useState(props.comments.likes);
 
-  async function handleCommentDelete () {
-    const deleteJob = await axios.delete(`/api/jobs/${props.jobId}/${commentId}`)
-    console.log(deleteJob);
-    window.location.reload(false)
+  async function handleCommentDeleteClick () {
+    props.handleCommentDelete(commentId)
   }
   
   async function handleLike () {
@@ -27,26 +25,16 @@ export default function CommentElement(props) {
   
   return (
     <article className="media my-5 mx-5">
-      <div key={props.comments._id + 0}> {/* double keys due to mapping so adding 'salt' with 0 to avoid conflict when rendering */}
-        {/* <Link to={`/users/${comment.owner._id}`}> */}
-        {/* <h6>{comment.user.username} </h6> */}
-        {/* </Link> */}
-
-        {/* <figure className="media-left">
-          <p>
-            <img />
-          </p>
-        </figure> */}
+      <div key={props.comments._id}>
         <div className="media-content">
           <div className="content">
             <p><strong>{props.comments.user.username}</strong> posted on
               <small> {props.comments.createdAt.replace('T', ' - ').slice(0, - 8)}<br /></small>
               {props.comments.content}</p>
             <p>{likes}</p>
-            {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
           <div>
-            {currUser === props.comments.user._id && <button onClick={handleCommentDelete}>Delete</button>}
+            {currUser === props.comments.user._id && <button onClick={handleCommentDeleteClick}>Delete</button>}
           </div>
           <button
             onClick={handleLike}

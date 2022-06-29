@@ -8,8 +8,6 @@ export default function ShowJob() {
   const navigate = useNavigate();
   const currUser = getLoggedInUserId();
 
-  console.log(currUser);
-
   const [likes, setLikes ] = useState(undefined);
 
   const [formDataInput, setformDataInput] = useState({
@@ -19,8 +17,6 @@ export default function ShowJob() {
   const [job, setJob] = useState(undefined);
   const { jobId } = useParams();
 
-  console.log(job);
-
   useEffect(() => {
     const getData = async () => {
       try {
@@ -29,7 +25,6 @@ export default function ShowJob() {
             "authorization": localStorage.getItem("token"),
           },
         })
-        console.log(data);
         setJob(data)
         setLikes(data.likes)
       } catch (error) {
@@ -38,8 +33,16 @@ export default function ShowJob() {
     }
     getData()
 
-  }, []);
+  }, [jobId, likes, formDataInput]);
 
+  //Handles change in our inputs
+
+  function handleChangeEvent(e) {
+    console.log(e);
+    setformDataInput({
+      [e.target.name]: e.target.value,
+    });
+  }
 
   async function handleDelete() {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`, {
@@ -50,6 +53,7 @@ export default function ShowJob() {
     console.log(deleteJob);
     navigate("/jobs/index");
   }
+
 
   async function handleCommentPost(e) {
     e.preventDefault();
@@ -63,21 +67,32 @@ export default function ShowJob() {
       }
     );
     console.log(addComment);
-    window.location.reload(false)
-  }
-
-  function handleChangeEvent(e) {
-    console.log(e);
+    console.log("here");
     setformDataInput({
-      [e.target.name]: e.target.value,
-    });
+      content: "",
+    })
   }
 
-  async function handleLike () {
-    console.log(likes);
-    const like = await axios.put(`/api/jobs/${jobId}/likes`, { currentUser: currUser, likes: likes + 1 })
-    setLikes(like);
+  async function handleCommentDelete (commentId) {
+    console.log(commentId);
+    const deleteJob = await axios.delete(`/api/jobs/${jobId}/${commentId}`,  {
+      headers: {
+        authorization: localStorage.getItem("token"),
+      },
+    })
+    console.log(deleteJob);
+    console.log("here");
+    setformDataInput({
+      content: "",
+    })
   }
+
+
+  const handleLike = async () => {
+    setLikes(await axios.put(`/api/jobs/${jobId}/likes`, { currentUser: currUser, likes: likes + 1 }))
+  }
+
+
 
   return (
     <section className="section">
@@ -161,6 +176,7 @@ export default function ShowJob() {
                       comments={comment}
                       jobId={jobId}
                       username={job.user.username}
+                      handleCommentDelete={handleCommentDelete}
                     />
                   );
                 })}

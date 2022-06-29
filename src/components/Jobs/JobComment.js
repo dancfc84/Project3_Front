@@ -5,7 +5,9 @@ import { getLoggedInUserId } from "../../lib/auth.js";
 
 export default function CommentElement(props) {
   const currUser = getLoggedInUserId();
-  console.log(`this is my props ${props.comments.user}`);
+  console.log(`this is my props ${props.comments}`);
+  console.log(currUser);
+  console.log(props.comments._id);
 
   const commentId = props.comments._id
 
@@ -37,14 +39,14 @@ export default function CommentElement(props) {
         </figure> */}
         <div className="media-content">
           <div className="content">
-            <p><strong></strong> posted on
+            <p><strong>{props.comments.user.username}</strong> posted on
               <small> {props.comments.createdAt.replace('T', ' - ').slice(0, - 8)}<br /></small>
               {props.comments.content}</p>
             <p>{likes}</p>
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
           <div>
-            {currUser && <button onClick={handleCommentDelete}>Delete</button>}
+            {currUser === props.comments.user._id && <button onClick={handleCommentDelete}>Delete</button>}
           </div>
           <button
             onClick={handleLike}

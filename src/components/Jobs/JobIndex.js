@@ -12,7 +12,11 @@ export default function JobIndex() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get("/api/jobs")
+        const { data } = await axios.get("/api/jobs", {
+          headers: {
+            "authorization": localStorage.getItem("token"),
+          },
+        })
         console.log(data);
         setJobs(data)
       } catch (error) {
@@ -21,6 +25,8 @@ export default function JobIndex() {
     }
     getData()
   }, [])
+
+  console.log();
 
   function filterJobs() {
     return jobs.filter((job) => {

@@ -51,7 +51,9 @@ export default function Newsfeed() {
     }
     try {
       const { data } = await axios.post('/api/posts/', newFormData, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { 
+          "authorization": token, 
+        },
       })
       getPostData()
       console.log(data._id)

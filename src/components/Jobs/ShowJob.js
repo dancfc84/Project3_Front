@@ -7,7 +7,10 @@ import { isCreator, getLoggedInUserId } from "../../lib/auth.js";
 export default function ShowJob() {
   const navigate = useNavigate();
   const currUser = getLoggedInUserId();
+
   console.log(currUser);
+
+  const [likes, setLikes ] = useState(undefined);
 
   const [formDataInput, setformDataInput] = useState({
     content: "",
@@ -19,13 +22,31 @@ export default function ShowJob() {
   console.log(job);
 
   useEffect(() => {
-    fetch(`/api/jobs/${jobId}`)
-      .then((resp) => resp.json())
-      .then((data) => setJob(data));
+    const getData = async () => {
+      try {
+        const { data } = await axios.get(`/api/jobs/${jobId}`, {
+          headers: {
+            "authorization": localStorage.getItem("token"),
+          },
+        })
+        console.log(data);
+        setJob(data)
+        setLikes(data.likes)
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getData()
+
   }, []);
 
+
   async function handleDelete() {
-    const deleteJob = await axios.delete(`/api/jobs/${jobId}`);
+    const deleteJob = await axios.delete(`/api/jobs/${jobId}`, {
+      headers: {
+        "authorization": localStorage.getItem("token"),
+      },
+    });
     console.log(deleteJob);
     navigate("/jobs/index");
   }
@@ -52,6 +73,12 @@ export default function ShowJob() {
     });
   }
 
+  async function handleLike () {
+    console.log(likes);
+    const like = await axios.put(`/api/jobs/${jobId}/likes`, { currentUser: currUser, likes: likes + 1 })
+    setLikes(like);
+  }
+
   return (
     <section className="section">
       <div className="container">
@@ -75,6 +102,16 @@ export default function ShowJob() {
                     <button className="button is-warning">Edit Job</button>
                   </Link>
                 )}
+                <button
+                  onClick={handleLike}
+                >
+                  <div className="like-button">
+                    <span>Like</span>
+                  </div>
+                </button>
+                <h4 className="title is-4"></h4>
+                <hr />
+                <p>{job.likes}</p>
               </div>
               <div className="column is-half">
                 <h4 className="title is-4">Job Description</h4>

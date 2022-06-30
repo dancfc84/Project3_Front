@@ -44,7 +44,6 @@ export default function Newsfeed() {
   async function handleSubmit(event) {
     event.preventDefault()
 
-
     const newFormData = {
       ...formData,
       tags: formData.tags.map(tag => tag.value),

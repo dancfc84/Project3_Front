@@ -2,6 +2,7 @@ import logoFile from '../../assets/HT-logo.jpg'
 import { NavLink } from "react-router-dom"
 import React from "react"
 import { useLocation } from "react-router-dom";
+import styles from "./Navbar.module.css"
 // import { getLoggedInUserId } from '../../lib/auth.js'
 
 
@@ -18,20 +19,19 @@ export default function Navbar() {
   function NavbarChange() {
     window.localStorage.clear()
     setIsLoggedIn(false)
-
   }
 
   return (
     <>
-      <header>
-        <nav>
+      <header className={styles.nav_container}>
+        <nav >
           <div className="container-nav ">
             <div className="navbar-brand">
               <NavLink to="/"><img className="logo image image is-128x128 p-1 mx-5" src={logoFile} /></NavLink>
               {/* <NavLink to="/" className="navbar-item is-size-3 has-text-weight-bold ml-3 is-right">
                 Home
               </NavLink> */}
-              {isLoggedIn && <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
+              {isLoggedIn && <NavLink  to="/newsfeed" className={`navbar-item is-size-3 has-text-weight-bold ml-3 ${styles.link_styling}`}>
 								Newsfeed
               </NavLink>}
               <NavLink to="/jobs/index" className="navbar-item is-size-3 has-text-weight-bold ml-3">

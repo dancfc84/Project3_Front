@@ -152,13 +152,12 @@ export default function ShowJob() {
             </div>
             <article className={styles.comments_container}>
               {currUser && <div>
-                <h4 className="title is-4">Post Comments</h4>
                 <div className="">
                   <form onSubmit={handleCommentPost}>
                     <div className="field">
                       <div className="control columns">
-                        <button className="button mx-4 is-outlined">
-                          Post your comment
+                        <button className={styles.post_comment_button}>
+                          Comment
                         </button>
                         <input
                           className="input column text is-secondary"

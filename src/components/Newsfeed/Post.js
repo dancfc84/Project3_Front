@@ -9,6 +9,15 @@ import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 
 export default function PostElement(singlePostDataProp) {
   const [commentContent, setCommentContent] = React.useState('')
+  const [newComment, setNewComment] = React.useState(singlePostDataProp.userComments)
+
+  // function deleteCommentHandle(deletedComment) { //only shows posts that are not the deleted one without quering the api
+  //   setNewComment(newComment.filter((comments) =>
+  //     comments._id !== deletedComment
+  //   ))
+
+  // }
+
   // const [post, setPost] = React.useState(singlePostDataProp)
 
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
@@ -56,6 +65,23 @@ export default function PostElement(singlePostDataProp) {
     }
   }
 
+  async function deleteComment(commentID) {
+    try {
+      const deleteThisComment = await axios.delete(
+        `/api/posts/${singlePostDataProp._id}/${commentID}`,
+        {
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+        }
+      )
+      setNewComment(newComment.filter((comments) =>
+        comments._id !== commentID
+      ))
+      console.log(deleteThisComment);
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
   return <div className="card my-3">
     <div className="section">
       <div className="container">
@@ -65,15 +91,20 @@ export default function PostElement(singlePostDataProp) {
           </p>
           <small className="">
             posted at {singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</small>
+          {singlePostDataProp.tags.length > 0 &&
+            <h5 className="level-right">
+              Tags:
+            </h5>}
+          <div className="tags level-right">
+            {singlePostDataProp.tags.map((tag, index) => {
+              return <div key={index} className="tag is-link mx-1 is-light">
+                {tag}
+              </div>
+            })}
+          </div>
           <div className="is-grouped">
             <p className="">{singlePostDataProp.postContent}</p>
-            <div className="tags level-right">
-              {singlePostDataProp.tags.map((tag, index) => {
-                return <div key={index} className="tag is-link mx-1 is-light">
-                  {tag}
-                </div>
-              })}
-            </div>
+
           </div>
 
           <div className="level-right">
@@ -96,10 +127,10 @@ export default function PostElement(singlePostDataProp) {
           {/* {edit and delte buttons if creator} */}
           {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
             <Link to={`/postedit/${singlePostDataProp._id}`}>
-              <button className="button is-rounded is-small is-info is-light mx-1" >
+              <button className="button is-rounded is-small level-right is-info is-light mx-2 my-2" >
                 Edit </button>
             </Link>
-            <button className="button is-rounded is-small is-warning is-light mx-1" onClick={deletePostHandle} >
+            <button className="button is-rounded is-small level-right is-warning is-light mx-2 my-2" onClick={deletePostHandle} >
               Delete </button>
           </div>
           }
@@ -114,7 +145,7 @@ export default function PostElement(singlePostDataProp) {
           </button>
 
           <div className={hiddenCommentsNumber.includes(singlePostDataProp._id) ? null : `is-hidden`}>
-            {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
+            {newComment ? newComment.map(comment => {
               return <article key={comment._id} className="media">
                 <div className="media-content box my-2">
                   <div className="content">
@@ -122,6 +153,12 @@ export default function PostElement(singlePostDataProp) {
                       {comment.user && comment.user.username}
                     </p><small className="">
                       posted at {singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}:</small>
+
+                    {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
+                      <button className="button is-rounded is-small level-right is-warning is-light mx-2 my-2" onClick={() => deleteComment(comment._id)} >
+                        Delete </button>
+                    </div>
+                    }
                     <p className="my-2">{comment.content}</p>
                   </div>
                 </div>
@@ -137,8 +174,8 @@ export default function PostElement(singlePostDataProp) {
                       className="textarea"
                       placeholder="Make a comment.."
                       onChange={(event) => setCommentContent(event.target.value)}
-                    >
-                    </textarea>
+                    />
+
                   </p>
                 </div>
                 <div className="field">

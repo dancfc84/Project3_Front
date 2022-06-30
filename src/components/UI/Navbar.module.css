@@ -1,7 +1,11 @@
 .nav_container {
   border-bottom: solid 0.25px grey;
   height: 125px;
+  background-color: #001D3D;
   
 }
 
+.link_styling {
+  color: white;
+}
 

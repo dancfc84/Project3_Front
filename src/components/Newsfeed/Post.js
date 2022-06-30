@@ -57,7 +57,6 @@ export default function PostElement(singlePostDataProp) {
   }
 
   return <div className="card my-3">
-
     <div className="section">
       <div className="container">
         <div className="">

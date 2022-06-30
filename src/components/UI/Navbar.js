@@ -1,4 +1,4 @@
-import logoFile from '../../assets/HT-logo.jpg'
+import logoFile from '../../assets/HT-logo.ico'
 import { NavLink } from "react-router-dom"
 import React from "react"
 import { useLocation } from "react-router-dom";
@@ -31,25 +31,25 @@ export default function Navbar() {
               {/* <NavLink to="/" className="navbar-item is-size-3 has-text-weight-bold ml-3 is-right">
                 Home
               </NavLink> */}
-              {isLoggedIn && <NavLink  to="/newsfeed" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              {isLoggedIn && <NavLink  to="/newsfeed" className={`navbar-item is-size-3 has-text-weight-bold ml-3 ${styles.link_styling}`}>
 								Newsfeed
               </NavLink>}
-              <NavLink to="/jobs/index" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              <NavLink to="/jobs/index" className="navbar-item is-size-3 has-text-weight-bold ml-3">
 								Job Listings
               </NavLink>
-              {isLoggedIn && <NavLink to="/jobs/create" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              {isLoggedIn && <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
 								Create Job
               </NavLink>}
-              <NavLink to="/about" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
 								About
               </NavLink>
-              <NavLink to="/contact" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              <NavLink to="/contact" className="navbar-item is-size-3 has-text-weight-bold ml-3">
 								Contact
               </NavLink>
-              {isLoggedIn && <NavLink to="/profile" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              {isLoggedIn && <NavLink to="/profile" className="navbar-item is-size-3 has-text-weight-bold ml-3">
 								Profile
               </NavLink>}
-              {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>Logout</NavLink>}
+              {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
             </div>
           </div>
         </nav>

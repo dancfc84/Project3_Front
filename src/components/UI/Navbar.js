@@ -49,7 +49,7 @@ export default function Navbar() {
               <NavLink to="/profile" className="navbar-item is-size-3 has-text-weight-bold ml-3">
                 Profile
               </NavLink>
-              {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
+              {<NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
             </div>
           </div>
         </nav>

@@ -50,9 +50,9 @@ export default function Newsfeed() {
     }
     try {
       const { data } = await axios.post('/api/posts/', newFormData, {
-        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      }
-      )
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("token")}` },
+      })
       getPostData()
       console.log(data._id)
     } catch (e) {
@@ -62,9 +62,13 @@ export default function Newsfeed() {
 
   //gets data about posts from API db
   const getPostData = async () => {
-    const apiResponse = await fetch('api/posts')
-    const json = await apiResponse.json()
-    setAllUserPosts(json)
+    console.log(localStorage.getItem("token"));
+    const { data } = await axios.get('/api/posts/',
+      {
+        headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
+      })
+
+    setAllUserPosts(data)
   }
   useEffect(() => {
     getPostData()

@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 // import classes from "./LoginModal.module.css"
 import Modal from "./Modal.js";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useNavigate } from 'react-router-dom'
+
 
 const LoginModal = (props) => {
-  const navigate = useNavigate();
-
+  const navigate = useNavigate()
   const [modalForm, setModalForm] = useState({
     username: "",
     password: "",
@@ -21,9 +21,10 @@ const LoginModal = (props) => {
       const { data } = await axios.post("/api/register", modalForm);
       console.log(data);
       //props.handleLogin(e) //login the user once user has registered
-
-      // ! Navigate to the /login page.
-      navigate("/newsfeed"); //navigates to newsfeed if successfully registered
+      localStorage.setItem('token', data.token)
+      localStorage.setItem("loggedIn", true)
+      console.log(data.token)
+      navigate('/newsfeed')
     } catch (err) {
       // ! Print out the response from the backend if there's an error
       console.log(err.response.data);

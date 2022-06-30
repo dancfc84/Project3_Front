@@ -20,10 +20,13 @@ export default function Profile() {
 
   const navigate = useNavigate()
   // const [profile, setProfile] = React.useState(undefined)
+
   const getData = async () => {
-    const res = await fetch(`/api/profile/${getLoggedInUserId()}`)
-    const json = await res.json()
-    setFormData(json)
+    const token = localStorage.getItem('token')
+    const { data } = await axios.get(`/api/profile/${getLoggedInUserId()}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    setFormData(data)
   }
   React.useEffect(() => {
     getData()

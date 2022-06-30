@@ -1,7 +1,7 @@
 function About() {
   return (
     <section className="hero is-fullheight-with-navbar is-white">
-      
+
       <p className="title is-1 has-text-centered has-text-black">
 				Developers
       </p>
@@ -13,8 +13,7 @@ function About() {
                 <div className="media-content">
                   <h4 className="title is-3">Dimitar Vidolov</h4>
                   <p className="subtitle is-4">Developer</p>
-                  <p>Developed Posts and Comments for the site, both frontend and backend, making sure posts render immediately without waiting for the backend.
-                    Frontend login panel and worked on improving backend.</p>
+                  <p>Developed Posts and Comments for the site, both frontend and backend, making sure posts render immediately without waiting for the backend.</p>
                 </div>
               </div>
             </div>
@@ -31,9 +30,9 @@ function About() {
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-4">Cody Shan</p>
-                  <p className="subtitle is-6">Developer</p>
-                  <p>Developed user for the site, both frontend and backend.
+                  <p className="title is-3">Cody Shan</p>
+                  <p className="subtitle is-4">Developer</p>
+                  <p>Developed User and About for the site, both frontend and backend. Enabling Registration, Login and editing of Profiles.
                   </p>
                 </div>
               </div>

@@ -57,12 +57,10 @@ export default function PostElement(singlePostDataProp) {
   }
 
   return <div className="card my-3">
-
     <div className="section">
       <div className="container">
         <div className="box mb-5">
           <p className="title is-4">{singlePostDataProp.user.username ? singlePostDataProp.user.username : "Unknown user posted"}:</p>
-          
           <div className="is-grouped">
             <p className="tags level-right">{singlePostDataProp.postContent}</p>
             {singlePostDataProp.tags.map((tag, index) => {

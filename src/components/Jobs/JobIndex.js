@@ -13,9 +13,7 @@ export default function JobIndex() {
     const getData = async () => {
       try {
         const { data } = await axios.get("/api/jobs", {
-          headers: {
-            "authorization": localStorage.getItem("token"),
-          },
+          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         console.log(data);
         setJobs(data)

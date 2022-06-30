@@ -24,9 +24,7 @@ export default function CreateJob () {
     try {
       e.preventDefault()
       const { data } = await axios.post("/api/jobs/create", formData, {
-        headers: {
-          "authorization": localStorage.getItem("token"),
-        },
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       console.log(data);
       navigate('/jobs/index')

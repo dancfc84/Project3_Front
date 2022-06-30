@@ -43,7 +43,6 @@ export default function Newsfeed() {
   //handles submitting new post
   async function handleSubmit(event) {
     event.preventDefault()
-    const token = localStorage.getItem('token')
 
     const newFormData = {
       ...formData,
@@ -51,10 +50,9 @@ export default function Newsfeed() {
     }
     try {
       const { data } = await axios.post('/api/posts/', newFormData, {
-        headers: { 
-          "authorization": token, 
-        },
-      })
+        headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      }
+      )
       getPostData()
       console.log(data._id)
     } catch (e) {

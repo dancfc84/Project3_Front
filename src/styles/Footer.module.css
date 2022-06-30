@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Quicksand:wght@500&display=swap');
+
+.footerArea div {
+  font-family: 'Quicksand', sans-serif;
+	background-color: #FFD60A;
+	line-height: 20px;
+}
+
+.footerArea {
+  font-family: 'Quicksand', sans-serif;
+	background-color: white;
+}

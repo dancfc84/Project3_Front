@@ -13,6 +13,7 @@ import About from "./components/About"
 import Contact from './components/Contact'
 import EditPost from './components/Newsfeed/EditPost'
 import Profile from './components/Profile'
+import styles from "./styles/Footer.module.css"
 
 
 function App() {
@@ -32,7 +33,7 @@ function App() {
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
         </Routes>
-        <footer className="footer column is-narrow">
+        <footer className={`footer column is-narrow ${styles.footerArea}`}>
           <div className="box content has-text-centered">
             Companies looking to hire:
             <Link to={`/jobs/create`}> Post a new Job</Link><br />

@@ -32,22 +32,22 @@ export default function Navbar() {
                 Home
               </NavLink> */}
               {isLoggedIn && <NavLink to="/newsfeed" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                Newsfeed
+								Newsfeed
               </NavLink>}
               <NavLink to="/jobs/index" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                Job Listings
+								Job Listings
               </NavLink>
               {isLoggedIn && <NavLink to="/jobs/create" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                Create Job
+								Create Job
               </NavLink>}
               <NavLink to="/about" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                About
+								About
               </NavLink>
               <NavLink to="/contact" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                Contact
+								Contact
               </NavLink>
               {isLoggedIn && <NavLink to="/profile" className="navbar-item is-size-3 has-text-weight-bold ml-3">
-                Profile
+								Profile
               </NavLink>}
               {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className="navbar-item is-size-3 has-text-weight-bold ml-3">Logout</NavLink>}
             </div>

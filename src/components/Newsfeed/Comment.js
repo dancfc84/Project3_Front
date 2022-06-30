@@ -24,9 +24,8 @@ export default function CommentElement(comment) {
         {/* <figure className="media-left"><p><img /></p></figure> */}
         <div className="card-content">
           <div className="content">
-            <p><strong>{comment.user ? comment.user : 'Username missing'}:</strong> <br />
-              <small className="level-right"> at {comment.createdAt}</small>
-              {comment.content}</p>
+            <p><strong>{comment.user ? comment.user : 'Username missing'}:</strong></p>
+            <p>{comment.content}</p>
             {/* <p>{comment.likedBy.length} upvotes</p> */}
           </div>
           <div className="level-right" >

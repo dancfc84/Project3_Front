@@ -23,7 +23,7 @@ export default function Newsfeed() {
   //handle posts filter
   function postsFilter() {
     return allUserPosts.filter((post) => {
-      return (post.postContent.toLowerCase().includes(search.toLowerCase())
+      return (selectedTag && post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }
@@ -51,7 +51,8 @@ export default function Newsfeed() {
     try {
       const { data } = await axios.post('/api/posts/', newFormData, {
         headers: {
-          "authorization": `Bearer ${localStorage.getItem("token")}` },
+          "authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
       })
       getPostData()
       console.log(data._id)
@@ -126,6 +127,7 @@ export default function Newsfeed() {
           <div>
             <div className="my-5 level-right">
               <input
+                className=""
                 value={search}
                 placeholder={"Search Newsfeed"}
                 onChange={(e) => setSearch(e.target.value)} />

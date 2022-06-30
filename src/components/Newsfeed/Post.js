@@ -60,16 +60,21 @@ export default function PostElement(singlePostDataProp) {
 
     <div className="section">
       <div className="container">
-        <div className="box mb-5">
-          <p className="title is-4">{singlePostDataProp.user.username ? singlePostDataProp.user.username : "Unknown user posted"}:</p>
-          
+        <div className="">
+          <p className="title is-4">
+            {singlePostDataProp.user.username ? singlePostDataProp.user.username : "Unknown user posted"}:
+          </p>
+          <small className="">
+            posted at {singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</small>
           <div className="is-grouped">
-            <p className="tags level-right">{singlePostDataProp.postContent}</p>
-            {singlePostDataProp.tags.map((tag, index) => {
-              return <div key={index} className="tag is-link mx-1 is-light">
-                {tag}
-              </div>
-            })}
+            <p className="">{singlePostDataProp.postContent}</p>
+            <div className="tags level-right">
+              {singlePostDataProp.tags.map((tag, index) => {
+                return <div key={index} className="tag is-link mx-1 is-light">
+                  {tag}
+                </div>
+              })}
+            </div>
           </div>
 
           <div className="level-right">
@@ -86,9 +91,8 @@ export default function PostElement(singlePostDataProp) {
             </div>
           })}
 
-          {<p className="">{singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</p>}
 
-          {<p className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</p>}
+          {/* {<small className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</small>} */}
 
           {/* {edit and delte buttons if creator} */}
           {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
@@ -113,19 +117,18 @@ export default function PostElement(singlePostDataProp) {
           <div className={hiddenCommentsNumber.includes(singlePostDataProp._id) ? null : `is-hidden`}>
             {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
               return <article key={comment._id} className="media">
-                <div className="media-content">
+                <div className="media-content box my-2">
                   <div className="content">
                     <p className="subtitle">
-                      {comment.createdAt.replace('T', ' - ').slice(0, - 8)}
-                    </p>
-                    <p className="subtitle">
                       {comment.user && comment.user.username}
-                    </p>
-                    <p>{comment.content}</p>
+                    </p><small className="">
+                      posted at {singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}:</small>
+                    <p className="my-2">{comment.content}</p>
                   </div>
                 </div>
               </article>
             }) : <p>Loading comments </p>}
+            <br />
 
             {getLoggedInUserId() && <article className="media">
               <div className="media-content">

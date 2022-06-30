@@ -72,7 +72,7 @@ export default function PostElement(singlePostDataProp) {
             })}
           </div>
 
-          <div className="tags level-right">
+          <div className="level-right">
             {singlePostDataProp.upvotedBy.map((tag, index) => {
               return <div key={index} className="tag is-link mx-1 is-light">
                 {tag}

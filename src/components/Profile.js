@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLoggedInUserId } from '../lib/auth.js'
 
@@ -19,6 +19,7 @@ export default function Profile() {
   })
 
   const navigate = useNavigate()
+  
   // const [profile, setProfile] = React.useState(undefined)
 
   const getData = async () => {

@@ -1,4 +1,4 @@
-<!-- // const [userPosts, setUserPosts] = React.useState([])
+// const [userPosts, setUserPosts] = React.useState([])
 // const [formDataInput, setformDataInput] = React.useState({
 //   postContent: "",
 //   tags: [],
@@ -86,7 +86,7 @@
 //                     <Select
 //                       defaultValue={[]}
 //                       isMulti
-//                       name="colors"
+<!-- //                       name="colors" -->
 //                       options={tags}
 //                       className="basic-multi-select"
 //                       classNamePrefix="select"
@@ -120,4 +120,4 @@
 //       </div>
 //     </section>
 //   </>
-// ) -->
+// )

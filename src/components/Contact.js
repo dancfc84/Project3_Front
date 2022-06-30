@@ -1,11 +1,11 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
-import { useNavigate } from "react-router-dom"
+import ContactModal from './UI/ContactModal';
 
 export default function Contact() {
 
-  const navigate = useNavigate()
   const form = useRef();
+  const [showContactModal, setShowContactModal] = useState(false)
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -16,32 +16,39 @@ export default function Contact() {
       }, (error) => {
         console.log(error.text);
       });
+    
+    setShowContactModal(true)
 
-    navigate("/")
   };
 
 
   return (
-    <div className="section">
-      <div className="container">
-        <form ref={form} onSubmit={sendEmail}>
-          <div className="field">
-            <label className="label">Name</label>
-            <input type="text" name="user_name" />
-          </div>
-          <div className="field">
-            <label className="label">Email</label>
-            <input type="email" name="user_email" />
-          </div>
-          <div className="field">
-            <label className="label">Message</label>
-            <textarea name="message" />
-          </div>
-          <div>
-            <input className="button" type="submit" value="Send" />
-          </div>
-        </form>
+    <section>
+      <div className="section">
+        <div className="container">
+          <form ref={form} onSubmit={sendEmail}>
+            <div className="field">
+              <label className="label">Name</label>
+              <input type="text" name="user_name" />
+            </div>
+            <div className="field">
+              <label className="label">Email</label>
+              <input type="email" name="user_email" />
+            </div>
+            <div className="field">
+              <label className="label">Message</label>
+              <textarea name="message" />
+            </div>
+            <div>
+              <input className="button" type="submit" value="Send" />
+            </div>
+          </form>
+        </div>
       </div>
-    </div>
+      {
+        showContactModal && <ContactModal/>
+      }
+
+    </section>
   );
 }

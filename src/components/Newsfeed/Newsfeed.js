@@ -23,7 +23,7 @@ export default function Newsfeed() {
   //handle posts filter
   function postsFilter() {
     return allUserPosts.filter((post) => {
-      return ( post.postContent.toLowerCase().includes(search.toLowerCase())
+      return (post.postContent.toLowerCase().includes(search.toLowerCase())
       )
     })
   }
@@ -43,7 +43,6 @@ export default function Newsfeed() {
   //handles submitting new post
   async function handleSubmit(event) {
     event.preventDefault()
-    const token = localStorage.getItem('token')
 
     const newFormData = {
       ...formData,
@@ -51,7 +50,8 @@ export default function Newsfeed() {
     }
     try {
       const { data } = await axios.post('/api/posts/', newFormData, {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("token")}` },
       })
       getPostData()
       console.log(data._id)
@@ -62,9 +62,13 @@ export default function Newsfeed() {
 
   //gets data about posts from API db
   const getPostData = async () => {
-    const apiResponse = await fetch('api/posts')
-    const json = await apiResponse.json()
-    setAllUserPosts(json)
+    console.log(localStorage.getItem("token"));
+    const { data } = await axios.get('/api/posts/',
+      {
+        headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
+      })
+
+    setAllUserPosts(data)
   }
   useEffect(() => {
     getPostData()

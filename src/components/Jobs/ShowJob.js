@@ -3,12 +3,14 @@ import { Link, useParams, useNavigate } from "react-router-dom";
 import JobComment from "../Jobs/JobComment";
 import axios from "axios";
 import { isCreator, getLoggedInUserId } from "../../lib/auth.js";
+import ApplyModal from "./ApplyModal.js";
 
 export default function ShowJob() {
   const navigate = useNavigate();
   const currUser = getLoggedInUserId();
 
   const [likes, setLikes ] = useState(undefined);
+  const [ showApplyModal, setShowApplyModal ] = useState(false)
 
   const [formDataInput, setformDataInput] = useState({
     content: "",
@@ -92,6 +94,10 @@ export default function ShowJob() {
     setLikes(await axios.put(`/api/jobs/${jobId}/likes`, { currentUser: currUser, likes: likes + 1 }))
   }
 
+  const handleApplyJob = () => {
+    setShowApplyModal(true)
+  }
+
 
 
   return (
@@ -106,6 +112,7 @@ export default function ShowJob() {
                 <figure className="image">
                   <img src={job.companyImage} alt={job.companyName} />
                 </figure>
+
                 {isCreator(job.user._id) && (
                   <button className="button is-danger" onClick={handleDelete}>
                     Delete job
@@ -116,6 +123,9 @@ export default function ShowJob() {
                   <Link to={`/jobs/edit/${jobId}`}>
                     <button className="button is-warning">Edit Job</button>
                   </Link>
+                )}
+                {currUser && (
+                  <button onClick={handleApplyJob} className="button is-warning">Apply</button>
                 )}
                 <button
                   onClick={handleLike}
@@ -187,6 +197,10 @@ export default function ShowJob() {
           <p>...loading</p>
         )}
       </div>
+
+      {
+        showApplyModal && <ApplyModal/>
+      }
     </section>
   );
 }

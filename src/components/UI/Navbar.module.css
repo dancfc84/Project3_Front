@@ -1,11 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Quicksand:wght@500&display=swap');
+
 .nav_container {
   border-bottom: solid 0.25px grey;
   height: 125px;
   background-color: #001D3D;
-  
+
 }
 
 .link_styling {
   color: white;
+	font-family: 'Quicksand', sans-serif;
 }
 

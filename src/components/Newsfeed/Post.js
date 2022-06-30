@@ -58,16 +58,20 @@ export default function PostElement(singlePostDataProp) {
 
   return <div className="card my-3">
 
-    <div className="card-content">
-      <div className="media">
-        <div className="media-content">
-          <p className="title is-4">{singlePostDataProp.user.username}:</p>
-          <p className="">{singlePostDataProp.postContent}</p>
-          {singlePostDataProp.tags.map((tag, index) => {
-            return <div key={index} className="tag is-link mx-1 is-light">
-              {tag}
-            </div>
-          })}
+    <div className="section">
+      <div className="container">
+        <div className="box mb-5">
+          <p className="title is-4">{singlePostDataProp.user.username ? singlePostDataProp.user.username : "Unknown user posted"}:</p>
+          
+          <div className="is-grouped">
+            <p className="tags level-right">{singlePostDataProp.postContent}</p>
+            {singlePostDataProp.tags.map((tag, index) => {
+              return <div key={index} className="tag is-link mx-1 is-light">
+                {tag}
+              </div>
+            })}
+          </div>
+
           <div className="tags level-right">
             {singlePostDataProp.upvotedBy.map((tag, index) => {
               return <div key={index} className="tag is-link mx-1 is-light">
@@ -75,12 +79,15 @@ export default function PostElement(singlePostDataProp) {
               </div>
             })}
           </div>
+
           {singlePostDataProp.downvotedBy.map((tag, index) => {
             return <div key={index} className="tag is-link mx-1 is-light">
               {tag}
             </div>
           })}
+
           {<p className="">{singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</p>}
+
           {<p className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</p>}
 
           {/* {edit and delte buttons if creator} */}

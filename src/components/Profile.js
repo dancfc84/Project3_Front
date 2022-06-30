@@ -19,6 +19,7 @@ export default function Profile() {
   })
 
   const navigate = useNavigate()
+  
   // const [profile, setProfile] = React.useState(undefined)
   const getData = async () => {
     const res = await fetch(`/api/profile/${getLoggedInUserId()}`)

@@ -154,8 +154,8 @@ export default function ShowJob() {
               {currUser && <div>
                 <div className="">
                   <form onSubmit={handleCommentPost}>
-                    <div className="field">
-                      <div className="control columns">
+                    <div>
+                      <div>
                         <button className={styles.post_comment_button}>
                           Comment
                         </button>

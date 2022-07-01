@@ -1,5 +1,14 @@
 
 
+body{
+  font-family: 'Quicksand', sans-serif;
+}
+
+.job_title {
+  font-size: 3rem;
+  text-align: center;
+}
+
 .image_class {
   max-width: 60%;
   height: auto;
@@ -137,7 +146,30 @@
 .comments_container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 1rem;
+
+}
+
+.post_comment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.comment_input {
+  display: flex;
+  width: 400px;
+  height: 200px;
+  border: #003566 0.25px solid;
+  color:#003566;
+}
+
+.comment_input:focus {
+  outline:0px;
+  border: #003566 2px solid;
+
 }
 
 .post_comment_button {
@@ -177,7 +209,7 @@
 Heart Like Button */
 
 .heart {
-  width: 100px;
+  width: 80px;
   height: 100px;
   background: url("https://cssanimation.rocks/images/posts/steps/heart.png") no-repeat;
   background-position: 0 0;

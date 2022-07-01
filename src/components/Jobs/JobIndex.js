@@ -2,10 +2,11 @@
 import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Job from "./Job"
+import styles from "./JobIndex.module.css"
 
 export default function JobIndex() {
+  
   const [jobs, setJobs] = useState([])
-
   const [search, setSearch] = useState("")
 
 
@@ -34,7 +35,7 @@ export default function JobIndex() {
   }
 
   return (
-    <section className="section">
+    <section className={}>
       <input className="container"
         value={search} 
         placeholder={"SEARCH JOBS"}
@@ -51,7 +52,7 @@ export default function JobIndex() {
           : <p>Loading Jobs</p>
         }
       </div>
-    </section>  
+    </section> 
   )
 }
 

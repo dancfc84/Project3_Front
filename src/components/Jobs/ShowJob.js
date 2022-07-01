@@ -13,15 +13,17 @@ export default function ShowJob() {
   const [likes, setLikes ] = useState(undefined);
   const [ showApplyModal, setShowApplyModal ] = useState(false)
 
+  const [isHeartRed, setIsHeartRed] = useState(false)
+
   //Needs some logic to maintain the heart
 
-  const [isHeartRed, setIsHeartRed] = useState(false)
 
   const [formDataInput, setformDataInput] = useState({
     content: "",
   });
 
   const [job, setJob] = useState(undefined);
+
   const { jobId } = useParams();
 
   useEffect(() => {
@@ -33,6 +35,12 @@ export default function ShowJob() {
         )
         setJob(data)
         setLikes(data.likes)
+        const userLiked = job.userLiked.filter((user) => {
+          return currUser === user
+        })
+        if (userLiked.length > 0) {
+          setIsHeartRed(true)
+        }
       } catch (error) {
         console.log(error);
       }
@@ -40,6 +48,8 @@ export default function ShowJob() {
     getData()
 
   }, [jobId, likes, formDataInput]);
+
+
 
   //Handles change in our inputs
 
@@ -49,6 +59,8 @@ export default function ShowJob() {
       [e.target.name]: e.target.value,
     });
   }
+
+  console.log(job);
 
   async function handleDelete() {
     const deleteJob = await axios.delete(`/api/jobs/${jobId}`, {
@@ -106,7 +118,7 @@ export default function ShowJob() {
       <div className="container">
         {job ? (
           <div>
-            <h2 className="title has-text-centered">{job.jobTitle}</h2>
+            <h2 className={styles.job_title}>{job.jobTitle}</h2>
             <hr />
             <div className="columns">
               <div className={`column is-half ${styles.left_col}`}>
@@ -152,22 +164,21 @@ export default function ShowJob() {
             </div>
             <article className={styles.comments_container}>
               {currUser && <div>
-                <div className="">
+                <div >
                   <form onSubmit={handleCommentPost}>
-                    <div>
-                      <div>
-                        <button className={styles.post_comment_button}>
-                          Comment
-                        </button>
-                        <input
-                          className="input column text is-secondary"
-                          type="text"
-                          name={"content"}
-                          value={formDataInput.content}
-                          onChange={handleChangeEvent}
-                          placeholder="Type Comment Here"
-                        /> 
-                      </div>
+                    <div className={styles.post_comment}>
+                      <textarea
+                        className={styles.comment_input}
+                        type="text"
+                        name={"content"}
+                        value={formDataInput.content}
+                        onChange={handleChangeEvent}
+                        placeholder="Type Comment Here"
+                      /> 
+                      <button className={styles.post_comment_button}>
+                        Comment
+                      </button>
+ 
                     </div>
                   </form>
                 </div>
@@ -176,7 +187,7 @@ export default function ShowJob() {
                 return (
                   <JobComment
                     key={comment._id}
-                    comments={comment}
+                    comment={comment}
                     jobId={jobId}
                     username={job.user.username}
                     handleCommentDelete={handleCommentDelete}

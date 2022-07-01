@@ -1,6 +1,8 @@
 import React, { useRef, useState } from 'react';
 import emailjs from '@emailjs/browser';
 import ContactModal from './UI/ContactModal';
+import styles from "../styles/Contact.module.css"
+
 
 export default function Contact() {
 
@@ -25,22 +27,22 @@ export default function Contact() {
   return (
     <section>
       <div className="section">
-        <div className="container">
-          <form ref={form} onSubmit={sendEmail}>
-            <div className="field">
-              <label className="label">Name</label>
+        <div className={styles.form_container}>
+          <form className={styles.form} ref={form} onSubmit={sendEmail}>
+            <div className={styles.form_fields} >
+              <label >Name</label>
               <input type="text" name="user_name" />
             </div>
-            <div className="field">
-              <label className="label">Email</label>
+            <div className={styles.field_container}>
+              <label >Email</label>
               <input type="email" name="user_email" />
             </div>
-            <div className="field">
-              <label className="label">Message</label>
+            <div className={styles.field_container}>
+              <label >Message</label>
               <textarea name="message" />
             </div>
             <div>
-              <input className="button" type="submit" value="Send" />
+              <input className={styles.contact_button} type="submit" value="Send" />
             </div>
           </form>
         </div>

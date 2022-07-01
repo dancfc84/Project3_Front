@@ -35,14 +35,16 @@ export default function JobIndex() {
   }
 
   return (
-    <section className={}>
-      <input className="container"
-        value={search} 
-        placeholder={"SEARCH JOBS"}
-        onChange={(e) => setSearch(e.target.value)} 
-      />
+    <section >
+      <div className={styles.search_container}>
+        <input className={styles.search_input}
+          value={search} 
+          placeholder={"SEARCH JOBS"}
+          onChange={(e) => setSearch(e.target.value)} 
+        />
+      </div>
 
-      <div>
+      <div className={styles.jobs_container}>
         {jobs ? filterJobs().map((job, i) => {
           return <Job
             key={i}

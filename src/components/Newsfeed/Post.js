@@ -76,12 +76,21 @@ export default function PostElement(singlePostDataProp) {
 
   //submits query to backed for like/upvote
   async function handleUpvote() {
+    
     try {
-      const { data } = await axios.post(
-        `/api/posts/${singlePostDataProp._id}/vote`,
+      const { data } = await fetch(`/api/posts/${singlePostDataProp._id}/vote`,
         {
-          headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-        })
+          method: 'POST',
+          headers: {
+            "Authorization": `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      )
+      // await axios.put(
+      //     `/api/posts/${singlePostDataProp._id}/vote`,
+      //     {
+      //       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
+      //     })
       console.log(data);
     } catch (err) {
       console.log(err.response.data);

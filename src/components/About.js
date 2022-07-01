@@ -1,18 +1,20 @@
+import styles from "../styles/About.module.css"
+
 function About() {
   return (
-    <section className="hero is-fullheight-with-navbar is-white">
+    <section className={`hero is-fullheight-with-navbar is-white ${styles.aboutpage}`}>
 
-      <p className="title is-1 has-text-centered has-text-black">
-				Developers
+      <p className="title is-1 has-text-centered has-text-black mt-4">
+				Our Team
       </p>
       <div className="columns is-multiline is-mobile">
         <div className="column is-one-third-desktop is-half-tablet is-half-mobile">
-          <div className="card mx-4 my-4">
-            <div className="card-content">
+          <div className={`card mx-4 my-4 ${styles.profiles}`}>
+            <div className={`card-content ${styles.profiles}`}>
               <div className="media">
                 <div className="media-content">
-                  <h4 className="title is-3">Dimitar Vidolov</h4>
-                  <p className="subtitle is-4">Developer</p>
+                  <h4 className="title is-3 has-text-white">Dimitar Vidolov</h4>
+                  <p className="subtitle is-4 has-text-white">Developer</p>
                   <p>Developed Posts and Comments for the site, both frontend and backend, making sure posts render immediately without waiting for the backend.</p>
                 </div>
               </div>
@@ -26,12 +28,12 @@ function About() {
         </div>
 
         <div className="column is-one-third-desktop is-half-tablet is-half-mobile">
-          <div className="card mx-4 my-4">
-            <div className="card-content">
+          <div className={`card mx-4 my-4 ${styles.profiles}`}>
+            <div className={`card-content ${styles.profiles}`}>
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-3">Cody Shan</p>
-                  <p className="subtitle is-4">Developer</p>
+                  <p className="title is-3 has-text-white">Cody Shan</p>
+                  <p className="subtitle is-4 has-text-white">Developer</p>
                   <p>Developed User and About for the site, both frontend and backend. Enabling Registration, Login and editing of Profiles.
                   </p>
                 </div>
@@ -45,12 +47,12 @@ function About() {
           </div>
         </div>
         <div className="column is-one-third-desktop is-half-tablet is-half-mobile">
-          <div className="card mx-4 my-4">
-            <div className="card-content">
+          <div className={`card mx-4 my-4 ${styles.profiles}`}>
+            <div className={`card-content ${styles.profiles}`}>
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-3">Dan Whittock</p>
-                  <p className="subtitle is-4">Developer</p>
+                  <p className="title is-3 has-text-white">Dan Whittock</p>
+                  <p className="subtitle is-4 has-text-white">Developer</p>
                   <p>Developed Jobs for the site, both frontend and backend, making sure posts render immediately without waiting for the backend.
                   </p>
                 </div>
@@ -67,7 +69,7 @@ function About() {
       <div className="hero-body">
         <div className="container">
           <div className="columns">
-            <div className="column is-half">
+            <div className={`column is-half ${styles.profiles}`}>
               <figure className="image">
                 <img src="https://potomac.edu/wp-content/uploads/2020/10/list-of-jobs-that-use-coding-e1603873567655.jpg" alt={"about_image"} />
               </figure>
@@ -84,7 +86,7 @@ function About() {
           </div>
         </div>
       </div>
-    </section>
+    </section >
   )
 }
 

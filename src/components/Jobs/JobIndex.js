@@ -5,7 +5,7 @@ import Job from "./Job"
 import styles from "./JobIndex.module.css"
 
 export default function JobIndex() {
-  
+
   const [jobs, setJobs] = useState([])
   const [search, setSearch] = useState("")
 
@@ -35,11 +35,11 @@ export default function JobIndex() {
   }
 
   return (
-    <section className={}>
+    <section>
       <input className="container"
-        value={search} 
+        value={search}
         placeholder={"SEARCH JOBS"}
-        onChange={(e) => setSearch(e.target.value)} 
+        onChange={(e) => setSearch(e.target.value)}
       />
 
       <div>
@@ -52,7 +52,7 @@ export default function JobIndex() {
           : <p>Loading Jobs</p>
         }
       </div>
-    </section> 
+    </section>
   )
 }
 

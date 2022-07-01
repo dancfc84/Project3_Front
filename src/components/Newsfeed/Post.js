@@ -20,6 +20,8 @@ export default function PostElement(singlePostDataProp) {
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
   }
 
+  console.log(singlePostDataProp.user);
+
   //handles post deleting
   async function deletePostHandle() {
     try {
@@ -103,7 +105,7 @@ export default function PostElement(singlePostDataProp) {
       <div className="container">
         <div className="">
           <p className="title is-4">
-            {singlePostDataProp.user.username ? singlePostDataProp.user.username : "Unknown user posted"}:
+            {singlePostDataProp.user ? singlePostDataProp.user.username : "Unknown user posted"}:
           </p>
           <small className="">
             posted at {singlePostDataProp.createdAt.replace('T', ' - ').slice(0, - 8)}</small>

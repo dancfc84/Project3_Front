@@ -12,7 +12,12 @@ export default function Home() {
     username: "",
     password: "",
     email: "",
-    userType: "",
+  })
+
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    email: "",
   })
 
   const [showRegisterModal, setShowRegisterModal] = useState(false)
@@ -47,7 +52,7 @@ export default function Home() {
       console.log(data.token)
       navigate('/newsfeed')
     } catch (err) {
-      console.log(err.response.data)
+      setErrors(err.response.data.errors)
     }
   }
 
@@ -64,8 +69,9 @@ export default function Home() {
                 name={'email'}
                 value={formData.email}
                 onChange={handleChange}
-                placeholder="e.g. higgs-boson@cern.ch"
+                placeholder="Email"
               />
+              {errors.email && <small className="has-text-danger">{errors.email}</small> }
             </div>
           </div>
 
@@ -78,8 +84,9 @@ export default function Home() {
                 name={'password'}
                 value={formData.password}
                 onChange={handleChange}
-                placeholder="Make it long, not complex. 40 bits of entropy and above."
+                placeholder="Password"
               />
+              {errors.password && <small className="has-text-danger">{errors.password}</small> }
             </div>
           </div>
           <div className="field container">

@@ -1,0 +1,41 @@
+.form {
+  width: 50%;
+  height: auto;
+  background: #003566;
+  border-radius: 8px;
+  box-shadow: 0 0 40px -10px #003566;
+  margin: calc(50vh - 400px) auto;
+  padding: 20px 30px;
+}
+
+.label_styling {
+  color: #FFD60A;
+  font-size: 1.5rem;
+  padding: 10px;
+}
+
+.form_button{
+  margin-top:5px;
+  appearance: none;
+  background-color: #FFD60A;
+  border: 1px solid rgba(27, 31, 35, .15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, .1) 0 1px 0;
+  box-sizing: border-box;
+  color: #003566;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system,system-ui,"Segoe UI",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}

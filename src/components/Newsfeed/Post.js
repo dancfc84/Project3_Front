@@ -76,7 +76,7 @@ export default function PostElement(singlePostDataProp) {
 
   //submits query to backed for like/upvote
   async function handleUpvote() {
-    
+
     try {
       const { data } = await fetch(`/api/posts/${singlePostDataProp._id}/vote`,
         {
@@ -163,6 +163,31 @@ export default function PostElement(singlePostDataProp) {
             : 'Comment'
           }
         </button>
+        {getLoggedInUserId() && <article className="media">
+          <div className="media-content">
+            <div className="field">
+              <p className="control">
+                <input
+                  className="input is-rounded my-2"
+                  type="text"
+                  placeholder="Make a comment.."
+                  onChange={(event) => setCommentContent(event.target.value)}
+                />
+
+              </p>
+            </div>
+            <div className="field">
+              <p className="control">
+                <button
+                  className="button is-info"
+                  onClick={handleComment}
+                >
+                  Submit
+                </button>
+              </p>
+            </div>
+          </div>
+        </article>}
 
         <div className={hiddenCommentsNumber.includes(singlePostDataProp._id) ? null : `is-hidden`}>
           {newComment ? newComment.map(comment => {
@@ -186,31 +211,9 @@ export default function PostElement(singlePostDataProp) {
           }) : <p>Loading comments </p>}
           <br />
 
-          {getLoggedInUserId() && <article className="media">
-            <div className="media-content">
-              <div className="field">
-                <p className="control">
-                  <textarea
-                    className="textarea"
-                    placeholder="Make a comment.."
-                    onChange={(event) => setCommentContent(event.target.value)}
-                  />
 
-                </p>
-              </div>
-              <div className="field">
-                <p className="control">
-                  <button
-                    className="button is-info"
-                    onClick={handleComment}
-                  >
-                    Submit
-                  </button>
-                </p>
-              </div>
-            </div>
-          </article>}
         </div>
+
       </div>
     </div>
   </div >

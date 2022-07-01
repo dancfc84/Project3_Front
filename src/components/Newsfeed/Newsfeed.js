@@ -17,13 +17,11 @@ export default function Newsfeed() {
     tags: [],
   })
 
-  console.log(selectedTag);
-
   //handles search
-  //handle posts filter
+  // handle posts filter
   function postsFilter() {
     return allUserPosts.filter((post) => {
-      return (selectedTag && post.postContent.toLowerCase().includes(search.toLowerCase())
+      return post.postContent.toLowerCase().includes(search.toLowerCase()
       )
     })
   }
@@ -43,7 +41,6 @@ export default function Newsfeed() {
   //handles submitting new post
   async function handleSubmit(event) {
     event.preventDefault()
-
     const newFormData = {
       ...formData,
       tags: formData.tags.map(tag => tag.value),
@@ -68,7 +65,6 @@ export default function Newsfeed() {
       {
         headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
       })
-
     setAllUserPosts(data)
   }
   useEffect(() => {
@@ -152,7 +148,10 @@ export default function Newsfeed() {
             {postsFilter().map((post, index) => {
               return <div key={index} className="">
                 <PostElement
-                  {...post} getPostData={getPostData} />
+                  {...post}
+                  getPostData={getPostData}
+                  allUserPosts={allUserPosts} 
+                  setAllUserPosts={setAllUserPosts} />
               </div>
             }
             )}
@@ -163,36 +162,6 @@ export default function Newsfeed() {
     </section >
 
 
-
-
-
   )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

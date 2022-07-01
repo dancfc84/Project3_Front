@@ -13,7 +13,7 @@ const Job = (props) => {
           <div className={`card-header-title ${styles.card_header_text}`}>{props.jobInfo.jobTitle}</div>
         </div>
         <div className={`card-image ${styles.card_image_size}`}>
-          <figure >
+          <figure className={styles.card_image_size} >
             <img src={props.jobInfo.companyImage} alt={props.name} />  
           </figure>
         </div>

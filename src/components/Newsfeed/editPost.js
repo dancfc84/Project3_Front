@@ -18,8 +18,6 @@ export default function EditPost() {
     tags: [],
   })
 
-
-  //prepopulates the state of the form - faster would be via props without API
   useEffect(() => {
     console.log(tags[0].value)
     fetch(`${baseUrl}/posts/${postID}`)
@@ -29,8 +27,21 @@ export default function EditPost() {
           postContent: `${data.postContent}`,
           tags: tags.filter((word) => data.tags.includes(word.value)),
         })
+    const getPostData = async () => {
+      const { data } = await axios.get(`${baseUrl}/posts/posts/${postID}`, {
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
       })
-  }, [postID])
+      setformDataInput({
+        postContent: `${data.postContent}`,
+        tags: tags.filter((word) => data.tags.includes(word.value)),
+      })
+    }
+
+    getPostData()
+  }, [])
+
 
   //updates the post on button click via API
   async function handlePostUpdate(e) {
@@ -42,8 +53,12 @@ export default function EditPost() {
     try {
       e.preventDefault(formDataInput)
       console.log(newFormData);
-      const { data } = await axios.put(`/api/posts/${postID}`,
-        newFormData)
+
+      const { data } = await axios.put(`/api/posts/${postID}`, newFormData, {
+        headers: {
+          "authorization": `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       console.log(data);
       navigate('/newsfeed')
 

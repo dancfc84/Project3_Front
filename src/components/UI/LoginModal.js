@@ -7,39 +7,46 @@ import { useNavigate } from 'react-router-dom'
 
 const LoginModal = (props) => {
   const navigate = useNavigate()
+
   const [modalForm, setModalForm] = useState({
     username: "",
     password: "",
     passwordConfirmation: "",
     email: "",
-    userType: "",
   });
+
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    passwordConfirmation: "",
+    email: "",
+  })
 
   async function handleRegistrationConfirm(e) {
     e.preventDefault();
     try {
       const { data } = await axios.post("/api/register", modalForm);
       console.log(data);
-      //props.handleLogin(e) //login the user once user has registered
-      localStorage.setItem('token', data.token)
-      localStorage.setItem("loggedIn", true)
-      console.log(data.token)
       navigate('/newsfeed')
     } catch (err) {
-      // ! Print out the response from the backend if there's an error
-      console.log(err.response.data);
+      //This error data is the data sent from the api from the middleware
+      setErrors(err.response.data.errors)
     }
   }
+
+  console.log(errors);
 
   function handleModalChange(e) {
     const { name, value } = e.target;
     setModalForm({
       ...modalForm,
       [name]: value,
-    });
+    }),
+    setErrors({
+      ...errors,
+      [name]: '',
+    })
   }
-
-  console.log(modalForm);
 
   return (
     <Modal hideModalHandler={props.hideModalHandler}>
@@ -56,8 +63,9 @@ const LoginModal = (props) => {
                 name={"email"}
                 value={modalForm.email}
                 onChange={handleModalChange}
-                placeholder="e.g. higgs-boson@cern.ch"
+                placeholder="Email"
               />
+              {errors.email && <small className="has-text-danger">{errors.email}</small> }
             </div>
           </div>
 
@@ -70,7 +78,7 @@ const LoginModal = (props) => {
                 name={"password"}
                 value={modalForm.password}
                 onChange={handleModalChange}
-                placeholder="Mamorable, not complex. 40 bits of entropy."
+                placeholder="Password"
               />{" "}
               <small>
                 Hint:{" "}
@@ -79,6 +87,7 @@ const LoginModal = (props) => {
                 </a>
               </small>
             </div>
+            {errors.password && <small className="has-text-danger">{errors.password}</small> }
           </div>
 
           <div className="field column">
@@ -90,15 +99,10 @@ const LoginModal = (props) => {
                 name={"passwordConfirmation"}
                 value={modalForm.passwordConfirmation}
                 onChange={handleModalChange}
-                placeholder="Mamorable, not complex. 40 bits of entropy."
+                placeholder="Password"
               />{" "}
-              <small>
-                Hint:{" "}
-                <a href="https://xkcd.com/936/">
-                  info on passwords and entropy
-                </a>
-              </small>
             </div>
+            {errors.passwordConfirmation && <small className="has-text-danger">{errors.passwordConfirmation}</small> }
           </div>
 
           <div className="field column">
@@ -110,8 +114,9 @@ const LoginModal = (props) => {
                 name={"username"}
                 value={modalForm.username}
                 onChange={handleModalChange}
-                placeholder="Enter a Display Name / Username you like. "
+                placeholder="Enter a Display Name / Username"
               />
+              {errors.username && <small className="has-text-danger">{errors.username}</small> }
             </div>
           </div>
           <div className="field container">

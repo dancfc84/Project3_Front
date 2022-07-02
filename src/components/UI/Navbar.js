@@ -49,6 +49,9 @@ export default function Navbar() {
               {isLoggedIn && <NavLink to="/profile" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
 								Profile
               </NavLink>}
+              {isLoggedIn && <NavLink to="/community" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+								Community
+              </NavLink>}
               {isLoggedIn && <NavLink to="/" onClick={NavbarChange} className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>Logout</NavLink>}
             </div>
           </div>

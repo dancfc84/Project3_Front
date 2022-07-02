@@ -18,7 +18,7 @@ export default function Contact() {
       }, (error) => {
         console.log(error.text);
       });
-    
+
     setShowContactModal(true)
 
   };
@@ -26,7 +26,7 @@ export default function Contact() {
 
   return (
     <section>
-      <div className="section">
+      <div className="section mt-5">
         <div className={styles.form_container}>
           <form className={styles.form} ref={form} onSubmit={sendEmail}>
             <div className={styles.form_fields} >

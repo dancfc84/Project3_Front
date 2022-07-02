@@ -2,6 +2,7 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLoggedInUserId } from '../lib/auth.js'
+import styles from "../styles/Profile.module.css"
 
 // import { Link } from "react-router-dom"
 
@@ -19,7 +20,7 @@ export default function Profile() {
   })
 
   const navigate = useNavigate()
-  
+
   // const [profile, setProfile] = React.useState(undefined)
 
   const getData = async () => {
@@ -76,8 +77,8 @@ export default function Profile() {
     <section className="section">
       <div className="columns is-multiline is-mobile">
         <div className="column is-half-tablet is-half-mobile">
-          <div className="card mx-4 my-4">
-            <div className="card-content">
+          <div className={`card mx-4 my-4 ${styles.profiles}`}>
+            <div className={`card-content ${styles.profiles}`}>
               <div className="media">
                 <div className="media-content">
                   <h4 className="title is-3">{formData && formData.firstName + " " + formData.lastName}</h4>
@@ -96,7 +97,7 @@ export default function Profile() {
             </div>
           </div>
         </div>
-        <div className="column is-half-tablet is-half-mobile">
+        <div className="column is-half-tablet is-half-mobile mt-4">
           <form onSubmit={handleSubmit}>
             {/* // ! Me Being Extremely Fancy 🤪: */}
             {['profilePicture', 'bioUser', 'firstName', 'lastName', 'position', 'companyRepresented', 'yearsExp' ].map(field => {
@@ -115,10 +116,10 @@ export default function Profile() {
                 </div>
               </div>
             })}
-            <button className="button mt-5 is-success">Save</button>
+            <button className={`button mt-5 ${styles.saveButton}`}>Save</button>
           </form>
-          <button onClick={handleCancel} className="button mt-5 is-warning is-light is-outlined">
-          Cancel Edit </button>
+          <button onClick={handleCancel} className={`button mt-5 ${styles.cancelButton}`}>
+          Cancel</button>
         </div>
       </div>
     </section>

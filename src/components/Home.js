@@ -1,8 +1,8 @@
-import splashImage from '../assets/malwareImage.jpg'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import LoginModal from './UI/LoginModal'
+import styles from "../styles/Home.module.css"
 
 export default function Home() {
   const navigate = useNavigate()
@@ -12,7 +12,12 @@ export default function Home() {
     username: "",
     password: "",
     email: "",
-    userType: "",
+  })
+
+  const [errors, setErrors] = useState({
+    username: "",
+    password: "",
+    email: "",
   })
 
   const [showRegisterModal, setShowRegisterModal] = useState(false)
@@ -47,64 +52,81 @@ export default function Home() {
       console.log(data.token)
       navigate('/newsfeed')
     } catch (err) {
-      console.log(err.response.data)
+      setErrors(err.response.data.errors)
     }
   }
 
   return (
     <section className="">
-      <div className="container column box is-half">
-        <form onSubmit={handleLogin}>
-          <div className="field column">
-            <label className="label">Email</label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name={'email'}
-                value={formData.email}
-                onChange={handleChange}
-                placeholder="e.g. higgs-boson@cern.ch"
-              />
-            </div>
-          </div>
+      <p className={`title is-1 has-text-centered has-text-black mt-4 ${styles.titleMessage}`}>
+				Welcome to your hacker community
+      </p>
+      <div className={`columns is-multiline is-mobile ${styles.mainDiv}`}>
+        <div className="column is-half-tablet is-half-mobile mt-5">
+          <div className={`card mx-4 my-4 ${styles.login}`}>
+            <div className={`card-content ${styles.login}`}>
+              <div className="media">
+                <div className="media-content">
+                  <form onSubmit={handleLogin} className= "media-content">
+                    <div className="field column ">
+                      <label className={`label ${styles.labels}`}>Email</label>
+                      <div className="control">
+                        <input
+                          className="input"
+                          type="text"
+                          name={'email'}
+                          value={formData.email}
+                          onChange={handleChange}
+                          placeholder="Email"
+                        />
+                        {errors.email && <small className="has-text-danger">{errors.email}</small> }
+                      </div>
+                    </div>
 
-          <div className="field column">
-            <label className="label">Password</label>
-            <div className="control">
-              <input
-                className="input "
-                type="password"
-                name={'password'}
-                value={formData.password}
-                onChange={handleChange}
-                placeholder="Make it long, not complex. 40 bits of entropy and above."
-              />
+                    <div className="field column">
+                      <label className={`label ${styles.labels}`}>Password</label>
+                      <div className="control">
+                        <input
+                          className="input "
+                          type="password"
+                          name={'password'}
+                          value={formData.password}
+                          onChange={handleChange}
+                          placeholder="Password"
+                        />
+                        {errors.password && <small className="has-text-danger">{errors.password}</small> }
+                      </div>
+                    </div>
+                    <div className="field container pl-3 pb-2">
+                      <div className="control">
+                        <button type='submit' className={`button ${styles.loginButton}`}>
+													Log In
+                        </button>
+                      </div>
+                    </div>
+                    <div className="field container pl-3">
+                      <div className="control">
+                        <button type='submit' className={"button"} onClick={showModalHandler}>
+													Create New Account
+                        </button>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
             </div>
           </div>
-          <div className="field container">
-            <div className="control">
-              <button type='submit' className={"button"}>
-                Log In
-              </button>
-            </div>
-          </div>
-          <div className="field container">
-            <div className="control">
-              <button type='submit' className={"button"} onClick={showModalHandler}>
-                Create New Account
-              </button>
-            </div>
-          </div>
-        </form>
-      </div >
+        </div >
 
-      <div className="columns">
-        <div className="column is-one-thirds" />
-        <div className="column is-one-thirds">
-          <img className="card image" src={splashImage} />
+        <div className="column is-half-tablet is-half-mobile mt-5">
+          <div className="card-image">
+            <figure className="image">
+              <img className='is-rounded' src="https://static-exp2.licdn.com/aero-v1/sc/h/dxf91zhqd2z6b0bwg85ktm5s4" />
+            </figure>
+          </div>
         </div>
-        <div className="column is-one-thirds" />
+
+
       </div>
 
       {

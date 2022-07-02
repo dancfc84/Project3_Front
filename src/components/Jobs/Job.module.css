@@ -7,12 +7,14 @@
 .card_dimensions {
   height: 500px;
   width: 350px;
+  text-align: center;
  
 }
 
 .card_image_size img {
   margin-top: 10px;
-  width: 100%;
+  margin-right: 10px;
+  width: 90%;
   height: 180px;
   object-fit: contain;
 }
@@ -40,6 +42,9 @@
   font-size: 1.5rem;
   font-family: 'Quicksand', sans-serif;
   text-transform: uppercase;
-  justify-content: center;
-  padding: 15 px;
+  text-align: center;
+}
+
+.card_header_container {
+  text-align: center;
 }

@@ -61,15 +61,17 @@ export default function Home() {
   return (
     <section className="">
       <p className={`title is-1 has-text-centered has-text-black mt-4 ${styles.titleMessage}`}>
-				Welcome to your hacker community
+        Hacker Trees 
       </p>
+      <p className="title is-4 has-text-centered has-text-black mt-4">Build tech trees, not moats.</p><br />
+      <p className="title is-3 has-text-centered has-text-black mt-4">{"Chat, hack and get access to private job opennings."}</p>
       <div className={`columns is-multiline is-mobile ${styles.mainDiv}`}>
         <div className="column is-half-tablet is-half-mobile mt-5">
           <div className={`card mx-4 my-4 ${styles.login}`}>
             <div className={`card-content ${styles.login}`}>
               <div className="media">
                 <div className="media-content">
-                  <form onSubmit={handleLogin} className= "media-content">
+                  <form onSubmit={handleLogin} className="media-content">
                     <div className="field column ">
                       <label className={`label ${styles.labels}`}>Email</label>
                       <div className="control">
@@ -81,7 +83,7 @@ export default function Home() {
                           onChange={handleChange}
                           placeholder="Email"
                         />
-                        {errors.email && <small className="has-text-danger">{errors.email}</small> }
+                        {errors.email && <small className="has-text-danger">{errors.email}</small>}
                       </div>
                     </div>
 
@@ -96,20 +98,20 @@ export default function Home() {
                           onChange={handleChange}
                           placeholder="Password"
                         />
-                        {errors.password && <small className="has-text-danger">{errors.password}</small> }
+                        {errors.password && <small className="has-text-danger">{errors.password}</small>}
                       </div>
                     </div>
                     <div className="field container pl-3 pb-2">
                       <div className="control">
                         <button type='submit' className={`button ${styles.loginButton}`}>
-													Log In
+                          Log In
                         </button>
                       </div>
                     </div>
                     <div className="field container pl-3">
                       <div className="control">
                         <button type='submit' className={"button"} onClick={showModalHandler}>
-													Create New Account
+                          Create New Account
                         </button>
                       </div>
                     </div>

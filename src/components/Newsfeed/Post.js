@@ -113,11 +113,13 @@ export default function PostElement(singlePostDataProp) {
               </div>
             })}
           </div>
-          <div className="is-grouped">
-            <p className="">{singlePostDataProp.postContent}</p>
-
-          </div>
-
+          {singlePostDataProp.postContent &&
+            <div className="is-grouped">
+              <hr />
+              <p className="">{singlePostDataProp.postContent}</p>
+              <hr />
+            </div>
+          }
         </div>
 
         {singlePostDataProp.downvotedBy.map((tag, index) => {
@@ -158,9 +160,11 @@ export default function PostElement(singlePostDataProp) {
           }
         </button>
         {getLoggedInUserId() && <article className="media">
+
           <form className="media-content" onClick={handleComment}>
             <div className="field">
               <p className="control">
+
                 <input
                   className="input is-rounded my-2"
                   type="text"
@@ -173,7 +177,7 @@ export default function PostElement(singlePostDataProp) {
             <div className="field">
               <p className="control">
                 <button
-                  className="button is-info"
+                  className="button is-info button is-rounded is-light mx-3"
                   type="submit"
                 >
                   Submit

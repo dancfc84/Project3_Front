@@ -4,7 +4,6 @@ import PostElement from './Post'
 import axios from 'axios'
 import Select from 'react-select'
 import tags from '../../data/tags'
-import { getLoggedInUserId } from '../../lib/auth'
 // import { set } from 'lodash'
 
 
@@ -61,7 +60,6 @@ export default function Newsfeed() {
 
   //gets data about posts from API db
   const getPostData = async () => {
-    console.log(localStorage.getItem("token"));
     const { data } = await axios.get('/api/posts/',
       {
         headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
@@ -80,8 +78,9 @@ export default function Newsfeed() {
         <h1 className="title is-1">
           Hacketree Newsbites
         </h1>
-        <h2><small>Welcome back, {getLoggedInUserId}</small></h2>
-
+        {localStorage.getItem("username") &&
+          <h2><small>Welcome back, {localStorage.getItem("username")}.</small></h2>
+        }
         <div className="columns ">
           <div className="column ">
             <div className="section">

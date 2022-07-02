@@ -19,14 +19,7 @@ export default function EditPost() {
   })
 
   useEffect(() => {
-    console.log(tags[0].value)
-    fetch(`${baseUrl}/posts/${postID}`)
-      .then(resp => resp.json())
-      .then(data => {
-        setformDataInput({
-          postContent: `${data.postContent}`,
-          tags: tags.filter((word) => data.tags.includes(word.value)),
-        })
+
     const getPostData = async () => {
       const { data } = await axios.get(`${baseUrl}/posts/posts/${postID}`, {
         headers: {
@@ -54,7 +47,7 @@ export default function EditPost() {
       e.preventDefault(formDataInput)
       console.log(newFormData);
 
-      const { data } = await axios.put(`/api/posts/${postID}`, newFormData, {
+      const { data } = await axios.put(`${baseUrl}/posts/${postID}`, newFormData, {
         headers: {
           "authorization": `Bearer ${localStorage.getItem("token")}`,
         },

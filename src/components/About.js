@@ -4,7 +4,7 @@ function About() {
   return (
     <section className={`hero is-fullheight-with-navbar is-white ${styles.aboutpage}`}>
 
-      <p className="title is-1 has-text-centered has-text-black mt-4">
+      <p className={`title is-1 has-text-centered has-text-black mt-4 ${styles.titleMessage}`}>
 				Our Team
       </p>
       <div className="columns is-multiline is-mobile">

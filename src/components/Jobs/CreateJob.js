@@ -50,7 +50,7 @@ export default function CreateJob () {
   function handleChange (e) {
     const { name, value } = e.target
     setFormData( {
-      ...formData, 
+      ...formData,
       [name]: value,
     }),
     setErrors({
@@ -59,8 +59,8 @@ export default function CreateJob () {
     })
   }
 
-  
-  return <div className="section">
+
+  return <div className="section mt-5">
     <div className={styles.form}>
       <form onSubmit={handleSubmit}>
 
@@ -70,7 +70,7 @@ export default function CreateJob () {
             <input
               className="input"
               type="text"
-              name={'jobTitle'} 
+              name={'jobTitle'}
               value={formData.jobTitle}
               onChange={handleChange}
             />

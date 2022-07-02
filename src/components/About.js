@@ -15,7 +15,9 @@ function About() {
                 <div className="media-content">
                   <h4 className="title is-3 has-text-white">Dimitar Vidolov</h4>
                   <p className="subtitle is-4 has-text-white">Developer</p>
-                  <p>Developed Posts and Comments for the site, both frontend and backend, making sure posts render immediately without waiting for the backend.</p>
+                  <p>Developed Newsfeed page, posts and comments, both frontend and backend;
+                    New post, comments, edit, delete, filtering etc. for the page. 
+                  </p>
                 </div>
               </div>
             </div>

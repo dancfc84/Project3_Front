@@ -22,6 +22,7 @@
 .contact_button{
   background-color: #FFC300;
   margin-top: 20px;
+  color: #003566;
 }
 
 input {
@@ -35,6 +36,7 @@ input {
   font-family: "Montserrat", sans-serif;
   transition: all 0.3s;
   border-bottom: 2px solid #bebed2;
+  color: #FFC300;
 }
 
 input:focus {
@@ -52,6 +54,7 @@ textarea {
   font-family: "Montserrat", sans-serif;
   transition: all 0.3s;
   border-bottom: 2px solid #bebed2;
+  color: #FFC300;
 }
 
 textarea:focus {

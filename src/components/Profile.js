@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import { getLoggedInUserId } from '../lib/auth.js'
 import styles from "../styles/Profile.module.css"
+import baseUrl from "../config"
 
 // import { Link } from "react-router-dom"
 
@@ -25,7 +26,7 @@ export default function Profile() {
 
   const getData = async () => {
     const token = localStorage.getItem('token')
-    const { data } = await axios.get(`/api/profile/${getLoggedInUserId()}`, {
+    const { data } = await axios.get(`${baseUrl}/profile/${getLoggedInUserId()}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     setFormData(data)
@@ -57,7 +58,7 @@ export default function Profile() {
 
     console.log(formData)
     try {
-      const { data } = await axios.put(`/api/profile/${getLoggedInUserId()}`, formData, {
+      const { data } = await axios.put(`${baseUrl}/profile/${getLoggedInUserId()}`, formData, {
         headers: { Authorization: `Bearer ${token}` },
       })
       console.log(data._id)

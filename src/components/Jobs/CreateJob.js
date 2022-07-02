@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
 import styles from "./CreateJob.module.css"
+import baseUrl from "../../config"
 
 export default function CreateJob () {
 
@@ -36,7 +37,7 @@ export default function CreateJob () {
   async function handleSubmit(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.post("/api/jobs/create", formData, {
+      const { data } = await axios.post(`${baseUrl}/jobs/create`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       console.log(data);

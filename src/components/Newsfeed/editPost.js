@@ -5,6 +5,7 @@ import Select from 'react-select'
 import postTags from '../../data/tags'
 import { useNavigate } from 'react-router-dom'
 import tags from '../../data/tags'
+import baseUrl from "../../config"
 
 
 
@@ -21,7 +22,7 @@ export default function EditPost() {
   //prepopulates the state of the form - faster would be via props without API
   useEffect(() => {
     console.log(tags[0].value)
-    fetch(`/api/posts/${postID}`)
+    fetch(`${baseUrl}/posts/${postID}`)
       .then(resp => resp.json())
       .then(data => {
         setformDataInput({

@@ -2,6 +2,7 @@ import React from 'react'
 import axios from 'axios'
 // import { Link } from 'react-router-dom'
 import styles from "../styles/UserView.module.css"
+import baseUrl from "../config"
 
 export default function UserView() {
 
@@ -9,7 +10,7 @@ export default function UserView() {
 
   const getData = async () => {
     const token = localStorage.getItem('token')
-    const { data } = await axios.get(`/api/profile`, {
+    const { data } = await axios.get(`${baseUrl}/profile`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     console.log(data)

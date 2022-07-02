@@ -5,6 +5,7 @@ import axios from "axios";
 import { isCreator, getLoggedInUserId } from "../../lib/auth.js";
 import ApplyModal from "./ApplyModal.js";
 import styles from "./ShowJob.module.css"
+import baseUrl from "../../config"
 
 export default function ShowJob() {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ export default function ShowJob() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get(`/api/jobs/${jobId}`, {
+        const { data } = await axios.get(`${baseUrl}/jobs/${jobId}`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         }
         )
@@ -63,7 +64,7 @@ export default function ShowJob() {
   console.log(job);
 
   async function handleDelete() {
-    const deleteJob = await axios.delete(`/api/jobs/${jobId}`, {
+    const deleteJob = await axios.delete(`${baseUrl}/jobs/${jobId}`, {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }
     );
@@ -75,7 +76,7 @@ export default function ShowJob() {
   async function handleCommentPost(e) {
     e.preventDefault();
     const addComment = await axios.post(
-      `/api/jobs/${jobId}/comment`,
+      `${baseUrl}/jobs/${jobId}/comment`,
       formDataInput,
       {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -90,7 +91,7 @@ export default function ShowJob() {
 
   async function handleCommentDelete (commentId) {
     console.log(commentId);
-    const deleteJob = await axios.delete(`/api/jobs/${jobId}/${commentId}`,  {
+    const deleteJob = await axios.delete(`${baseUrl}/jobs/${jobId}/${commentId}`,  {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }
     )

@@ -5,6 +5,8 @@ import _ from 'lodash'
 import axios from "axios"
 import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 
+import baseUrl from "../../config"
+
 
 export default function PostElement(singlePostDataProp) {
   const [commentContent, setCommentContent] = React.useState('')
@@ -23,7 +25,7 @@ export default function PostElement(singlePostDataProp) {
   //handles post deleting
   async function deletePostHandle() {
     try {
-      const deletePost = await axios.delete(`/api/posts/${singlePostDataProp._id}`,
+      const deletePost = await axios.delete(`${baseUrl}/posts/${singlePostDataProp._id}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       )
       if (deletePost.status === 204) {

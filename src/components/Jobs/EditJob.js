@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import axios from "axios"
 import { useParams, useNavigate } from "react-router-dom"
 import styles from "./EditJob.module.css"
+import baseUrl from "../../config"
 
 export default function CreateJob () {
 
@@ -39,7 +40,7 @@ export default function CreateJob () {
   const { jobId } = useParams()
 
   useEffect(() => {
-    fetch(`/api/jobs/${jobId}`)
+    fetch(`${baseUrl}/jobs/${jobId}`)
       .then(resp => resp.json())
       .then(data => setFormData(data))
   }, [jobId])
@@ -48,7 +49,7 @@ export default function CreateJob () {
   async function handleSubmit(e) {
     try {
       e.preventDefault()
-      const { data } = await axios.put(`/api/jobs/edit/${jobId}`, formData, {
+      const { data } = await axios.put(`${baseUrl}/jobs/edit/${jobId}`, formData, {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       })
       console.log(data);

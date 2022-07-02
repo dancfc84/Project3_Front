@@ -5,6 +5,7 @@ import axios from 'axios'
 import Select from 'react-select'
 import tags from '../../data/tags'
 // import { set } from 'lodash'
+import baseUrl from "../../config"
 
 
 export default function Newsfeed() {
@@ -46,7 +47,7 @@ export default function Newsfeed() {
       tags: formData.tags.map(tag => tag.value),
     }
     try {
-      const { data } = await axios.post('/api/posts/', newFormData, {
+      const { data } = await axios.post(`${baseUrl}/posts/`, newFormData, {
         headers: {
           "authorization": `Bearer ${localStorage.getItem("token")}`,
         },
@@ -60,7 +61,7 @@ export default function Newsfeed() {
 
   //gets data about posts from API db
   const getPostData = async () => {
-    const { data } = await axios.get('/api/posts/',
+    const { data } = await axios.get(`${baseUrl}/posts/`,
       {
         headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
       })

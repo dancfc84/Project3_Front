@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import LoginModal from './UI/LoginModal'
 import styles from "../styles/Home.module.css"
+import baseUrl from "../config"
 
 export default function Home() {
   const navigate = useNavigate()
@@ -46,7 +47,7 @@ export default function Home() {
   async function handleLogin(e) {
     e.preventDefault()
     try {
-      const { data } = await axios.post('/api/login', formData)
+      const { data } = await axios.post(`${baseUrl}/login`, formData)
       localStorage.setItem('token', data.token)
       localStorage.setItem("loggedIn", true)
       localStorage.setItem("username", data.user.username)

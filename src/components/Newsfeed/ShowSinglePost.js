@@ -3,6 +3,8 @@ import { useNavigate, useParams } from "react-router-dom"
 import { isCreator, getLoggedInUserId } from '../lib/auth'
 import axios from 'axios'
 
+import baseUrl from '../../config.js'
+
 export default function ShowSinglePost() {
   const [postData, setPostData] = React.useState(undefined)
   const [commentContent, setCommentContent] = useState('')
@@ -10,7 +12,7 @@ export default function ShowSinglePost() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    fetch(`api/posts/${postID}`)
+    fetch(`${baseUrl}/posts/${postID}`)
       .then(respo => respo.json())
       .then(data => setPostData(data))
   }, [postID])
@@ -19,7 +21,7 @@ export default function ShowSinglePost() {
   async function handleComment() {
     try {
       const { data } = await axios.post(
-        `/api/post/${postData._id}/comment`,
+        `${baseUrl}/post/${postData._id}/comment`,
         { content: commentContent },
         {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
@@ -34,7 +36,7 @@ export default function ShowSinglePost() {
 
   async function handleDelete() {
     try {
-      await axios.delete(`api/posts/${postData._id}`, {
+      await axios.delete(`${baseUrl}/posts/${postData._id}`, {
         headers: { Authorization: `Bearer ${localStorage.getItem(`token`)} ` },
       })
       navigate(`/newsfeed`)

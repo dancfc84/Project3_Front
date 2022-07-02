@@ -3,6 +3,7 @@ import axios from 'axios'
 import { getLoggedInUserId } from "../../lib/auth.js";
 // import { Link } from "react-router-dom"
 import styles from "./JobComment.module.css"
+import baseUrl from "../../config.js"
 
 export default function CommentElement(props) {
   const currUser = getLoggedInUserId();
@@ -31,7 +32,7 @@ export default function CommentElement(props) {
 
   
   async function handleLike () {
-    const like = await axios.put(`/api/jobs/${props.jobId}/${commentId}/likes`, { currentUser: currUser, likes: likes + 1 })
+    const like = await axios.put(`${baseUrl}/jobs/${props.jobId}/${commentId}/likes`, { currentUser: currUser, likes: likes + 1 })
     console.log(like);
     setLikes(like.data[0].likes);
     setIsHeartRed(true)

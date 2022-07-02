@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Modal from "./Modal.js";
 import axios from "axios";
 import { useNavigate } from 'react-router-dom'
+import baseUrl from "../../config"
 
 
 const LoginModal = (props) => {
@@ -25,7 +26,7 @@ const LoginModal = (props) => {
   async function handleRegistrationConfirm(e) {
     e.preventDefault();
     try {
-      const { data } = await axios.post("/api/register", modalForm);
+      const { data } = await axios.post(`${baseUrl}/register`, modalForm);
       console.log(data);
       navigate('/newsfeed')
     } catch (err) {

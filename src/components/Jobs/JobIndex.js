@@ -3,6 +3,7 @@ import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import Job from "./Job"
 import styles from "./JobIndex.module.css"
+import baseUrl from "../../config"
 
 export default function JobIndex() {
 
@@ -13,7 +14,7 @@ export default function JobIndex() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const { data } = await axios.get("/api/jobs", {
+        const { data } = await axios.get(`${baseUrl}/jobs`, {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         })
         setJobs(data)

@@ -14,6 +14,7 @@ import Contact from './components/Contact'
 import EditPost from './components/Newsfeed/EditPost'
 import Profile from './components/Profile'
 import styles from "./styles/Footer.module.css"
+import UserView from './components/UserView'
 
 
 function App() {
@@ -32,6 +33,7 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/community" element={<UserView />} />
         </Routes>
         <footer className={`footer column is-narrow ${styles.footerArea}`}>
           <div className="box content has-text-centered">

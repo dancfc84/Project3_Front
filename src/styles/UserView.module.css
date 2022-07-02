@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Koulen&family=Quicksand:wght@500&display=swap');
+
+.profiles div {
+  font-family: 'Quicksand', sans-serif;
+	background-color: #003566;
+	color: white;
+}
+
+
+.profiles p {
+	color: white;
+}
+
+.profiles h4 {
+	color: white;
+	padding-bottom: 10px;
+}
+

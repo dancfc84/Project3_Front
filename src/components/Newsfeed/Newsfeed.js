@@ -4,7 +4,6 @@ import PostElement from './Post'
 import axios from 'axios'
 import Select from 'react-select'
 import tags from '../../data/tags'
-import { getLoggedInUserId } from '../../lib/auth'
 // import { set } from 'lodash'
 
 
@@ -61,7 +60,6 @@ export default function Newsfeed() {
 
   //gets data about posts from API db
   const getPostData = async () => {
-    console.log(localStorage.getItem("token"));
     const { data } = await axios.get('/api/posts/',
       {
         headers: { "authorization": `Bearer ${localStorage.getItem("token")}` },
@@ -80,15 +78,16 @@ export default function Newsfeed() {
         <h1 className="title is-1">
           Hacketree Newsbites
         </h1>
-        <h2><small>Welcome back, {getLoggedInUserId}</small></h2>
-
+        {localStorage.getItem("username") &&
+          <h2><small>Welcome back, {localStorage.getItem("username")}.</small></h2>
+        }
         <div className="columns ">
           <div className="column ">
             <div className="section">
               <div className="container box">
                 <form onSubmit={handleSubmit}>
                   <div className="field ">
-                    <label className="label">Post</label>
+                    <label className="label">{`What's`} on your mind?</label>
                     <div className="control">
                       <textarea
                         className="input textarea is-primary"
@@ -96,7 +95,7 @@ export default function Newsfeed() {
                         name={'postContent'}
                         value={formData.postContent}
                         onChange={handleChange}
-                        placeholder="Make it count"
+                        placeholder="Type here to submit a new pos t"
                       />
                     </div>
                   </div>
@@ -113,7 +112,7 @@ export default function Newsfeed() {
                       value={formData.tags}
                     />
                   </div>
-                  <button className="button is-rounded is-success is-light is-fullwidth is-outlined">
+                  <button className="button is-rounded is-success is-light is-outlined">
                     SEND IT
                   </button>
                 </form>

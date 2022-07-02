@@ -120,13 +120,15 @@ export default function Newsfeed() {
             </div >
           </div>
 
-          <div>
+          <div className="column">
             <div className="my-5 level-right">
               <input
-                className=""
                 value={search}
                 placeholder={"Search Newsfeed"}
                 onChange={(e) => setSearch(e.target.value)} />
+              <button className={`button is-rounded  ${search.length > 0 ? "" : 'is-hidden'}`} onClick>
+                Search futher..
+              </button>
             </div>
 
             <div>
@@ -150,7 +152,7 @@ export default function Newsfeed() {
                 <PostElement
                   {...post}
                   getPostData={getPostData}
-                  allUserPosts={allUserPosts} 
+                  allUserPosts={allUserPosts}
                   setAllUserPosts={setAllUserPosts} />
               </div>
             }

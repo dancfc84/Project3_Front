@@ -47,8 +47,8 @@ export default function PostElement(singlePostDataProp) {
           headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
         }
       )
-      singlePostDataProp.getPostData()
 
+      singlePostDataProp.getPostData()
       console.log(data);
       setCommentContent('')
     } catch (e) {
@@ -58,14 +58,14 @@ export default function PostElement(singlePostDataProp) {
 
   //handles comment delete query to backend
   async function deleteComment(commentID) {
+    setNewComment(newComment.filter((comments) =>
+      comments._id !== commentID
+    ))
     try {
       const deleteThisComment = await axios.delete(
         `/api/posts/${singlePostDataProp._id}/${commentID}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       )
-      setNewComment(newComment.filter((comments) =>
-        comments._id !== commentID
-      ))
       console.log(deleteThisComment);
     } catch (e) {
       console.log(e)

@@ -4,6 +4,7 @@ import PostElement from './Post'
 import axios from 'axios'
 import Select from 'react-select'
 import tags from '../../data/tags'
+import { getLoggedInUserId } from '../../lib/auth'
 // import { set } from 'lodash'
 
 
@@ -67,6 +68,7 @@ export default function Newsfeed() {
       })
     setAllUserPosts(data)
   }
+
   useEffect(() => {
     getPostData()
   }, [])
@@ -76,12 +78,12 @@ export default function Newsfeed() {
       <div className="container">
 
         <h1 className="title is-1">
-          Newsfeed
+          Hacketree Newsbites
         </h1>
-
+        <h2><small>Welcome back, {getLoggedInUserId}</small></h2>
 
         <div className="columns ">
-          <div className="column is-one-third ">
+          <div className="column ">
             <div className="section">
               <div className="container box">
                 <form onSubmit={handleSubmit}>
@@ -99,7 +101,7 @@ export default function Newsfeed() {
                     </div>
                   </div>
                   <div className="field ">
-                    <h2>Tag it</h2>
+                    <h3>Tag it</h3>
                     <Select
                       defaultValue={[]}
                       isMulti
@@ -111,7 +113,7 @@ export default function Newsfeed() {
                       value={formData.tags}
                     />
                   </div>
-                  <button className="button is-rounded is-warning is-light is-fullwidth is-outlined">
+                  <button className="button is-rounded is-success is-light is-fullwidth is-outlined">
                     SEND IT
                   </button>
                 </form>

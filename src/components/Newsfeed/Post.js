@@ -1,18 +1,17 @@
 import React from "react"
 import { Link } from "react-router-dom"
 import _ from 'lodash'
-// import NewComment from "./NewComment"
-// import CommentElement from "./Comment"
+
 import axios from "axios"
 import { isCreator, getLoggedInUserId } from '../../lib/auth.js'
 
 
 export default function PostElement(singlePostDataProp) {
   const [commentContent, setCommentContent] = React.useState('')
-  const [newComment, setNewComment] = React.useState(singlePostDataProp.userComments)
+  // const [newComment, setNewComment] = React.useState(singlePostDataProp.userComments)
   const [hiddenCommentsNumber, setHiddenCommentsNumber] = React.useState([]) //used to keep track of which posts have show comments clicked on to show comments
 
-  console.log(singlePostDataProp);
+
   //handles Show Comments button
   function handleShowCommentsButton(postID) {
     hiddenCommentsNumber.includes(postID)
@@ -20,7 +19,6 @@ export default function PostElement(singlePostDataProp) {
       : setHiddenCommentsNumber([...hiddenCommentsNumber, postID])
   }
 
-  console.log(singlePostDataProp.user);
 
   //handles post deleting
   async function deletePostHandle() {
@@ -32,7 +30,6 @@ export default function PostElement(singlePostDataProp) {
         singlePostDataProp.setAllUserPosts(singlePostDataProp.allUserPosts.filter((post) =>
           post._id !== singlePostDataProp._id
         ))
-        // singlePostDataProp.getPostData()
       }
     } catch (e) {
       console.log(e)
@@ -40,7 +37,9 @@ export default function PostElement(singlePostDataProp) {
   }
 
   //handles comment sumbission to backend
-  async function handleComment() {
+
+  async function handleComment(e) {
+    e.preventDefault()
     try {
       const { data } = await axios.post(
         `/api/posts/${singlePostDataProp._id}/comment`,
@@ -60,15 +59,14 @@ export default function PostElement(singlePostDataProp) {
 
   //handles comment delete query to backend
   async function deleteComment(commentID) {
-    setNewComment(newComment.filter((comments) =>
-      comments._id !== commentID
-    ))
+
     try {
       const deleteThisComment = await axios.delete(
         `/api/posts/${singlePostDataProp._id}/${commentID}`,
         { headers: { Authorization: `Bearer ${localStorage.getItem('token')}` } }
       )
       console.log(deleteThisComment);
+      singlePostDataProp.getPostData()
     } catch (e) {
       console.log(e)
     }
@@ -88,11 +86,6 @@ export default function PostElement(singlePostDataProp) {
           },
         }
       )
-      // await axios.put(
-      //     `/api/posts/${singlePostDataProp._id}/vote`,
-      //     {
-      //       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
-      //     })
       console.log(data);
     } catch (err) {
       console.log(err.response.data);
@@ -134,7 +127,6 @@ export default function PostElement(singlePostDataProp) {
         })}
 
 
-        {/* {<small className="">{singlePostDataProp.updatedAt.replace('T', ' - ').slice(0, - 8)}</small>} */}
 
         {/* {edit and delte buttons if creator} */}
         {isCreator(singlePostDataProp.user._id) && <div className="level-right" >
@@ -166,7 +158,7 @@ export default function PostElement(singlePostDataProp) {
           }
         </button>
         {getLoggedInUserId() && <article className="media">
-          <div className="media-content">
+          <form className="media-content" onClick={handleComment}>
             <div className="field">
               <p className="control">
                 <input
@@ -182,17 +174,18 @@ export default function PostElement(singlePostDataProp) {
               <p className="control">
                 <button
                   className="button is-info"
-                  onClick={handleComment}
+                  type="submit"
                 >
                   Submit
                 </button>
               </p>
             </div>
-          </div>
+          </form>
         </article>}
 
         <div className={hiddenCommentsNumber.includes(singlePostDataProp._id) ? null : `is-hidden`}>
-          {newComment ? newComment.map(comment => {
+
+          {singlePostDataProp.userComments ? singlePostDataProp.userComments.map(comment => {
             return <article key={comment._id} className="media">
               <div className="media-content box my-2">
                 <div className="content">

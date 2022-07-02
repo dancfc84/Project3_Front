@@ -19,9 +19,8 @@ export default function EditPost() {
   })
 
   useEffect(() => {
-
     const getPostData = async () => {
-      const { data } = await axios.get(`${baseUrl}/posts/posts/${postID}`, {
+      const { data } = await axios.get(`${baseUrl}/posts/${postID}`, {
         headers: {
           "authorization": `Bearer ${localStorage.getItem("token")}`,
         },

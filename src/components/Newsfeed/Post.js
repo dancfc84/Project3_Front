@@ -88,6 +88,8 @@ export default function PostElement(singlePostDataProp) {
           },
         }
       )
+      singlePostDataProp.getPostData()
+
       console.log(data);
     } catch (err) {
       console.log(err.response.data);

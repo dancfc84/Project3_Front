@@ -87,7 +87,7 @@ export default function Newsfeed() {
               <div className="container box">
                 <form onSubmit={handleSubmit}>
                   <div className="field ">
-                    <label className="label">Post</label>
+                    <label className="label">{`What's`} on your mind?</label>
                     <div className="control">
                       <textarea
                         className="input textarea is-primary"
@@ -95,7 +95,7 @@ export default function Newsfeed() {
                         name={'postContent'}
                         value={formData.postContent}
                         onChange={handleChange}
-                        placeholder="Make it count"
+                        placeholder="Type here to submit a new pos t"
                       />
                     </div>
                   </div>

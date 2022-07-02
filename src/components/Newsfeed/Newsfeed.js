@@ -112,7 +112,7 @@ export default function Newsfeed() {
                       value={formData.tags}
                     />
                   </div>
-                  <button className="button is-rounded is-success is-light is-fullwidth is-outlined">
+                  <button className="button is-rounded is-success is-light is-outlined">
                     SEND IT
                   </button>
                 </form>

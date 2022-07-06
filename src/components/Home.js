@@ -31,8 +31,6 @@ export default function Home() {
     })
   }
 
-  console.log(showRegisterModal);
-
   const showModalHandler = (state) => {
     console.log(state);
     setShowRegisterModal(true)
@@ -106,14 +104,15 @@ export default function Home() {
                         </button>
                       </div>
                     </div>
-                    <div className="field container pl-3">
-                      <div className="control">
-                        <button type='submit' className={"button"} onClick={showModalHandler}>
-													Create New Account
-                        </button>
-                      </div>
-                    </div>
                   </form>
+                  
+                  <div className="field container pl-3">
+                    <div className="control">
+                      <button type='submit' className={"button"} onClick={showModalHandler}>
+                        Create New Account
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

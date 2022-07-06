@@ -13,7 +13,7 @@ const LoginModal = (props) => {
     username: "",
     password: "",
     passwordConfirmation: "",
-    email: "",
+    "email": "",
   });
 
   const [errors, setErrors] = useState({
@@ -27,25 +27,38 @@ const LoginModal = (props) => {
     e.preventDefault();
     try {
       const { data } = await axios.post(`${baseUrl}/register`, modalForm);
-      console.log(data);
-      navigate('/newsfeed')
+      console.log(data.message);
+      if (data.message === "Login ok") {
+        const loginData = {
+          email: modalForm.email,
+          password: modalForm.password,
+        }
+        try {
+          const { data } = await axios.post(`${baseUrl}/login`, loginData )
+          localStorage.setItem('token', data.token)
+          localStorage.setItem("loggedIn", true)
+          localStorage.setItem("username", data.user.username)
+          navigate('/newsfeed')
+          
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
     } catch (err) {
       //This error data is the data sent from the api from the middleware
       setErrors(err.response.data.errors)
     }
   }
 
-  console.log(errors);
+  console.log(modalForm);
 
   function handleModalChange(e) {
+    console.log(e.target);
     const { name, value } = e.target;
     setModalForm({
       ...modalForm,
       [name]: value,
-    }),
-    setErrors({
-      ...errors,
-      [name]: '',
     })
   }
 

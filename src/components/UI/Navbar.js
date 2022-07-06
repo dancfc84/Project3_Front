@@ -31,9 +31,9 @@ export default function Navbar() {
               {isLoggedIn && <NavLink to="/newsfeed" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
                 Newsbites
               </NavLink>}
-              <NavLink to="/jobs/index" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
+              {isLoggedIn && <NavLink to="/jobs/index" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
                 Job Listings
-              </NavLink>
+              </NavLink>}
               {isLoggedIn && <NavLink to="/jobs/create" className={`navbar-item is-size-4 has-text-weight-bold ml-3 ${styles.link_styling}`}>
                 Create Job
               </NavLink>}

@@ -61,8 +61,7 @@ export default function Home() {
       <p className={`title is-1 has-text-centered has-text-black mt-4 ${styles.titleMessage}`}>
         Hacker Trees 
       </p>
-      <p className="title is-4 has-text-centered has-text-black mt-4">Build tech trees, not moats.</p><br />
-      <p className="title is-3 has-text-centered has-text-black mt-4">{"Chat, hack and get access to private job opennings."}</p>
+      <p className="title is-3 has-text-centered has-text-black mt-4">{"Chat, hack and get access to private job openings."}</p>
       <div className={`columns is-multiline is-mobile ${styles.mainDiv}`}>
         <div className="column is-half-tablet is-half-mobile mt-5">
           <div className={`card mx-4 my-4 ${styles.login}`}>

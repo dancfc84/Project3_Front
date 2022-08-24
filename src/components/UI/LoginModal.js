@@ -21,7 +21,7 @@ const LoginModal = (props) => {
     password: "",
     passwordConfirmation: "",
     email: "",
-  })
+  });
 
   async function handleRegistrationConfirm(e) {
     e.preventDefault();
@@ -48,11 +48,11 @@ const LoginModal = (props) => {
     } catch (err) {
       //This error data is the data sent from the api from the middleware
       setErrors(err.response.data.errors)
-      console.log(err);
     }
   }
 
   console.log(modalForm);
+  console.log(errors);
 
   function handleModalChange(e) {
     console.log(e.target);
@@ -98,7 +98,7 @@ const LoginModal = (props) => {
               <small>
                 Hint:{" "}
                 <a href="https://xkcd.com/936/">
-                  info on passwords and entropy
+                  info on passwords
                 </a>
               </small>
             </div>

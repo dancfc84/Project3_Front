@@ -48,6 +48,7 @@ const LoginModal = (props) => {
     } catch (err) {
       //This error data is the data sent from the api from the middleware
       setErrors(err.response.data.errors)
+      console.log(err);
     }
   }
 

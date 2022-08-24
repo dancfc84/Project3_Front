@@ -38,7 +38,7 @@ const LoginModal = (props) => {
           localStorage.setItem('token', data.token)
           localStorage.setItem("loggedIn", true)
           localStorage.setItem("username", data.user.username)
-          navigate('/newsfeed')
+          navigate('/jobs/index')
           
         } catch (error) {
           console.log(error);

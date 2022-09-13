@@ -2,7 +2,7 @@
 
 This was the third project for the General Assembly Software Engineering Immersive course, our group built a complex MERN stack application aimed at developers looking for jobs in the industry.
 
-You will find the deployed app here:  [HackerTress](https://htrees.netlify.app/)
+You will find the deployed app here:  [HackerTrees](https://htrees.netlify.app/)
 
 ## Getting started/Code Installation
 1. Download source code via the 'Clone or download' button in GitHub.

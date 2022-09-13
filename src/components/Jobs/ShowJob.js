@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { Link, useParams, useNavigate } from "react-router-dom";
 import JobComment from "../Jobs/JobComment";
@@ -11,8 +12,10 @@ export default function ShowJob() {
   const navigate = useNavigate();
   const currUser = getLoggedInUserId();
 
-  const [likes, setLikes ] = useState(undefined);
-  const [ showApplyModal, setShowApplyModal ] = useState(false)
+  const [likes, setLikes] = useState(undefined);
+  const [showApplyModal, setShowApplyModal ] = useState(false)
+  const [deletedComment, setDeletedComment] = useState(undefined)
+  const [newComment, setNewComment] = useState(undefined)
 
   const [isHeartRed, setIsHeartRed] = useState(false)
 
@@ -48,7 +51,7 @@ export default function ShowJob() {
     }
     getData()
 
-  }, [jobId, likes, formDataInput]);
+  }, [jobId, likes, deletedComment, newComment]);
 
 
 
@@ -73,8 +76,7 @@ export default function ShowJob() {
   }
 
 
-  async function handleCommentPost(e) {
-    e.preventDefault();
+  async function handleCommentPost() {
     const addComment = await axios.post(
       `${baseUrl}/jobs/${jobId}/comment`,
       formDataInput,
@@ -82,24 +84,15 @@ export default function ShowJob() {
         headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
       }
     );
-    console.log(addComment);
-    console.log("here");
-    setformDataInput({
-      content: "",
-    })
+    setNewComment(addComment)
   }
 
   async function handleCommentDelete (commentId) {
-    console.log(commentId);
-    const deleteJob = await axios.delete(`${baseUrl}/jobs/${jobId}/${commentId}`,  {
+    const deleteComment = await axios.delete(`${baseUrl}/jobs/${jobId}/${commentId}`,  {
       headers: { Authorization: `Bearer ${localStorage.getItem('token')}` },
     }
     )
-    console.log(deleteJob);
-    console.log("here");
-    setformDataInput({
-      content: "",
-    })
+    setDeletedComment(deleteComment)
   }
 
 
